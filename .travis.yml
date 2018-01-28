@@ -6,6 +6,8 @@ cache:
     - "node_modules"
 script:
   - npm run build
+before_deploy:
+  - sed -i '/dist/d' .gitignore
 deploy:
   provider: pages
   skip-cleanup: true
