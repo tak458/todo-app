@@ -32,7 +32,7 @@ export default {
   methods: {
     addNewTodo: function() {
       this.todos.push({
-        id: this.nextTodoId++,
+        id: (this.nextTodoId++).toString(),
         title: this.newTodoText
       });
       this.newTodoText = "";

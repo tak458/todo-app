@@ -14,7 +14,7 @@
       <node
       v-for="(child, index) in children"
       :key="child.id"
-      :id="child.id"
+      :id="id.toString() + '.' + child.id.toString()"
       :title="child.title"
       v-on:remove="removeTodo(index)"
       />
@@ -31,7 +31,7 @@ export default {
     node
   },
   props: {
-    id: Number,
+    id: String,
     title: String,
     initializeChildren: Array
   },
