@@ -25,20 +25,24 @@ export default {
   data() {
     return {
       newTodoText: "",
-      nextTodoId: 0,
-      todos: []
+      nextTodoId: 0
     };
+  },
+  computed: {
+    todos() {
+      return this.$store.state.todos;
+    }
   },
   methods: {
     addNewTodo: function() {
-      this.todos.push({
+      this.$store.commit("addTodo", {
         id: (this.nextTodoId++).toString(),
         title: this.newTodoText
       });
       this.newTodoText = "";
     },
     removeTodo: function(index) {
-      this.todos.splice(index, 1);
+      this.$store.commit("removeTodo", { index });
     }
   },
   components: {
