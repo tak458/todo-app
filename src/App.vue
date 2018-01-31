@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       newTodoText: "",
-      nextTodoId: 0
+      nextTodoId: this.$store.state.todos.length
     };
   },
   computed: {
