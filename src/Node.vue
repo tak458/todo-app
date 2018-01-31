@@ -12,10 +12,11 @@
     </div>
     <ul>
       <node
-      v-for="(child, index) in children"
+      v-for="(child, index) in todo.children"
       :key="child.id"
-      :id="id.toString() + '.' + child.id.toString()"
+      :id="child.id"
       :title="child.title"
+      :initializeChildren="child.children"
       v-on:remove="removeTodo(index)"
       />
     </ul>
@@ -35,12 +36,19 @@ export default {
     title: String,
     initializeChildren: Array
   },
+  computed: {
+    todo() {
+      return this.$store.getters.getTodoById(this.id);
+    }
+  },
   data() {
     return {
       visibleAddPain: false,
       newTodoText: "",
-      nextTodoId: this.initializeChildren ? this.initializeChildren.length : 0,
-      children: this.initializeChildren || []
+      nextTodoId: this.initializeChildren
+        ? this.initializeChildren.length
+        : this.todo ? (this.todo.children ? this.todo.children.length : 0) : 0,
+      children: this.initializeChildren || this.todo
     };
   },
   methods: {
@@ -51,8 +59,8 @@ export default {
       this.visibleAddPain = false;
     },
     addNewTodo: function() {
-      this.children.push({
-        id: this.nextTodoId++,
+      this.$store.commit("addTodo", {
+        id: this.id + "." + this.nextTodoId++,
         title: this.newTodoText
       });
       this.newTodoText = "";
