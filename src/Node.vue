@@ -12,12 +12,12 @@
     </div>
     <ul>
       <node
-      v-for="(child, index) in todo.children"
+      v-for="child in todo.children"
       :key="child.id"
       :id="child.id"
       :title="child.title"
       :initializeChildren="child.children"
-      v-on:remove="removeTodo(index)"
+      v-on:remove="removeTodo(child.id)"
       />
     </ul>
   </li>
@@ -65,8 +65,8 @@ export default {
       });
       this.newTodoText = "";
     },
-    removeTodo: function(index) {
-      this.children.splice(index, 1);
+    removeTodo: function(id) {
+      this.$store.commit("removeTodo", { id });
     }
   }
 };
