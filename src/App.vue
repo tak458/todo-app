@@ -6,12 +6,12 @@
       placeholder="Add a todo"/>
     <ul>
       <node
-        v-for="(todo, index) in todos"
+        v-for="todo in todos"
         :key="todo.id"
         :id="todo.id"
         :title="todo.title"
         :initializeChildren="todo.children"
-        v-on:remove="removeTodo(index)">
+        v-on:remove="removeTodo(todo.id)">
       </node>
     </ul>
   </div>
@@ -41,8 +41,8 @@ export default {
       });
       this.newTodoText = "";
     },
-    removeTodo: function(index) {
-      this.$store.commit("removeTodo", { index });
+    removeTodo: function(id) {
+      this.$store.commit("removeTodo", { id });
     }
   },
   components: {
