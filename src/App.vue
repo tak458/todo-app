@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       newTodoText: "",
-      nextTodoId: this.$store.state.todos.length
+      nextTodoId: Math.max(...this.$store.state.todos.map(todo => todo.id)) + 1
     };
   },
   computed: {
