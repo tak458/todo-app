@@ -47,7 +47,11 @@ export default {
       newTodoText: "",
       nextTodoId: this.initializeChildren
         ? this.initializeChildren.length
-        : this.todo ? (this.todo.children ? this.todo.children.length : 0) : 0,
+        : this.todo
+          ? this.todo.children
+            ? Math.max(...this.todo.children.map(todo => todo.id)) + 1
+            : 0
+          : 0,
       children: this.initializeChildren || this.todo
     };
   },
