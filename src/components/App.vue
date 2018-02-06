@@ -8,9 +8,7 @@
       <node
         v-for="todo in todos"
         :key="todo.id"
-        :id="todo.id"
-        :title="todo.title"
-        :initializeChildren="todo.children"
+        :model="todo"
         v-on:remove="removeTodo(todo.id)">
       </node>
     </ul>
@@ -25,7 +23,10 @@ export default {
   data() {
     return {
       newTodoText: "",
-      nextTodoId: Math.max(...this.$store.state.todos.map(todo => todo.id)) + 1
+      nextTodoId:
+        this.$store.state.todos.length !== 0
+          ? Math.max(...this.$store.state.todos.map(todo => todo.id)) + 1
+          : 0
     };
   },
   computed: {

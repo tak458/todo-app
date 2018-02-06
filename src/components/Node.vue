@@ -1,6 +1,6 @@
 <template id="node">
   <li>
-    {{title}}
+    {{model.title}}
     <button v-on:click="$emit('remove')">x</button>
     <button v-on:click="openNewTodo">+</button>
     <div v-show="visibleAddPain">
@@ -14,9 +14,7 @@
       <node
       v-for="child in todo.children"
       :key="child.id"
-      :id="child.id"
-      :title="child.title"
-      :initializeChildren="child.children"
+      :model="child"
       v-on:remove="removeTodo(child.id)"
       />
     </ul>
@@ -25,6 +23,7 @@
 
 <script>
 import node from "./Node.vue";
+import Id from "../store/Id";
 
 export default {
   name: "node",
@@ -32,27 +31,25 @@ export default {
     node
   },
   props: {
-    id: String,
-    title: String,
-    initializeChildren: Array
+    model: Object
   },
   computed: {
     todo() {
-      return this.$store.getters.getTodoById(this.id);
+      return this.$store.getters.getTodoById(this.model.id);
     }
   },
   data() {
     return {
       visibleAddPain: false,
       newTodoText: "",
-      nextTodoId: this.initializeChildren
-        ? this.initializeChildren.length
+      nextTodoId: this.model.children
+        ? Math.max(...this.model.children.map(todo => new Id(todo.id).foot())) + 1
         : this.todo
           ? this.todo.children
-            ? Math.max(...this.todo.children.map(todo => todo.id)) + 1
+            ? Math.max(...this.todo.children.map(todo => new Id(todo.id).foot())) + 1
             : 0
           : 0,
-      children: this.initializeChildren || this.todo
+      children: this.model.children || this.todo
     };
   },
   methods: {
@@ -64,7 +61,7 @@ export default {
     },
     addNewTodo: function() {
       this.$store.commit("addTodo", {
-        id: this.id + "." + this.nextTodoId++,
+        id: this.model.id + "." + this.nextTodoId++,
         title: this.newTodoText
       });
       this.newTodoText = "";
