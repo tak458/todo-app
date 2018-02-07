@@ -36,20 +36,16 @@ export default {
   computed: {
     todo() {
       return this.$store.getters.getTodoById(this.model.id);
+    },
+    nextTodoId() {
+      return Math.max(-1, ...this.children.map(td => new Id(td.id).foot())) + 1;
     }
   },
   data() {
     return {
       visibleAddPain: false,
       newTodoText: "",
-      nextTodoId: this.model.children
-        ? Math.max(...this.model.children.map(todo => new Id(todo.id).foot())) + 1
-        : this.todo
-          ? this.todo.children
-            ? Math.max(...this.todo.children.map(todo => new Id(todo.id).foot())) + 1
-            : 0
-          : 0,
-      children: this.model.children || this.todo
+      children: this.model.children || this.todo.children
     };
   },
   methods: {
@@ -61,8 +57,9 @@ export default {
     },
     addNewTodo: function() {
       this.$store.commit("addTodo", {
-        id: this.model.id + "." + this.nextTodoId++,
-        title: this.newTodoText
+        id: this.model.id + "." + this.nextTodoId,
+        title: this.newTodoText,
+        children: []
       });
       this.newTodoText = "";
     },
