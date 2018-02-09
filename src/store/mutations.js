@@ -8,8 +8,6 @@ export const mutations = {
         todos.push(model)
       } else {
         const newIndex = index.excludeRootId().toString()
-        if (todos.find(todo => new Id(todo.id).foot() === index.head()).children === undefined)
-          todos.find(todo => new Id(todo.id).foot() === index.head()).children = []
         _addTodo(new Id(newIndex), todos.find(todo => new Id(todo.id).foot() === index.head()).children, model)
       }
     }
