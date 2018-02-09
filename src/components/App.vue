@@ -17,28 +17,29 @@
 
 <script>
 import node from "./Node.vue";
+import Id from "../store/Id";
 
 export default {
   name: "app",
   data() {
     return {
-      newTodoText: "",
-      nextTodoId:
-        this.$store.state.todos.length !== 0
-          ? Math.max(...this.$store.state.todos.map(todo => todo.id)) + 1
-          : 0
+      newTodoText: ""
     };
   },
   computed: {
     todos() {
       return this.$store.state.todos;
+    },
+    nextTodoId() {
+      return Math.max(-1, ...this.todos.map(td => new Id(td.id).foot())) + 1;
     }
   },
   methods: {
     addNewTodo: function() {
       this.$store.commit("addTodo", {
-        id: (this.nextTodoId++).toString(),
-        title: this.newTodoText
+        id: (this.nextTodoId).toString(),
+        title: this.newTodoText,
+        children: []
       });
       this.newTodoText = "";
     },
