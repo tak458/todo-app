@@ -1,8 +1,12 @@
 <template id="node">
   <li>
-    {{model.title}}
-    <button v-on:click="$emit('remove')">x</button>
-    <button v-on:click="openNewTodo">+</button>
+    <div class="todo">
+      <span class="title">{{model.title}}</span>
+      <span class="control">
+        <button v-on:click="$emit('remove')">x</button>
+        <button v-on:click="openNewTodo">+</button>
+      </span>
+    </div>
     <div v-show="visibleAddPain">
       <input
       v-model="newTodoText"
@@ -69,3 +73,14 @@ export default {
   }
 };
 </script>
+
+<style>
+div.todo {
+  display: flex;
+  border-bottom: 1px solid #eeeeee;
+}
+span.title{
+  display: block;
+  margin-right: auto;
+}
+</style>
