@@ -1,7 +1,8 @@
 <template id="node">
   <li>
     <div class="todo">
-      <span class="title">{{model.title}}</span>
+      <input type="checkbox" v-model="model.isFinish"/>
+      <span class="title" :class="{isFinish: model.isFinish}">{{model.title}}</span>
       <span class="control">
         <button v-on:click="$emit('remove')">x</button>
         <button v-on:click="openNewTodo">+</button>
@@ -63,7 +64,8 @@ export default {
       this.$store.commit("addTodo", {
         id: this.model.id + "." + this.nextTodoId,
         title: this.newTodoText,
-        children: []
+        children: [],
+        isFinish: false
       });
       this.newTodoText = "";
     },
@@ -79,8 +81,11 @@ div.todo {
   display: flex;
   border-bottom: 1px solid #eeeeee;
 }
-span.title{
+span.title {
   display: block;
   margin-right: auto;
+}
+span.isFinish{
+  text-decoration: solid line-through;
 }
 </style>
