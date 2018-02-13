@@ -1,17 +1,19 @@
 <template>
   <div id="app">
-    <input
-      v-model="newTodoText"
-      v-on:keyup.enter="addNewTodo"
-      placeholder="Add a todo"/>
-    <ul>
-      <node
-        v-for="todo in todos"
-        :key="todo.id"
-        :model="todo"
-        v-on:remove="removeTodo(todo.id)">
-      </node>
-    </ul>
+    <div id="todolist">
+      <input
+        v-model="newTodoText"
+        v-on:keyup.enter="addNewTodo"
+        placeholder="Add a todo"/>
+      <ul>
+        <node
+          v-for="todo in todos"
+          :key="todo.id"
+          :model="todo"
+          v-on:remove="removeTodo(todo.id)">
+        </node>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -37,9 +39,10 @@ export default {
   methods: {
     addNewTodo: function() {
       this.$store.commit("addTodo", {
-        id: (this.nextTodoId).toString(),
+        id: this.nextTodoId.toString(),
         title: this.newTodoText,
-        children: []
+        children: [],
+        isFinish: false
       });
       this.newTodoText = "";
     },
