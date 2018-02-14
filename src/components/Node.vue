@@ -29,6 +29,7 @@
 <script>
 import node from "./Node.vue";
 import Id from "../store/Id";
+import moment from "moment";
 
 export default {
   name: "node",
@@ -76,7 +77,9 @@ export default {
         id: this.model.id + "." + this.nextTodoId,
         title: this.newTodoText,
         children: [],
-        isFinish: false
+        isFinish: false,
+        deadlineAt: null, // 期限
+        scheduledAt: null, // 予定
       });
       this.newTodoText = "";
     },
@@ -98,5 +101,6 @@ span.title {
 }
 span.isFinish {
   text-decoration: solid line-through;
+  color: lightgray;
 }
 </style>
