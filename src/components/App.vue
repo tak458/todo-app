@@ -20,6 +20,7 @@
 <script>
 import node from "./Node.vue";
 import Id from "../store/Id";
+import moment from "moment";
 
 export default {
   name: "app",
@@ -42,7 +43,9 @@ export default {
         id: this.nextTodoId.toString(),
         title: this.newTodoText,
         children: [],
-        isFinish: false
+        isFinish: false,
+        deadlineAt: null, // 期限
+        scheduledAt: null, // 予定
       });
       this.newTodoText = "";
     },

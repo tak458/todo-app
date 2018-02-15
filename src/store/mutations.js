@@ -29,10 +29,11 @@ export const mutations = {
     const _editTodo = (index, todos, model) => {
       console.log({ index, todos, model })
       if (index.length() === 1) {
-        todos[todos.findIndex(todo => todo.id === model.id)].isFinish = model.isFinish
+        const idx = todos.findIndex(todo => todo.id === model.id);
+        Object.assign(todos[idx], model);
       } else {
         const newIndex = index.excludeRootId().toString()
-        _removeTodo(new Id(newIndex), todos.find(todo => new Id(todo.id).foot() === index.head()).children, model)
+        _editTodo(new Id(newIndex), todos.find(todo => new Id(todo.id).foot() === index.head()).children, model)
       }
     }
     _editTodo(new Id(model.id), state.todos, model)
