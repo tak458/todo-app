@@ -8,6 +8,9 @@
         <button v-on:click="openNewTodo">+</button>
       </span>
     </div>
+    <div class="indicator">
+      <div class="fill" :style="{width:progress}"></div>
+    </div>
     <div v-show="visibleAddPain">
       <input
       v-model="newTodoText"
@@ -56,6 +59,17 @@ export default {
           Object.assign({}, this.todo, { isFinish: value })
         );
       }
+    },
+    progress() {
+      if (this.children.length > 1) {
+        const count = this.children.reduce(
+          (prev, cur) => prev + (cur.isFinish ? 1 : 0),
+          0
+        );
+        return (100 - count / this.children.length * 100).toString() + "%";
+      } else {
+        return this.isFinish ? "0%" : "100%";
+      }
     }
   },
   data() {
@@ -79,7 +93,7 @@ export default {
         children: [],
         isFinish: false,
         deadlineAt: null, // 期限
-        scheduledAt: null, // 予定
+        scheduledAt: null // 予定
       });
       this.newTodoText = "";
     },
@@ -90,10 +104,21 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 div.todo {
   display: flex;
-  border-bottom: 1px solid #eeeeee;
+}
+div.indicator {
+  display: flex;
+  flex-flow: row-reverse;
+  width: 100%;
+  height: 1px;
+  background-color: #eeeeee;
+}
+div.fill {
+  width: 100%;
+  height: 100%;
+  background-color: #cccccc;
 }
 span.title {
   display: block;
