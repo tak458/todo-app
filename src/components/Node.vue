@@ -2,14 +2,22 @@
   <li>
     <div class="todo">
       <input type="checkbox" v-model="isFinish"/>
-      <span class="title" :class="{isFinish: model.isFinish}">{{model.title}}</span>
+      <input type="textbox" class="title" v-show="visibleEditPain" v-model="title"/>
+      <span class="title" v-show="!visibleEditPain" :class="{isFinish: model.isFinish}">{{model.title}}</span>
       <span class="control">
-        <button v-on:click="$emit('remove')">x</button>
+        <button v-on:click="openEditTodo">#</button>
         <button v-on:click="openNewTodo">+</button>
+        <button v-on:click="$emit('remove')">x</button>
       </span>
     </div>
     <div class="indicator">
       <div class="fill" :style="{width:progress}"></div>
+    </div>
+    <div v-show="visibleEditPain">
+      <table>
+        <tr><td>期限</td><td><input type="date" v-model="deadlineAt"/></td></tr>
+        <tr><td>予定</td><td><input type="date" v-model="scheduledAt"/></td></tr>
+      </table>
     </div>
     <div v-show="visibleAddPain">
       <input
@@ -49,6 +57,17 @@ export default {
     nextTodoId() {
       return Math.max(-1, ...this.children.map(td => new Id(td.id).foot())) + 1;
     },
+    title: {
+      get() {
+        return this.todo.title;
+      },
+      set(value) {
+        this.$store.commit(
+          "editTodo",
+          Object.assign({}, this.todo, { title: value })
+        );
+      }
+    },
     isFinish: {
       get() {
         return this.todo.isFinish;
@@ -57,6 +76,28 @@ export default {
         this.$store.commit(
           "editTodo",
           Object.assign({}, this.todo, { isFinish: value })
+        );
+      }
+    },
+    deadlineAt: {
+      get() {
+        return this.todo.deadlineAt;
+      },
+      set(value) {
+        this.$store.commit(
+          "editTodo",
+          Object.assign({}, this.todo, { deadlineAt: value })
+        );
+      }
+    },
+    scheduledAt: {
+      get() {
+        return this.todo.scheduledAt;
+      },
+      set(value) {
+        this.$store.commit(
+          "editTodo",
+          Object.assign({}, this.todo, { scheduledAt: value })
         );
       }
     },
@@ -75,6 +116,7 @@ export default {
   data() {
     return {
       visibleAddPain: false,
+      visibleEditPain: false,
       newTodoText: "",
       children: this.model.children || this.todo.children
     };
@@ -99,6 +141,9 @@ export default {
     },
     removeTodo: function(id) {
       this.$store.commit("removeTodo", { id });
+    },
+    openEditTodo: function() {
+      this.visibleEditPain = !this.visibleEditPain;
     }
   }
 };
@@ -123,6 +168,9 @@ div.fill {
 }
 span.title {
   display: block;
+  margin-right: auto;
+}
+input.title{
   margin-right: auto;
 }
 span.isFinish {
