@@ -61,7 +61,7 @@ export default {
       }
     },
     progress() {
-      if (this.children.length > 1) {
+      if (!this.isFinish && this.children.length > 1) {
         const count = this.children.reduce(
           (prev, cur) => prev + (cur.isFinish ? 1 : 0),
           0
