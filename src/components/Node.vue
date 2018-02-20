@@ -119,6 +119,7 @@ div.fill {
   width: 100%;
   height: 100%;
   background-color: #cccccc;
+  transition: width 700ms 0s ease;
 }
 span.title {
   display: block;
