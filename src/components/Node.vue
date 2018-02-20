@@ -4,6 +4,7 @@
       <input type="checkbox" v-model="isFinish"/>
       <input type="textbox" class="title" v-show="visibleEditPain" v-model="title"/>
       <span class="title" v-show="!visibleEditPain" :class="{isFinish: model.isFinish}">{{model.title}}</span>
+      <span class="remainTime">{{remainTime}}</span>
       <span class="control">
         <button v-on:click="openEditTodo">#</button>
         <button v-on:click="openNewTodo">+</button>
@@ -14,10 +15,8 @@
       <div class="fill" :style="{width:progress}"></div>
     </div>
     <div v-show="visibleEditPain">
-      <table>
-        <tr><td>期限</td><td><input type="date" v-model="deadlineAt"/></td></tr>
-        <tr><td>予定</td><td><input type="date" v-model="scheduledAt"/></td></tr>
-      </table>
+        <label>期限<input type="date" v-model="deadlineAt"/></label>
+        <label>予定<input type="date" v-model="scheduledAt"/></label>
     </div>
     <div v-show="visibleAddPain">
       <input
@@ -88,6 +87,7 @@ export default {
           "editTodo",
           Object.assign({}, this.todo, { deadlineAt: value })
         );
+        this.remainTime = moment(value).fromNow()
       }
     },
     scheduledAt: {
@@ -118,7 +118,8 @@ export default {
       visibleAddPain: false,
       visibleEditPain: false,
       newTodoText: "",
-      children: this.model.children || this.todo.children
+      children: this.model.children || this.todo.children,
+      remainTime: null
     };
   },
   methods: {
@@ -170,7 +171,7 @@ span.title {
   display: block;
   margin-right: auto;
 }
-input.title{
+input.title {
   margin-right: auto;
 }
 span.isFinish {
