@@ -2,14 +2,21 @@
   <li>
     <div class="todo">
       <input type="checkbox" v-model="isFinish"/>
-      <span class="title" :class="{isFinish: model.isFinish}">{{model.title}}</span>
+      <input type="textbox" class="title" v-show="visibleEditPain" v-model="title"/>
+      <span class="title" v-show="!visibleEditPain" :class="{isFinish: model.isFinish}">{{model.title}}</span>
+      <span class="remainTime">{{remainTime}}</span>
       <span class="control">
-        <button v-on:click="$emit('remove')">x</button>
+        <button v-on:click="openEditTodo">#</button>
         <button v-on:click="openNewTodo">+</button>
+        <button v-on:click="$emit('remove')">x</button>
       </span>
     </div>
     <div class="indicator">
       <div class="fill" :style="{width:progress}"></div>
+    </div>
+    <div v-show="visibleEditPain">
+        <label>期限<input type="date" v-model="deadlineAt"/></label>
+        <label>予定<input type="date" v-model="scheduledAt"/></label>
     </div>
     <div v-show="visibleAddPain">
       <input
@@ -49,6 +56,17 @@ export default {
     nextTodoId() {
       return Math.max(-1, ...this.children.map(td => new Id(td.id).foot())) + 1;
     },
+    title: {
+      get() {
+        return this.todo.title;
+      },
+      set(value) {
+        this.$store.commit(
+          "editTodo",
+          Object.assign({}, this.todo, { title: value })
+        );
+      }
+    },
     isFinish: {
       get() {
         return this.todo.isFinish;
@@ -60,8 +78,31 @@ export default {
         );
       }
     },
+    deadlineAt: {
+      get() {
+        return this.todo.deadlineAt;
+      },
+      set(value) {
+        this.$store.commit(
+          "editTodo",
+          Object.assign({}, this.todo, { deadlineAt: value })
+        );
+        this.remainTime = moment(value).fromNow()
+      }
+    },
+    scheduledAt: {
+      get() {
+        return this.todo.scheduledAt;
+      },
+      set(value) {
+        this.$store.commit(
+          "editTodo",
+          Object.assign({}, this.todo, { scheduledAt: value })
+        );
+      }
+    },
     progress() {
-      if (this.children.length > 1) {
+      if (!this.isFinish && this.children.length > 1) {
         const count = this.children.reduce(
           (prev, cur) => prev + (cur.isFinish ? 1 : 0),
           0
@@ -75,8 +116,10 @@ export default {
   data() {
     return {
       visibleAddPain: false,
+      visibleEditPain: false,
       newTodoText: "",
-      children: this.model.children || this.todo.children
+      children: this.model.children || this.todo.children,
+      remainTime: null
     };
   },
   methods: {
@@ -99,6 +142,9 @@ export default {
     },
     removeTodo: function(id) {
       this.$store.commit("removeTodo", { id });
+    },
+    openEditTodo: function() {
+      this.visibleEditPain = !this.visibleEditPain;
     }
   }
 };
@@ -123,6 +169,9 @@ div.fill {
 }
 span.title {
   display: block;
+  margin-right: auto;
+}
+input.title {
   margin-right: auto;
 }
 span.isFinish {
