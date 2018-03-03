@@ -44,6 +44,8 @@ export default {
         title: this.newTodoText,
         children: [],
         isFinish: false,
+        memo: "",
+        importance: null,
         deadlineAt: null, // 期限
         scheduledAt: null, // 予定
       });
