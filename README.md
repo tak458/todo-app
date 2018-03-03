@@ -1,6 +1,8 @@
 # todo-app
 
-> Browser Todo App
+ブラウザのみで完結するTodoアプリ
+
+GitHub IO : https://tak458.github.io/todo-app/
 
 ## Build Setup
 
