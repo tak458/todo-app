@@ -17,6 +17,8 @@
     <div v-show="visibleEditPain">
         <label>期限<input type="date" v-model="deadlineAt"/></label>
         <label>予定<input type="date" v-model="scheduledAt"/></label>
+        <label>重要度<input type="text" v-model="importance"/></label>
+        <label>メモ<textarea v-model="memo"/></label>
     </div>
     <div v-show="visibleAddPain">
       <input
@@ -78,6 +80,28 @@ export default {
         );
       }
     },
+    importance: {
+      get() {
+        return this.todo.importance;
+      },
+      set(value) {
+        this.$store.commit(
+          "editTodo",
+          Object.assign({}, this.todo, { importance: value })
+        );
+      }
+    },
+    memo: {
+      get() {
+        return this.todo.memo;
+      },
+      set(value) {
+        this.$store.commit(
+          "editTodo",
+          Object.assign({}, this.todo, { memo: value })
+        );
+      }
+    },
     deadlineAt: {
       get() {
         return this.todo.deadlineAt;
@@ -87,7 +111,7 @@ export default {
           "editTodo",
           Object.assign({}, this.todo, { deadlineAt: value })
         );
-        this.remainTime = moment(value).fromNow()
+        this.remainTime = moment(value).fromNow();
       }
     },
     scheduledAt: {
@@ -135,6 +159,8 @@ export default {
         title: this.newTodoText,
         children: [],
         isFinish: false,
+        memo: "",
+        importance: null,
         deadlineAt: null, // 期限
         scheduledAt: null // 予定
       });
