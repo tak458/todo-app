@@ -1,41 +1,42 @@
 <template id="node">
-  <li>
-    <div class="todo">
-      <input type="checkbox" v-model="isFinish"/>
-      <input type="textbox" class="title" v-show="visibleEditPain" v-model="title"/>
-      <span class="title" v-show="!visibleEditPain" :class="{isFinish: model.isFinish}">{{model.title}}</span>
-      <span class="remainTime">{{remainTime}}</span>
-      <span class="control">
-        <button v-on:click="openEditTodo">#</button>
-        <button v-on:click="openNewTodo">+</button>
-        <button v-on:click="$emit('remove')">x</button>
-      </span>
-    </div>
-    <div class="indicator">
-      <div class="fill" :style="{width:progress}"></div>
-    </div>
-    <div v-show="visibleEditPain">
-        <label>期限<input type="date" v-model="deadlineAt"/></label>
-        <label>予定<input type="date" v-model="scheduledAt"/></label>
-        <label>重要度<input type="text" v-model="importance"/></label>
-        <label>メモ<textarea v-model="memo"/></label>
-    </div>
-    <div v-show="visibleAddPain">
-      <input
-      v-model="newTodoText"
-      v-on:keyup.enter="addNewTodo"
-      placeholder="Add a todo"/>
-      <button v-on:click="closeNewTodo">close</button>
-    </div>
-    <ul>
-      <node
-      v-for="child in todo.children"
-      :key="child.id"
-      :model="child"
-      v-on:remove="removeTodo(child.id)"
-      />
-    </ul>
-  </li>
+  <v-list>
+    <v-list-tile>
+      <v-list-tile-action>
+        <v-checkbox v-model="isFinish"/>
+      </v-list-tile-action>
+      <v-list-tile-content>
+        <v-text-field class="title" v-show="visibleEditPain" v-model="title"/>
+        <v-list-tile-title v-show="!visibleEditPain" :class="{isFinish: model.isFinish}">{{model.title}}</v-list-tile-title>
+        <span class="remainTime">{{remainTime}}</span>
+      </v-list-tile-content>
+      <v-list-tile-action>
+        <div>
+          <v-btn fab small v-on:click="openEditTodo">#</v-btn>
+          <v-btn fab small v-on:click="openNewTodo">+</v-btn>
+          <v-btn fab small v-on:click="$emit('remove')">x</v-btn>
+        </div>
+      </v-list-tile-action>
+      <div v-show="visibleEditPain">
+          <label>期限<input type="date" v-model="deadlineAt"/></label>
+          <label>予定<input type="date" v-model="scheduledAt"/></label>
+          <label>重要度<v-text-field v-model="importance"/></label>
+          <label>メモ<textarea v-model="memo"/></label>
+      </div>
+      <div v-show="visibleAddPain">
+        <v-text-field
+        v-model="newTodoText"
+        v-on:keyup.enter="addNewTodo"
+        placeholder="Add a todo"/>
+        <v-btn v-on:click="closeNewTodo">close</v-btn>
+      </div>
+    </v-list-tile>
+    <node style="margin-left:1em"
+    v-for="child in todo.children"
+    :key="child.id"
+    :model="child"
+    v-on:remove="removeTodo(child.id)"
+    />
+  </v-list>
 </template>
 
 <script>
