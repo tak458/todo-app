@@ -177,31 +177,4 @@ export default {
 </script>
 
 <style scoped>
-div.todo {
-  display: flex;
-}
-div.indicator {
-  display: flex;
-  flex-flow: row-reverse;
-  width: 100%;
-  height: 1px;
-  background-color: #eeeeee;
-}
-div.fill {
-  width: 100%;
-  height: 100%;
-  background-color: #cccccc;
-  transition: width 700ms 0s ease;
-}
-span.title {
-  display: block;
-  margin-right: auto;
-}
-input.title {
-  margin-right: auto;
-}
-span.isFinish {
-  text-decoration: solid line-through;
-  color: lightgray;
-}
 </style>
