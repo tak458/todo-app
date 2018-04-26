@@ -5,30 +5,42 @@
         <v-checkbox v-model="isFinish"/>
       </v-list-tile-action>
       <v-list-tile-content>
-        <v-text-field class="title" v-show="visibleEditPain" v-model="title"/>
-        <v-list-tile-title v-show="!visibleEditPain" :class="{isFinish: model.isFinish}">{{model.title}}</v-list-tile-title>
-        <span class="remainTime">{{remainTime}}</span>
+        <v-list-tile-title>
+          <span>{{model.title}}</span>
+          <span> {{remainTime}}</span>
+        </v-list-tile-title>
       </v-list-tile-content>
       <v-list-tile-action>
         <div>
-          <v-btn fab small v-on:click="openEditTodo">#</v-btn>
-          <v-btn fab small v-on:click="openNewTodo">+</v-btn>
-          <v-btn fab small v-on:click="$emit('remove')">x</v-btn>
+          <v-menu bottom offset-x :close-on-content-click="false" v-model="visibleEditPain">
+            <v-btn flat icon color="primary" slot="activator"><v-icon>mode_edit</v-icon></v-btn>
+            <v-card>
+              <v-container>
+                <v-text-field v-model="title" label="タイトル"/>
+                <v-menu lazy full-width transition="scale-transition">
+                  <v-text-field v-model="scheduledAt" slot="activator" label="予定" prepend-icon="event" readonly/>
+                  <v-date-picker v-model="scheduledAt" no-title scrollable/>
+                </v-menu>
+                <v-menu lazy full-width transition="scale-transition">
+                  <v-text-field v-model="deadlineAt" slot="activator" label="期限" prepend-icon="event" readonly/>
+                  <v-date-picker v-model="deadlineAt" no-title scrollable/>
+                </v-menu>
+                <v-text-field v-model="importance" label="重要度"/>
+                <v-text-field v-model="memo" label="メモ" multi-line/>
+              </v-container>
+            </v-card>
+          </v-menu>
+          <v-menu bottom offset-x :close-on-content-click="false" v-model="visibleAddPain">
+            <v-btn flat icon color="primary" slot="activator"><v-icon>add</v-icon></v-btn>
+            <v-card>
+              <v-container>
+                <v-text-field v-model="newTodoText" v-on:keyup.enter="addNewTodo" placeholder="Add a todo"/>
+              </v-container>
+            </v-card>
+          </v-menu>
+          <v-btn flat icon color="primary" v-on:click="$emit('remove')"><v-icon>delete</v-icon></v-btn>
         </div>
       </v-list-tile-action>
-      <div v-show="visibleEditPain">
-          <label>期限<input type="date" v-model="deadlineAt"/></label>
-          <label>予定<input type="date" v-model="scheduledAt"/></label>
-          <label>重要度<v-text-field v-model="importance"/></label>
-          <label>メモ<textarea v-model="memo"/></label>
-      </div>
-      <div v-show="visibleAddPain">
-        <v-text-field
-        v-model="newTodoText"
-        v-on:keyup.enter="addNewTodo"
-        placeholder="Add a todo"/>
-        <v-btn v-on:click="closeNewTodo">close</v-btn>
-      </div>
     </v-list-tile>
     <node style="margin-left:1em"
     v-for="child in todo.children"
@@ -148,12 +160,6 @@ export default {
     };
   },
   methods: {
-    openNewTodo: function() {
-      this.visibleAddPain = true;
-    },
-    closeNewTodo: function() {
-      this.visibleAddPain = false;
-    },
     addNewTodo: function() {
       this.$store.commit("addTodo", {
         id: this.model.id + "." + this.nextTodoId,
@@ -169,9 +175,6 @@ export default {
     },
     removeTodo: function(id) {
       this.$store.commit("removeTodo", { id });
-    },
-    openEditTodo: function() {
-      this.visibleEditPain = !this.visibleEditPain;
     }
   }
 };
