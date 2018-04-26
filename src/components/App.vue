@@ -1,20 +1,18 @@
 <template>
-  <div id="app">
-    <div id="todolist">
-      <input
+  <v-app>
+    <v-container id="todolist">
+      <v-text-field
         v-model="newTodoText"
         v-on:keyup.enter="addNewTodo"
         placeholder="Add a todo"/>
-      <ul>
-        <node
-          v-for="todo in todos"
-          :key="todo.id"
-          :model="todo"
-          v-on:remove="removeTodo(todo.id)">
-        </node>
-      </ul>
-    </div>
-  </div>
+      <node
+        v-for="todo in todos"
+        :key="todo.id"
+        :model="todo"
+        v-on:remove="removeTodo(todo.id)">
+      </node>
+    </v-container>
+  </v-app>
 </template>
 
 <script>
