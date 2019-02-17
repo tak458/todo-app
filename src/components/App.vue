@@ -1,5 +1,4 @@
 <template>
-  <v-app>
     <v-container id="todolist">
       <v-text-field
         v-model="newTodoText"
@@ -11,8 +10,7 @@
         :model="todo"
         v-on:remove="removeTodo(todo.id)">
       </node>
-    </v-container>
-  </v-app>
+  </v-container>
 </template>
 
 <script>
@@ -21,12 +19,9 @@ import Id from "../store/Id";
 import moment from "moment";
 
 export default {
-  name: "app",
-  data() {
-    return {
-      newTodoText: ""
-    };
-  },
+  data: () => ({
+    newTodoText: ""
+  }),
   computed: {
     todos() {
       return this.$store.state.todos;
