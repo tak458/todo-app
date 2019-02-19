@@ -1,14 +1,16 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import { state, getters } from './getters'
-import { mutations } from './mutations'
-import plugins from './plugins'
+import Vue from "vue";
+import Vuex from "vuex";
+import createPersistedState from "vuex-persistedstate";
+import todos from "./modules/todos";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
+
+const debug = process.env.NODE_ENV !== "production";
 
 export default new Vuex.Store({
-  state,
-  getters,
-  mutations,
-  plugins
-})
+  modules: {
+    todos
+  },
+  strict: debug,
+  plugins: [createPersistedState()]
+});

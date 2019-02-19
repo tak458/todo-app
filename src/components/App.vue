@@ -1,21 +1,14 @@
 <template>
-    <v-container id="todolist">
-      <v-text-field
-        v-model="newTodoText"
-        v-on:keyup.enter="addNewTodo"
-        placeholder="Add a todo"/>
-      <node
-        v-for="todo in todos"
-        :key="todo.id"
-        :model="todo"
-        v-on:remove="removeTodo(todo.id)">
-      </node>
+  <v-container id="todolist">
+    <v-text-field v-model="newTodoText" v-on:keyup.enter="addNewTodo" placeholder="Add a todo"/>
+    <node v-for="todo in todos" :key="todo.id" :model="todo" v-on:remove="removeTodo(todo.id)"></node>
   </v-container>
 </template>
 
 <script>
+import { mapState, mapMutations } from "vuex";
 import node from "./Node.vue";
-import Id from "../store/Id";
+import Id from "../store/models/Id";
 import moment from "moment";
 
 export default {
@@ -23,16 +16,17 @@ export default {
     newTodoText: ""
   }),
   computed: {
-    todos() {
-      return this.$store.state.todos;
-    },
+    ...mapState("todos", {
+      todos: state => state.todos
+    }),
     nextTodoId() {
       return Math.max(-1, ...this.todos.map(td => new Id(td.id).foot())) + 1;
     }
   },
   methods: {
-    addNewTodo: function() {
-      this.$store.commit("addTodo", {
+    ...mapMutations("todos",["addTodo","removeTodo"]),
+    addNewTodo() {
+      this.addTodo({
         id: this.nextTodoId.toString(),
         title: this.newTodoText,
         children: [],
@@ -40,12 +34,12 @@ export default {
         memo: "",
         importance: null,
         deadlineAt: null, // 期限
-        scheduledAt: null, // 予定
+        scheduledAt: null // 予定
       });
       this.newTodoText = "";
     },
-    removeTodo: function(id) {
-      this.$store.commit("removeTodo", { id });
+    removeTodo(id) {
+      this.removeTodo({ id });
     }
   },
   components: {
@@ -55,5 +49,4 @@ export default {
 </script>
 
 <style>
-
 </style>
