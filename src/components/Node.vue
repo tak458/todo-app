@@ -2,23 +2,28 @@
   <v-list>
     <v-list-tile>
       <v-list-tile-action>
-        <v-checkbox v-model="isFinish"/>
+        <v-checkbox v-model="isFinish" />
       </v-list-tile-action>
       <v-list-tile-content>
         <v-list-tile-title>
-          <span>{{model.title}}</span>
-          <span>{{remainTime}}</span>
+          <span>{{ model.title }}</span>
+          <span>{{ remainTime }}</span>
         </v-list-tile-title>
       </v-list-tile-content>
       <v-list-tile-action>
         <div>
-          <v-menu bottom offset-x :close-on-content-click="false" v-model="visibleEditPain">
+          <v-menu
+            bottom
+            offset-x
+            :close-on-content-click="false"
+            v-model="visibleEditPain"
+          >
             <v-btn flat icon color="primary" slot="activator">
               <v-icon>mode_edit</v-icon>
             </v-btn>
             <v-card>
               <v-container>
-                <v-text-field v-model="title" label="タイトル"/>
+                <v-text-field v-model="title" label="タイトル" />
                 <v-menu lazy full-width transition="scale-transition">
                   <v-text-field
                     v-model="scheduledAt"
@@ -27,7 +32,7 @@
                     prepend-icon="event"
                     readonly
                   />
-                  <v-date-picker v-model="scheduledAt" no-title scrollable/>
+                  <v-date-picker v-model="scheduledAt" no-title scrollable />
                 </v-menu>
                 <v-menu lazy full-width transition="scale-transition">
                   <v-text-field
@@ -37,14 +42,19 @@
                     prepend-icon="event"
                     readonly
                   />
-                  <v-date-picker v-model="deadlineAt" no-title scrollable/>
+                  <v-date-picker v-model="deadlineAt" no-title scrollable />
                 </v-menu>
-                <v-text-field v-model="importance" label="重要度"/>
-                <v-text-field v-model="memo" label="メモ" multi-line/>
+                <v-text-field v-model="importance" label="重要度" />
+                <v-text-field v-model="memo" label="メモ" multi-line />
               </v-container>
             </v-card>
           </v-menu>
-          <v-menu bottom offset-x :close-on-content-click="false" v-model="visibleAddPain">
+          <v-menu
+            bottom
+            offset-x
+            :close-on-content-click="false"
+            v-model="visibleAddPain"
+          >
             <v-btn flat icon color="primary" slot="activator">
               <v-icon>add</v-icon>
             </v-btn>
@@ -101,9 +111,7 @@ export default {
         return this.todo.title;
       },
       set(value) {
-        this.editTodo(
-          Object.assign({}, this.todo, { title: value })
-        );
+        this.editTodo(Object.assign({}, this.todo, { title: value }));
       }
     },
     isFinish: {
@@ -111,9 +119,7 @@ export default {
         return this.todo.isFinish;
       },
       set(value) {
-        this.editTodo(
-          Object.assign({}, this.todo, { isFinish: value })
-        );
+        this.editTodo(Object.assign({}, this.todo, { isFinish: value }));
       }
     },
     importance: {
@@ -121,9 +127,7 @@ export default {
         return this.todo.importance;
       },
       set(value) {
-        this.editTodo(
-          Object.assign({}, this.todo, { importance: value })
-        );
+        this.editTodo(Object.assign({}, this.todo, { importance: value }));
       }
     },
     memo: {
@@ -131,9 +135,7 @@ export default {
         return this.todo.memo;
       },
       set(value) {
-        this.editTodo(
-          Object.assign({}, this.todo, { memo: value })
-        );
+        this.editTodo(Object.assign({}, this.todo, { memo: value }));
       }
     },
     deadlineAt: {
@@ -141,9 +143,7 @@ export default {
         return this.todo.deadlineAt;
       },
       set(value) {
-        this.editTodo(
-          Object.assign({}, this.todo, { deadlineAt: value })
-        );
+        this.editTodo(Object.assign({}, this.todo, { deadlineAt: value }));
         this.remainTime = moment(value).fromNow();
       }
     },
@@ -152,9 +152,7 @@ export default {
         return this.todo.scheduledAt;
       },
       set(value) {
-        this.editTodo(
-          Object.assign({}, this.todo, { scheduledAt: value })
-        );
+        this.editTodo(Object.assign({}, this.todo, { scheduledAt: value }));
       }
     },
     progress() {
@@ -200,5 +198,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

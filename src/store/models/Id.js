@@ -29,6 +29,8 @@ export default class Id {
   }
 
   concatId(childId) {
-    return new Id(this.ids.push(childId.split(this.separator).join()).join(this.separator))
+    return new Id(
+      this.ids.push(childId.split(this.separator).join()).join(this.separator)
+    );
   }
 }

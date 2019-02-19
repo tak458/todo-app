@@ -1,7 +1,16 @@
 <template>
   <v-container id="todolist">
-    <v-text-field v-model="newTodoText" v-on:keyup.enter="addNewTodo" placeholder="Add a todo"/>
-    <node v-for="todo in todos" :key="todo.id" :model="todo" v-on:remove="removeTodo(todo.id)"></node>
+    <v-text-field
+      v-model="newTodoText"
+      v-on:keyup.enter="addNewTodo"
+      placeholder="Add a todo"
+    />
+    <node
+      v-for="todo in todos"
+      :key="todo.id"
+      :model="todo"
+      v-on:remove="removeTodo(todo.id)"
+    ></node>
   </v-container>
 </template>
 
@@ -24,7 +33,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations("todos",["addTodo","removeTodo"]),
+    ...mapMutations("todos", ["addTodo", "removeTodo"]),
     addNewTodo() {
       this.addTodo({
         id: this.nextTodoId.toString(),
@@ -48,5 +57,4 @@ export default {
 };
 </script>
 
-<style>
-</style>
+<style></style>

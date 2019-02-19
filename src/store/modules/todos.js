@@ -1,4 +1,4 @@
-import Id from '../models/Id';
+import Id from "../models/Id";
 
 const state = () => ({
   todos: []
