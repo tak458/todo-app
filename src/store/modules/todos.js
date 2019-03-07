@@ -1,79 +1,73 @@
-import Id from "../models/Id";
-
 const state = () => ({
-  todos: []
+  todos: {
+    children: []
+  },
+  nextId: 0
 });
 
+const recur = (rootObj, findFunc) => {
+  const _recur = obj => {
+    if (findFunc(obj)) {
+      return [obj];
+    } else {
+      return obj.children
+        .map(child => _recur(child))
+        .reduce((acc, val) => acc.concat(val), [])
+        .filter(Boolean);
+    }
+  };
+  const targets = _recur(rootObj);
+  return targets && targets.length > 0 ? targets[0] : undefined;
+};
+
+const findRecursiveById = (id, rootObj) => {
+  return recur(rootObj, obj => obj.id === id);
+};
+
+const findParentByChildId = (id, rootObj) => {
+  return recur(rootObj, obj => obj.children.some(child => child.id === id));
+};
+
 const mutations = {
-  addTodo(state, model) {
-    const _addTodo = (index, todos, model) => {
-      console.log({ index, todos, model });
-      if (index.length() === 1) {
-        todos.push(model);
-      } else {
-        const newIndex = index.excludeRootId().toString();
-        _addTodo(
-          new Id(newIndex),
-          todos.find(todo => new Id(todo.id).foot() === index.head()).children,
-          model
-        );
-      }
-    };
-    _addTodo(new Id(model.id), state.todos, model);
+  addTodo(state, { parentId, model }) {
+    const _model = Object.assign(
+      {
+        id: state.nextId++,
+        children: []
+      },
+      model
+    );
+    const target = findRecursiveById(parentId, state.todos);
+    target.children.push(_model);
   },
-  removeTodo(state, model) {
-    const _removeTodo = (index, todos, model) => {
-      console.log({ index, todos, model });
-      if (index.length() === 1) {
-        todos.splice(todos.findIndex(todo => todo.id === model.id), 1);
-      } else {
-        const newIndex = index.excludeRootId().toString();
-        _removeTodo(
-          new Id(newIndex),
-          todos.find(todo => new Id(todo.id).foot() === index.head()).children,
-          model
-        );
-      }
-    };
-    _removeTodo(new Id(model.id), state.todos, model);
+  removeTodo(state, { parentId, model }) {
+    const target = findRecursiveById(parentId, state.todos);
+    if (target && target.children) {
+      target.children.splice(
+        target.children.findIndex(cat => cat.id === model.id),
+        1
+      );
+    } else {
+      console.error("remove", { parentId, model });
+    }
   },
-  editTodo(state, model) {
-    const _editTodo = (index, todos, model) => {
-      console.log({ index, todos, model });
-      if (index.length() === 1) {
-        const idx = todos.findIndex(todo => todo.id === model.id);
-        Object.assign(todos[idx], model);
-      } else {
-        const newIndex = index.excludeRootId().toString();
-        _editTodo(
-          new Id(newIndex),
-          todos.find(todo => new Id(todo.id).foot() === index.head()).children,
-          model
-        );
-      }
-    };
-    _editTodo(new Id(model.id), state.todos, model);
+  editTodo(state, { model }) {
+    const target = findRecursiveById(model.id, state.todos);
+    Object.assign(target, model);
   }
 };
 
 const getters = {
-  getTodoById: state => id => {
-    const _getTodoById = (index, todos) => {
-      if (index.length() === 1) {
-        return todos.find(todo => new Id(todo.id).foot() === index.head());
-      } else {
-        const newIndex = index.excludeRootId().toString();
-        return _getTodoById(
-          new Id(newIndex),
-          todos.find(todo => new Id(todo.id).foot() === index.head()).children
-        );
-      }
-    };
-    return _getTodoById(new Id(id), state.todos);
-  }
+  getTodoById: state => id => findRecursiveById(id, state.todos),
+  getParentById: state => id => findParentByChildId(id, state.todos)
 };
 
-const actions = {};
+const actions = {
+  removeTodo({ commit, state }, { model }) {
+    const parent = findParentByChildId(model.id, state.todos);
+    commit("removeTodo", { parentId: parent.id, model });
+  }
+};
 
 export default {
   namespaced: true,
