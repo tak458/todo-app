@@ -8,6 +8,8 @@
   "scripts": {
     "lint": "next lint",
     "format": "prettier src/**/* --write",
+    "test": "jest",
+    "test:ci": "jest --ci --coverage",
     "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "next start"
@@ -15,8 +17,8 @@
   "dependencies": {
     "@material-ui/core": "4.12.2",
     "@material-ui/icons": "4.11.2",
+    "@material-ui/lab": "4.0.0-alpha.60",
     "@reduxjs/toolkit": "1.6.1",
-    "@material-ui/lab": "*",
     "next": "11.0.1",
     "normalizr": "3.6.1",
     "react": "17.0.2",
