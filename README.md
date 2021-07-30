@@ -1,32 +1,35 @@
 # todo-app
 
-ブラウザのみで完結するTodoアプリ
+ブラウザのみで完結する Todo アプリ
 
 GitHub IO : https://tak458.github.io/todo-app/
+
 ## Project setup
-```
-npm install
+
+```shell
+npm ci
 ```
 
 ### Compiles and hot-reloads for development
-```
-npm run serve
+
+```shell
+npm run dev
 ```
 
 ### Compiles and minifies for production
-```
+
+```shell
 npm run build
 ```
 
 ### Run your tests
-```
+
+```shell
 npm run test
 ```
 
 ### Lints and fixes files
-```
+
+```shell
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
