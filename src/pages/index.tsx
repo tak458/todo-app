@@ -4,7 +4,7 @@ import { Layout } from "../components/globals/Layout";
 import { TaskAddDialog } from "../components/TaskAddDialog";
 import { TaskDeleteDialog } from "../components/TaskDeleteDialog";
 import { TaskEditDialog } from "../components/TaskEditDialog";
-import { TaskTreeView } from "../components/TaskTreeView";
+import { TreeViewRecursive } from "../components/TreeViewRecursive";
 import { useAppSelector } from "../hooks/toolkit";
 import { getTaskTree } from "../store/modules/tasks";
 
@@ -41,8 +41,8 @@ export default function Home() {
             <Card>
               <CardHeader title="タスク" action={<TaskAddDialog parentId="root" />} />
               <CardContent>
-                <TaskTreeView
-                  taskTree={tasks}
+                <TreeViewRecursive
+                  treeNode={tasks}
                   renderLabel={(node) => (
                     <div className={classes.labelRoot}>
                       <Typography variant="body2" className={classes.labelText}>

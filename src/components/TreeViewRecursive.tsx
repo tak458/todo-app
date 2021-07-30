@@ -17,17 +17,17 @@ function renderTree<T extends RenderTree>(node: T, renderLabel: (node: T) => Rea
   );
 }
 
-export interface TaskTreeViewProps<T extends RenderTree> {
-  taskTree: T | T[];
+export interface TreeViewRecursiveProps<T extends RenderTree> {
+  treeNode: T | T[];
   selected?: string | null;
   onSelected?: (event: React.ChangeEvent, nodeId: string) => void;
   renderLabel?: (node: T) => ReactNode;
 }
 
-export function TaskTreeView<T extends RenderTree>(props: TaskTreeViewProps<T>) {
+export function TreeViewRecursive<T extends RenderTree>(props: TreeViewRecursiveProps<T>) {
   return (
     <>
-      {(Array.isArray(props.taskTree) ? props.taskTree : [props.taskTree]).map((taskTree) => {
+      {(Array.isArray(props.treeNode) ? props.treeNode : [props.treeNode]).map((taskTree) => {
         return (
           <TreeView
             key={taskTree.id}
