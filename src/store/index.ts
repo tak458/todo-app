@@ -12,7 +12,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: "todo-app",
   storage,
-  whitelist: [],
+  whitelist: ["tasks"],
 };
 
 export const store = configureStore({
