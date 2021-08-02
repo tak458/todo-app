@@ -1,1 +1,1 @@
-export const DateTimePattern = "yyyy-MM-dd'T'HH:mm:ss";
+export const DateTimePattern = "yyyy-MM-dd'T'HH:mm";
