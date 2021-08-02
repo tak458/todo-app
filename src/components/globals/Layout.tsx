@@ -4,6 +4,8 @@ import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { SideBar } from "./SideBar";
 import { makeStyles } from "@material-ui/core";
+import { ErrorBoundary } from "react-error-boundary";
+import { ErrorFallback } from "./ErrorFallback";
 
 const useStyles = makeStyles(() => ({
   content: {
@@ -26,7 +28,9 @@ export const Layout: FC = (props) => {
       <Header onOpen={() => setOpen(true)} />
       <SideBar onClose={() => setOpen(false)} open={open} />
 
-      <main className={classes.content}>{props.children}</main>
+      <main className={classes.content}>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>{props.children}</ErrorBoundary>
+      </main>
 
       <Footer />
     </>

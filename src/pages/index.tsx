@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, Container, Grid, makeStyles, Typography } from "@material-ui/core";
+import { format } from "date-fns";
 import React, { useCallback, useState } from "react";
 import { AddButton } from "../components/buttons/AddButton";
 import { DeleteButton } from "../components/buttons/DeleteButton";
@@ -9,6 +10,7 @@ import { TaskDeleteDialog } from "../components/TaskDeleteDialog";
 import { TaskEditDialog } from "../components/TaskEditDialog";
 import { TreeViewRecursive } from "../components/TreeViewRecursive";
 import { useAppSelector } from "../hooks/toolkit";
+import { DateTimePattern } from "../models/constants";
 import { getTaskTree, Task } from "../store/modules/tasks";
 
 const useStyles = makeStyles((theme) => ({
@@ -79,7 +81,8 @@ export default function Home() {
                   renderLabel={(node) => (
                     <div className={classes.labelRoot}>
                       <Typography variant="body2" className={classes.labelText}>
-                        {node.name}({node.startedAt}→{node.finishedAt})
+                        {node.name}({format(node.startedAt, DateTimePattern)}→{format(node.finishedAt, DateTimePattern)}
+                        )
                       </Typography>
                       <AddButton size="small" onClick={onOpenAdd(node)} />
                       <EditButton size="small" onClick={onOpenEdit(node)} />
