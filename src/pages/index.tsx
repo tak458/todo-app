@@ -1,4 +1,17 @@
-import { Card, CardContent, CardHeader, Container, Grid, makeStyles, Typography } from "@material-ui/core";
+import {
+  Accordion,
+  AccordionActions,
+  AccordionDetails,
+  AccordionSummary,
+  Card,
+  CardContent,
+  CardHeader,
+  Checkbox,
+  Container,
+  Grid,
+  makeStyles,
+  Typography,
+} from "@material-ui/core";
 import { format } from "date-fns";
 import React, { useCallback, useState } from "react";
 import { AddButton } from "../components/buttons/AddButton";
@@ -12,16 +25,14 @@ import { TreeViewRecursive } from "../components/TreeViewRecursive";
 import { useAppSelector } from "../hooks/toolkit";
 import { DateTimePattern } from "../models/constants";
 import { getTaskTree, Task } from "../store/modules/tasks";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import { useDispatch } from "react-redux";
+import * as StoreTasks from "../store/modules/tasks";
 
 const useStyles = makeStyles((theme) => ({
   container: {
     paddingTop: theme.spacing(4),
     paddingBottom: theme.spacing(4),
-  },
-  labelRoot: {
-    display: "flex",
-    alignItems: "center",
-    padding: theme.spacing(0.5, 0),
   },
   labelIcon: {
     width: 18,
@@ -31,10 +42,15 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "inherit",
     flexGrow: 1,
   },
+  finishedCheckbox: {
+    padding: 0,
+    paddingRight: theme.spacing(1),
+  },
 }));
 
 export default function Home() {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   const { children: tasks } = useAppSelector(getTaskTree);
 
@@ -79,15 +95,38 @@ export default function Home() {
                 <TreeViewRecursive
                   treeNode={tasks}
                   renderLabel={(node) => (
-                    <div className={classes.labelRoot}>
-                      <Typography variant="body2" className={classes.labelText}>
-                        {node.name}({format(node.startedAt, DateTimePattern)}→{format(node.finishedAt, DateTimePattern)}
-                        )
-                      </Typography>
-                      <AddButton size="small" onClick={onOpenAdd(node)} />
-                      <EditButton size="small" onClick={onOpenEdit(node)} />
-                      <DeleteButton size="small" onClick={onOpenDelete(node)} />
-                    </div>
+                    <Accordion square={true}>
+                      <AccordionSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        onClick={(e) => e.stopPropagation()}
+                        onFocus={(e) => e.stopPropagation()}
+                      >
+                        <Checkbox
+                          className={classes.finishedCheckbox}
+                          checked={!!node.completedAt}
+                          onClick={(e) => {
+                            const completedAt = node.completedAt ? undefined : new Date().getTime();
+                            dispatch(StoreTasks.tasks.actions.update({ ...node, completedAt }));
+                            e.stopPropagation();
+                          }}
+                          onFocus={(e) => {
+                            e.stopPropagation();
+                          }}
+                        />
+                        <Typography className={classes.labelText}>{node.name}</Typography>
+                      </AccordionSummary>
+                      <AccordionDetails>
+                        <Typography>
+                          ({format(node.startedAt, DateTimePattern)}→{format(node.finishedAt, DateTimePattern)})<br />
+                          {node.note}
+                        </Typography>
+                      </AccordionDetails>
+                      <AccordionActions>
+                        <AddButton size="small" onClick={onOpenAdd(node)} />
+                        <EditButton size="small" onClick={onOpenEdit(node)} />
+                        <DeleteButton size="small" onClick={onOpenDelete(node)} />
+                      </AccordionActions>
+                    </Accordion>
                   )}
                 />
               </CardContent>

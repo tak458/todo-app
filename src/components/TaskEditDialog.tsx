@@ -161,7 +161,7 @@ export const TaskEditDialog: FC<TaskEditDialogProps> = (props) => {
                         <Checkbox
                           {...field}
                           checked={!!field.value}
-                          onChange={(event) => field.onChange(event.target.value)}
+                          onChange={(event) => field.onChange(event.target.value ? undefined : new Date().getTime())}
                         />
                       }
                       label="完了"
