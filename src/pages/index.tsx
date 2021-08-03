@@ -74,7 +74,7 @@ export default function Home() {
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <Card>
-              <CardHeader title="タスク" action={<AddButton onClick={onOpenAdd()} />} />
+              <CardHeader title="タスクツリー" action={<AddButton onClick={onOpenAdd()} />} />
               <CardContent>
                 <TreeViewRecursive
                   treeNode={tasks}
