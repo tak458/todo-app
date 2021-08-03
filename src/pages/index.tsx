@@ -129,7 +129,7 @@ export default function Home() {
                           </Grid>
                         </Grid>
                       </AccordionDetails>
-                      <AccordionActions>
+                      <AccordionActions onClick={(e) => e.stopPropagation()} onFocus={(e) => e.stopPropagation()}>
                         <AddButton size="small" onClick={onOpenAdd(node)} />
                         <EditButton size="small" onClick={onOpenEdit(node)} />
                         <DeleteButton size="small" onClick={onOpenDelete(node)} />
