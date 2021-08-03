@@ -48,7 +48,7 @@ export const TaskAddDialog: FC<TaskAddDialogProps> = (props) => {
   return (
     <Dialog open={props.open} onClose={onCancel}>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <DialogTitle>カテゴリの追加</DialogTitle>
+        <DialogTitle>タスクの追加</DialogTitle>
         <DialogContent>
           <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Grid container spacing={2}>
@@ -57,7 +57,7 @@ export const TaskAddDialog: FC<TaskAddDialogProps> = (props) => {
                   name="name"
                   control={control}
                   defaultValue=""
-                  render={({ field }) => <TextField fullWidth label="カテゴリ名" {...field} />}
+                  render={({ field }) => <TextField fullWidth label="タスク名" {...field} />}
                 />
               </Grid>
               <Grid item xs={12}>
