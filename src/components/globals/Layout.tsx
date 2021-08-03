@@ -20,7 +20,7 @@ export const Layout: FC = (props) => {
   return (
     <>
       <Head>
-        <title>TODO APP</title>
+        <title>Tasks Local</title>
         <meta name="description" content="TODOアプリ" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

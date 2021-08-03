@@ -22,7 +22,7 @@ export default function MyApp(props: AppProps) {
   return (
     <React.Fragment>
       <Head>
-        <title>TODO APP</title>
+        <title>Tasks Local</title>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
       <Provider store={store}>
