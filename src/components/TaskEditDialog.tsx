@@ -112,7 +112,9 @@ export const TaskEditDialog: FC<TaskEditDialogProps> = (props) => {
                       InputLabelProps={{ shrink: true }}
                       {...field}
                       value={format(field.value, DateTimePattern)}
-                      onChange={(event) => field.onChange(parse(event.target.value, DateTimePattern, new Date()))}
+                      onChange={(event) =>
+                        field.onChange(parse(event.target.value, DateTimePattern, new Date()).getTime())
+                      }
                     />
                   )}
                 />
@@ -130,7 +132,9 @@ export const TaskEditDialog: FC<TaskEditDialogProps> = (props) => {
                       InputLabelProps={{ shrink: true }}
                       {...field}
                       value={format(field.value, DateTimePattern)}
-                      onChange={(event) => field.onChange(parse(event.target.value, DateTimePattern, new Date()))}
+                      onChange={(event) =>
+                        field.onChange(parse(event.target.value, DateTimePattern, new Date()).getTime())
+                      }
                     />
                   )}
                 />
