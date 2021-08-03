@@ -28,6 +28,7 @@ import { getTaskTree, Task } from "../store/modules/tasks";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { useDispatch } from "react-redux";
 import * as StoreTasks from "../store/modules/tasks";
+import Markdown from "markdown-to-jsx";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -115,11 +116,18 @@ export default function Home() {
                         />
                         <Typography className={classes.labelText}>{node.name}</Typography>
                       </AccordionSummary>
-                      <AccordionDetails>
-                        <Typography>
-                          ({format(node.startedAt, DateTimePattern)}→{format(node.finishedAt, DateTimePattern)})<br />
-                          {node.note}
-                        </Typography>
+                      <AccordionDetails onClick={(e) => e.stopPropagation()} onFocus={(e) => e.stopPropagation()}>
+                        <Grid container>
+                          <Grid item xs={12} sm={6}>
+                            開始日:{format(node.startedAt, DateTimePattern)}
+                          </Grid>
+                          <Grid item xs={12} sm={6}>
+                            終了日:{format(node.finishedAt, DateTimePattern)}
+                          </Grid>
+                          <Grid item xs={12}>
+                            <Markdown>{node.note}</Markdown>
+                          </Grid>
+                        </Grid>
                       </AccordionDetails>
                       <AccordionActions>
                         <AddButton size="small" onClick={onOpenAdd(node)} />
