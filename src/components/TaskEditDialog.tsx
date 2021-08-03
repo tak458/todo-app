@@ -8,8 +8,8 @@ import {
   Grid,
   Checkbox,
   FormControlLabel,
-  TextareaAutosize,
-  makeStyles,
+  FormControl,
+  InputLabel,
 } from "@material-ui/core";
 import React, { FC, useCallback } from "react";
 import { useAppDispatch } from "../hooks/toolkit";
@@ -19,12 +19,7 @@ import { format, parse } from "date-fns";
 import { DateTimePattern } from "../models/constants";
 import { ErrorBoundary } from "react-error-boundary";
 import { ErrorFallback } from "./globals/ErrorFallback";
-
-const useStyles = makeStyles(() => ({
-  textarea: {
-    width: "100%",
-  },
-}));
+import { MarkdownEditor } from "./MarkdownEditor";
 
 export interface TaskEditDialogProps {
   open: boolean;
@@ -33,7 +28,6 @@ export interface TaskEditDialogProps {
 }
 
 export const TaskEditDialog: FC<TaskEditDialogProps> = (props) => {
-  const classes = useStyles();
   const dispatch = useAppDispatch();
   const { control, handleSubmit } = useForm<Omit<Task, "children">>({ defaultValues: props.model });
 
@@ -74,7 +68,12 @@ export const TaskEditDialog: FC<TaskEditDialogProps> = (props) => {
                   control={control}
                   defaultValue=""
                   render={({ field }) => (
-                    <TextareaAutosize placeholder="メモ" minRows={5} className={classes.textarea} {...field} />
+                    <FormControl fullWidth>
+                      <InputLabel htmlFor="input-memo" shrink={true}>
+                        メモ
+                      </InputLabel>
+                      <MarkdownEditor {...field} id="input-memo" />
+                    </FormControl>
                   )}
                 />
               </Grid>

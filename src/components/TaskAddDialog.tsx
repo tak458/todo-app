@@ -8,8 +8,8 @@ import {
   Grid,
   Checkbox,
   FormControlLabel,
-  TextareaAutosize,
-  makeStyles,
+  InputLabel,
+  FormControl,
 } from "@material-ui/core";
 import { nanoid } from "@reduxjs/toolkit";
 import React, { FC, useCallback } from "react";
@@ -20,12 +20,7 @@ import { format, parse } from "date-fns";
 import { DateTimePattern } from "../models/constants";
 import { ErrorBoundary } from "react-error-boundary";
 import { ErrorFallback } from "./globals/ErrorFallback";
-
-const useStyles = makeStyles(() => ({
-  textarea: {
-    width: "100%",
-  },
-}));
+import { MarkdownEditor } from "./MarkdownEditor";
 
 export interface TaskAddDialogProps {
   open: boolean;
@@ -34,7 +29,6 @@ export interface TaskAddDialogProps {
 }
 
 export const TaskAddDialog: FC<TaskAddDialogProps> = (props) => {
-  const classes = useStyles();
   const dispatch = useAppDispatch();
   const { control, handleSubmit } = useForm<Omit<Task, "children">>();
 
@@ -75,7 +69,12 @@ export const TaskAddDialog: FC<TaskAddDialogProps> = (props) => {
                   control={control}
                   defaultValue=""
                   render={({ field }) => (
-                    <TextareaAutosize placeholder="メモ" minRows={5} className={classes.textarea} {...field} />
+                    <FormControl fullWidth>
+                      <InputLabel htmlFor="input-memo" shrink={true}>
+                        メモ
+                      </InputLabel>
+                      <MarkdownEditor {...field} id="input-memo" />
+                    </FormControl>
                   )}
                 />
               </Grid>
