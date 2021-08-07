@@ -120,10 +120,10 @@ export default function Home() {
                       <AccordionDetails onClick={(e) => e.stopPropagation()} onFocus={(e) => e.stopPropagation()}>
                         <Grid container>
                           <Grid item xs={12} sm={6}>
-                            開始日:{format(node.startedAt, DateTimePattern)}
+                            開始日:{node.startedAt ? format(node.startedAt, DateTimePattern) : "---"}
                           </Grid>
                           <Grid item xs={12} sm={6}>
-                            終了日:{format(node.finishedAt, DateTimePattern)}
+                            終了日:{node.finishedAt ? format(node.finishedAt, DateTimePattern) : "---"}
                           </Grid>
                           <Grid item xs={12}>
                             <Markdown>{node.note}</Markdown>
