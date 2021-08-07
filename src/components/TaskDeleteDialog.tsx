@@ -2,7 +2,8 @@ import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from "@mate
 import React, { FC, useCallback } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { useAppDispatch } from "../hooks/toolkit";
-import { Task, tasks } from "../store/modules/tasks";
+import { tasks } from "../store/modules/tasks";
+import { Task } from "../models/Task";
 import { ErrorFallback } from "./globals/ErrorFallback";
 
 export interface TaskDeleteDialogProps {

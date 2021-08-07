@@ -13,13 +13,13 @@ import {
 } from "@material-ui/core";
 import React, { FC, useCallback } from "react";
 import { useAppDispatch } from "../hooks/toolkit";
-import { Task, tasks } from "../store/modules/tasks";
+import { tasks } from "../store/modules/tasks";
+import { Task } from "../models/Task";
 import { Controller, useForm } from "react-hook-form";
-import { format, parse } from "date-fns";
-import { DateTimePattern } from "../models/constants";
 import { ErrorBoundary } from "react-error-boundary";
 import { ErrorFallback } from "./globals/ErrorFallback";
 import { MarkdownEditor } from "./MarkdownEditor";
+import { convertFromTask, convertToTask, TaskForm } from "../models/TaskForm";
 
 export interface TaskEditDialogProps {
   open: boolean;
@@ -29,13 +29,13 @@ export interface TaskEditDialogProps {
 
 export const TaskEditDialog: FC<TaskEditDialogProps> = (props) => {
   const dispatch = useAppDispatch();
-  const { control, handleSubmit } = useForm<Omit<Task, "children">>({ defaultValues: props.model });
+  const { control, handleSubmit } = useForm<TaskForm>({ defaultValues: convertFromTask(props.model) });
 
   const onSubmit = useCallback(
     (data) => {
       console.log(data);
       if (data.name !== undefined && data.name !== "") {
-        const model: Task = { ...props.model, ...data };
+        const model: Task = { ...convertToTask(data), id: props.model.id, children: props.model.children };
         dispatch(tasks.actions.update(model));
       }
       props.setOpen(false);
@@ -58,7 +58,6 @@ export const TaskEditDialog: FC<TaskEditDialogProps> = (props) => {
                 <Controller
                   name="name"
                   control={control}
-                  defaultValue=""
                   render={({ field }) => <TextField fullWidth label="タスク名" {...field} />}
                 />
               </Grid>
@@ -66,7 +65,6 @@ export const TaskEditDialog: FC<TaskEditDialogProps> = (props) => {
                 <Controller
                   name="note"
                   control={control}
-                  defaultValue=""
                   render={({ field }) => (
                     <FormControl fullWidth>
                       <InputLabel htmlFor="input-memo" shrink={true}>
@@ -81,39 +79,20 @@ export const TaskEditDialog: FC<TaskEditDialogProps> = (props) => {
                 <Controller
                   name="estimatedTime"
                   control={control}
-                  defaultValue={0}
-                  render={({ field }) => (
-                    <TextField
-                      fullWidth
-                      label="見積時間"
-                      {...field}
-                      value={field.value.toString()}
-                      onChange={(event) => field.onChange(event.target.value)}
-                    />
-                  )}
+                  render={({ field }) => <TextField fullWidth label="見積時間" {...field} />}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Controller
                   name="actualTime"
                   control={control}
-                  defaultValue={0}
-                  render={({ field }) => (
-                    <TextField
-                      fullWidth
-                      label="実績時間"
-                      {...field}
-                      value={field.value.toString()}
-                      onChange={(event) => field.onChange(event.target.value)}
-                    />
-                  )}
+                  render={({ field }) => <TextField fullWidth label="実績時間" {...field} />}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <Controller
                   name="startedAt"
                   control={control}
-                  defaultValue={new Date().getTime()}
                   render={({ field }) => (
                     <TextField
                       type="datetime-local"
@@ -121,10 +100,6 @@ export const TaskEditDialog: FC<TaskEditDialogProps> = (props) => {
                       label="開始日時"
                       InputLabelProps={{ shrink: true }}
                       {...field}
-                      value={format(field.value, DateTimePattern)}
-                      onChange={(event) =>
-                        field.onChange(parse(event.target.value, DateTimePattern, new Date()).getTime())
-                      }
                     />
                   )}
                 />
@@ -133,7 +108,6 @@ export const TaskEditDialog: FC<TaskEditDialogProps> = (props) => {
                 <Controller
                   name="finishedAt"
                   control={control}
-                  defaultValue={new Date().getTime()}
                   render={({ field }) => (
                     <TextField
                       type="datetime-local"
@@ -141,10 +115,6 @@ export const TaskEditDialog: FC<TaskEditDialogProps> = (props) => {
                       label="終了日時"
                       InputLabelProps={{ shrink: true }}
                       {...field}
-                      value={format(field.value, DateTimePattern)}
-                      onChange={(event) =>
-                        field.onChange(parse(event.target.value, DateTimePattern, new Date()).getTime())
-                      }
                     />
                   )}
                 />
@@ -153,7 +123,6 @@ export const TaskEditDialog: FC<TaskEditDialogProps> = (props) => {
                 <Controller
                   name="completedAt"
                   control={control}
-                  defaultValue={undefined}
                   render={({ field }) => (
                     <FormControlLabel
                       control={
