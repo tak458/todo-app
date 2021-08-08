@@ -1,4 +1,4 @@
-import { TreeItem, TreeView } from "@material-ui/lab";
+import { TreeItem, TreeView, TreeViewProps } from "@material-ui/lab";
 import React, { ReactNode } from "react";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
@@ -22,6 +22,7 @@ export interface TreeViewRecursiveProps<T extends RenderTree> {
   selected?: string | null;
   onSelected?: (event: React.ChangeEvent, nodeId: string) => void;
   renderLabel?: (node: T) => ReactNode;
+  defaultExpanded?: TreeViewProps["defaultExpanded"];
 }
 
 export function TreeViewRecursive<T extends RenderTree>(props: TreeViewRecursiveProps<T>) {
@@ -32,7 +33,7 @@ export function TreeViewRecursive<T extends RenderTree>(props: TreeViewRecursive
           <TreeView
             key={taskTree.id}
             defaultCollapseIcon={<ExpandMoreIcon />}
-            defaultExpanded={[]}
+            defaultExpanded={props.defaultExpanded}
             defaultExpandIcon={<ChevronRightIcon />}
             onNodeSelect={props.onSelected}
             selected={props.selected}

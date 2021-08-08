@@ -1,8 +1,6 @@
 import {
-  Accordion,
   AccordionActions,
   AccordionDetails,
-  AccordionSummary,
   Card,
   CardContent,
   CardHeader,
@@ -30,6 +28,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import { useDispatch } from "react-redux";
 import * as StoreTasks from "../store/modules/tasks";
 import Markdown from "markdown-to-jsx";
+import { CustomAccordion, CustomAccordionSummary } from "../components/CustomAccordion";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -55,6 +54,7 @@ export default function Home() {
   const dispatch = useDispatch();
 
   const { children: tasks } = useAppSelector(getTaskTree);
+  const ids = useAppSelector((state) => state.tasks.ids);
 
   const [id, setId] = useState("root");
   const [model, setModel] = useState<Task | undefined>({} as Task);
@@ -96,9 +96,10 @@ export default function Home() {
               <CardContent>
                 <TreeViewRecursive
                   treeNode={tasks}
+                  defaultExpanded={ids}
                   renderLabel={(node) => (
-                    <Accordion square={true}>
-                      <AccordionSummary
+                    <CustomAccordion square={true} elevation={0}>
+                      <CustomAccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         onClick={(e) => e.stopPropagation()}
                         onFocus={(e) => e.stopPropagation()}
@@ -116,7 +117,7 @@ export default function Home() {
                           }}
                         />
                         <Typography className={classes.labelText}>{node.name}</Typography>
-                      </AccordionSummary>
+                      </CustomAccordionSummary>
                       <AccordionDetails onClick={(e) => e.stopPropagation()} onFocus={(e) => e.stopPropagation()}>
                         <Grid container>
                           <Grid item xs={12} sm={6}>
@@ -135,7 +136,7 @@ export default function Home() {
                         <EditButton size="small" onClick={onOpenEdit(node)} />
                         <DeleteButton size="small" onClick={onOpenDelete(node)} />
                       </AccordionActions>
-                    </Accordion>
+                    </CustomAccordion>
                   )}
                 />
               </CardContent>
