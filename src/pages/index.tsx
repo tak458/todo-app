@@ -29,6 +29,7 @@ import { useDispatch } from "react-redux";
 import * as StoreTasks from "../store/modules/tasks";
 import Markdown from "markdown-to-jsx";
 import { CustomAccordion, CustomAccordionSummary } from "../components/CustomAccordion";
+import { fromDurationFormat } from "../models/DurationFormat";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -120,11 +121,17 @@ export default function Home() {
                       </CustomAccordionSummary>
                       <AccordionDetails onClick={(e) => e.stopPropagation()} onFocus={(e) => e.stopPropagation()}>
                         <Grid container>
-                          <Grid item xs={12} sm={6}>
+                          <Grid item xs={12} sm={6} md={3}>
                             開始日:{node.startedAt ? format(node.startedAt, DateTimePattern) : "---"}
                           </Grid>
-                          <Grid item xs={12} sm={6}>
+                          <Grid item xs={12} sm={6} md={3}>
                             終了日:{node.finishedAt ? format(node.finishedAt, DateTimePattern) : "---"}
+                          </Grid>
+                          <Grid item xs={12} sm={6} md={3}>
+                            見積時間:{node.estimatedTime ? fromDurationFormat(node.estimatedTime) : "---"}
+                          </Grid>
+                          <Grid item xs={12} sm={6} md={3}>
+                            実績時間:{node.actualTime ? fromDurationFormat(node.actualTime) : "---"}
                           </Grid>
                           <Grid item xs={12}>
                             <Markdown>{node.note}</Markdown>
