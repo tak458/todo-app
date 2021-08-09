@@ -30,6 +30,7 @@ import * as StoreTasks from "../store/modules/tasks";
 import Markdown from "markdown-to-jsx";
 import { CustomAccordion, CustomAccordionSummary } from "../components/CustomAccordion";
 import { fromDurationFormat } from "../models/DurationFormat";
+import { DataExport } from "../components/DataExport";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -93,7 +94,15 @@ export default function Home() {
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <Card>
-              <CardHeader title="タスクツリー" action={<AddButton onClick={onOpenAdd()} />} />
+              <CardHeader
+                title="タスクツリー"
+                action={
+                  <>
+                    <DataExport />
+                    <AddButton onClick={onOpenAdd()} />
+                  </>
+                }
+              />
               <CardContent>
                 <TreeViewRecursive
                   treeNode={tasks}
