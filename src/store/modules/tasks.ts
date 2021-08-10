@@ -46,6 +46,10 @@ export const tasks = createSlice({
       // 自エンティティを削除
       tasksAdapter.removeMany(state, [model.result]);
     },
+    removeAll(state) {
+      tasksAdapter.removeAll(state);
+      tasksAdapter.addOne(state, { id: "root", name: "root", children: [] });
+    },
   },
 });
 

@@ -4,7 +4,7 @@ export type Task = {
   /** タスク名 */
   name: string;
   /** メモ */
-  note: string;
+  note?: string;
   /** 完了日時 */
   completedAt?: number;
   /** 開始日時 */

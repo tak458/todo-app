@@ -31,6 +31,7 @@ import Markdown from "markdown-to-jsx";
 import { CustomAccordion, CustomAccordionSummary } from "../components/CustomAccordion";
 import { fromDurationFormat } from "../models/DurationFormat";
 import { DataExport } from "../components/DataExport";
+import { DataImport } from "../components/DataImport";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -98,6 +99,7 @@ export default function Home() {
                 title="タスクツリー"
                 action={
                   <>
+                    <DataImport />
                     <DataExport />
                     <AddButton onClick={onOpenAdd()} />
                   </>
