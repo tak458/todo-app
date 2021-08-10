@@ -33,6 +33,7 @@ export function convertToTask(taskForm: TaskForm): Omit<Task, "id" | "children">
 
 export function convertFromTask(task: Omit<Task, "id" | "children">): TaskForm {
   return {
+    note: "",
     ...task,
     estimatedTime: fromDurationFormat(task.estimatedTime),
     actualTime: fromDurationFormat(task.actualTime),
