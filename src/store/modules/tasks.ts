@@ -59,5 +59,21 @@ export const { selectById, selectIds, selectEntities, selectAll, selectTotal } =
 
 export const getTaskTree = createSelector(
   (state: AppState) => state.tasks,
-  (tasks) => denormalize(["root"], categoriesSchema, { children: tasks.entities })[0] as Task
+  (state: AppState, visibleCompleted: boolean) => visibleCompleted,
+  (tasks, visibleCompleted) => {
+    // 完了タスクのID一覧
+    const ids = Object.entries(tasks.entities)
+      .filter(([key, value]) => value.completedAt)
+      .map(([key]) => key);
+    // 未完了タスクの一覧
+    const children = Object.entries(tasks.entities)
+      .filter(([key, value]) => key === "root" || !value.completedAt)
+      .map(([key, value]) => [key, { ...value, children: value.children.filter((id) => !ids.includes(id)) }]);
+    console.log({ ids, children });
+    const result = denormalize(["root"], categoriesSchema, {
+      children: visibleCompleted ? Object.fromEntries(children) : tasks.entities,
+    })[0] as Task;
+    console.log(result);
+    return result;
+  }
 );

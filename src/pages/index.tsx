@@ -6,8 +6,10 @@ import {
   CardHeader,
   Checkbox,
   Container,
+  FormControlLabel,
   Grid,
   makeStyles,
+  Switch,
   Typography,
 } from "@material-ui/core";
 import { format } from "date-fns";
@@ -56,11 +58,12 @@ export default function Home() {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const { children: tasks } = useAppSelector(getTaskTree);
-  const ids = useAppSelector((state) => state.tasks.ids);
-
   const [id, setId] = useState("root");
   const [model, setModel] = useState<Task | undefined>({} as Task);
+  const [visibleCompleted, setVisibleCompleted] = useState(false);
+
+  const { children: tasks } = useAppSelector((state) => getTaskTree(state, visibleCompleted));
+  const ids = useAppSelector((state) => state.tasks.ids);
 
   const [openAdd, setOpenAdd] = useState(false);
   const onOpenAdd = useCallback(
@@ -99,6 +102,12 @@ export default function Home() {
                 title="タスクツリー"
                 action={
                   <>
+                    <FormControlLabel
+                      label="完了タスクを非表示"
+                      control={
+                        <Switch value={visibleCompleted} onChange={(_, checked) => setVisibleCompleted(checked)} />
+                      }
+                    />
                     <DataImport />
                     <DataExport />
                     <AddButton onClick={onOpenAdd()} />
