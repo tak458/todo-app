@@ -7,7 +7,7 @@ import DownloadIcon from "@material-ui/icons/ArrowUpward";
 import { useCallback } from "react";
 
 export const DataExport: VFC = () => {
-  const taskTree = useAppSelector(getTaskTree);
+  const taskTree = useAppSelector((state) => getTaskTree(state, false));
 
   const onClick = useCallback(() => {
     if (taskTree) {
