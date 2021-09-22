@@ -10,7 +10,7 @@ import {
   FormControlLabel,
   FormControl,
   InputLabel,
-} from "@material-ui/core";
+} from "@mui/material";
 import React, { FC, useCallback } from "react";
 import { useAppDispatch } from "../hooks/toolkit";
 import { tasks } from "../store/modules/tasks";

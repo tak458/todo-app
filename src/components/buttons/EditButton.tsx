@@ -1,10 +1,10 @@
-import { IconButton, IconButtonProps } from "@material-ui/core";
-import EditIcon from "@material-ui/icons/Edit";
+import { IconButton, IconButtonProps } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
 import React, { FC } from "react";
 
 export const EditButton: FC<IconButtonProps> = (props) => {
   return (
-    <IconButton {...props}>
+    <IconButton {...props} size="large">
       <EditIcon />
     </IconButton>
   );

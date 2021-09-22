@@ -8,10 +8,10 @@ import {
   Container,
   FormControlLabel,
   Grid,
-  makeStyles,
   Switch,
   Typography,
-} from "@material-ui/core";
+} from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 import { format } from "date-fns";
 import React, { useCallback, useState } from "react";
 import { AddButton } from "../components/buttons/AddButton";
@@ -26,7 +26,7 @@ import { useAppSelector } from "../hooks/toolkit";
 import { DateTimePattern } from "../models/constants";
 import { getTaskTree } from "../store/modules/tasks";
 import { Task } from "../models/Task";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useDispatch } from "react-redux";
 import * as StoreTasks from "../store/modules/tasks";
 import Markdown from "markdown-to-jsx";

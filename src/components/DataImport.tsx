@@ -9,9 +9,9 @@ import {
   Grid,
   IconButton,
   Input,
-} from "@material-ui/core";
+} from "@mui/material";
 import React, { useState, VFC } from "react";
-import UploadIcon from "@material-ui/icons/ArrowDownward";
+import UploadIcon from "@mui/icons-material/ArrowDownward";
 import { useCallback } from "react";
 import { tasks } from "../store/modules/tasks";
 import { Task } from "../models/Task";
@@ -58,38 +58,36 @@ export const DataImport: VFC = () => {
     setOpen(false);
   }, []);
 
-  return (
-    <>
-      <IconButton onClick={() => setOpen(true)}>
-        <UploadIcon />
-      </IconButton>
-      <Dialog open={open} onClose={onCancel}>
-        <DialogTitle>インポート</DialogTitle>
-        <DialogContent>
-          <Grid container spacing={2}>
-            <Grid item>
-              <Input type="file" onChange={onDrop} />
-            </Grid>
-            <Grid item>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={isRemoveAll}
-                    onChange={(_, checked) => {
-                      setIsRemoveAll(checked);
-                    }}
-                  />
-                }
-                label="すべて削除してからインポートする"
-              />
-            </Grid>
+  return <>
+    <IconButton onClick={() => setOpen(true)} size="large">
+      <UploadIcon />
+    </IconButton>
+    <Dialog open={open} onClose={onCancel}>
+      <DialogTitle>インポート</DialogTitle>
+      <DialogContent>
+        <Grid container spacing={2}>
+          <Grid item>
+            <Input type="file" onChange={onDrop} />
           </Grid>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={onImport}>インポート</Button>
-          <Button onClick={onCancel}>キャンセル</Button>
-        </DialogActions>
-      </Dialog>
-    </>
-  );
+          <Grid item>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={isRemoveAll}
+                  onChange={(_, checked) => {
+                    setIsRemoveAll(checked);
+                  }}
+                />
+              }
+              label="すべて削除してからインポートする"
+            />
+          </Grid>
+        </Grid>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={onImport}>インポート</Button>
+        <Button onClick={onCancel}>キャンセル</Button>
+      </DialogActions>
+    </Dialog>
+  </>;
 };

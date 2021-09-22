@@ -3,7 +3,7 @@ import Head from "next/head";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { SideBar } from "./SideBar";
-import { makeStyles } from "@material-ui/core";
+import makeStyles from '@mui/styles/makeStyles';
 import { ErrorBoundary } from "react-error-boundary";
 import { ErrorFallback } from "./ErrorFallback";
 

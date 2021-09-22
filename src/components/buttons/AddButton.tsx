@@ -1,10 +1,10 @@
-import { IconButton, IconButtonProps } from "@material-ui/core";
-import AddIcon from "@material-ui/icons/Add";
+import { IconButton, IconButtonProps } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
 import React, { FC } from "react";
 
 export const AddButton: FC<IconButtonProps> = (props) => {
   return (
-    <IconButton {...props}>
+    <IconButton {...props} size="large">
       <AddIcon />
     </IconButton>
   );

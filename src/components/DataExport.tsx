@@ -1,9 +1,9 @@
-import { IconButton } from "@material-ui/core";
+import { IconButton } from "@mui/material";
 import { VFC } from "react";
 import { useAppSelector } from "../hooks/toolkit";
 import { getTaskTree } from "../store/modules/tasks";
-import DownloadIcon from "@material-ui/icons/ArrowUpward";
-// import DownloadIcon from "@material-ui/icons/ArrowDownward";
+import DownloadIcon from "@mui/icons-material/ArrowUpward";
+// import DownloadIcon from "@mui/icons-material/ArrowDownward";
 import { useCallback } from "react";
 
 export const DataExport: VFC = () => {
@@ -24,7 +24,7 @@ export const DataExport: VFC = () => {
   }, [taskTree]);
 
   return (
-    <IconButton onClick={onClick}>
+    <IconButton onClick={onClick} size="large">
       <DownloadIcon />
     </IconButton>
   );

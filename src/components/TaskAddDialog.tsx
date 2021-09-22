@@ -10,7 +10,7 @@ import {
   FormControlLabel,
   InputLabel,
   FormControl,
-} from "@material-ui/core";
+} from "@mui/material";
 import { nanoid } from "@reduxjs/toolkit";
 import React, { FC, useCallback } from "react";
 import { useAppDispatch } from "../hooks/toolkit";
