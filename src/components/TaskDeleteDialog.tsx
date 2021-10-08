@@ -1,4 +1,4 @@
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from "@material-ui/core";
+import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from "@mui/material";
 import React, { FC, useCallback } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { useAppDispatch } from "../hooks/toolkit";

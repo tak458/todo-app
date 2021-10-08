@@ -1,7 +1,7 @@
-import { TreeItem, TreeView, TreeViewProps } from "@material-ui/lab";
+import { TreeItem, TreeView, TreeViewProps } from "@mui/lab";
 import React, { ReactNode } from "react";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 interface RenderTree {
   id: string;

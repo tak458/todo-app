@@ -10,7 +10,7 @@ import {
   FormControlLabel,
   FormControl,
   InputLabel,
-} from "@material-ui/core";
+} from "@mui/material";
 import React, { FC, useCallback } from "react";
 import { useAppDispatch } from "../hooks/toolkit";
 import { tasks } from "../store/modules/tasks";
@@ -53,7 +53,7 @@ export const TaskEditDialog: FC<TaskEditDialogProps> = (props) => {
         <DialogTitle>タスクの編集</DialogTitle>
         <DialogContent>
           <ErrorBoundary FallbackComponent={ErrorFallback}>
-            <Grid container spacing={2}>
+            <Grid container spacing={2} marginTop={1}>
               <Grid item xs={12}>
                 <Controller
                   name="name"

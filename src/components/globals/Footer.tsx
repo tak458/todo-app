@@ -1,8 +1,14 @@
-import { makeStyles } from "@material-ui/core";
+import { styled } from "@mui/material/styles";
 import { FC } from "react";
 
-const useStyles = makeStyles((theme) => ({
-  footer: {
+const PREFIX = "Footer";
+
+const classes = {
+  footer: `${PREFIX}-footer`,
+};
+
+const Root = styled("footer")(({ theme }) => ({
+  [`&.${classes.footer}`]: {
     padding: theme.spacing(1, 2),
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.primary.contrastText,
@@ -18,6 +24,5 @@ export interface FooterProps {}
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const Footer: FC<FooterProps> = (props) => {
-  const classes = useStyles();
-  return <footer className={classes.footer}>footer&nbsp;</footer>;
+  return <Root className={classes.footer}>footer&nbsp;</Root>;
 };

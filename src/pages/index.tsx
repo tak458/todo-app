@@ -8,10 +8,9 @@ import {
   Container,
   FormControlLabel,
   Grid,
-  makeStyles,
   Switch,
   Typography,
-} from "@material-ui/core";
+} from "@mui/material";
 import { format } from "date-fns";
 import React, { useCallback, useState } from "react";
 import { AddButton } from "../components/buttons/AddButton";
@@ -26,7 +25,7 @@ import { useAppSelector } from "../hooks/toolkit";
 import { DateTimePattern } from "../models/constants";
 import { getTaskTree } from "../store/modules/tasks";
 import { Task } from "../models/Task";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useDispatch } from "react-redux";
 import * as StoreTasks from "../store/modules/tasks";
 import Markdown from "markdown-to-jsx";
@@ -35,27 +34,7 @@ import { fromDurationFormat } from "../models/DurationFormat";
 import { DataExport } from "../components/DataExport";
 import { DataImport } from "../components/DataImport";
 
-const useStyles = makeStyles((theme) => ({
-  container: {
-    paddingTop: theme.spacing(4),
-    paddingBottom: theme.spacing(4),
-  },
-  labelIcon: {
-    width: 18,
-    height: 18,
-  },
-  labelText: {
-    fontWeight: "inherit",
-    flexGrow: 1,
-  },
-  finishedCheckbox: {
-    padding: 0,
-    paddingRight: theme.spacing(1),
-  },
-}));
-
 export default function Home() {
-  const classes = useStyles();
   const dispatch = useDispatch();
 
   const [id, setId] = useState("root");
@@ -94,7 +73,13 @@ export default function Home() {
 
   return (
     <Layout>
-      <Container maxWidth="lg" className={classes.container}>
+      <Container
+        maxWidth="lg"
+        sx={{
+          paddingTop: (theme) => theme.spacing(4),
+          paddingBottom: (theme) => theme.spacing(4),
+        }}
+      >
         <Grid container spacing={2}>
           <Grid item xs={12}>
             <Card>
@@ -126,7 +111,6 @@ export default function Home() {
                         onFocus={(e) => e.stopPropagation()}
                       >
                         <Checkbox
-                          className={classes.finishedCheckbox}
                           checked={!!node.completedAt}
                           onClick={(e) => {
                             const completedAt = node.completedAt ? undefined : new Date().getTime();
@@ -136,8 +120,19 @@ export default function Home() {
                           onFocus={(e) => {
                             e.stopPropagation();
                           }}
+                          sx={{
+                            padding: 0,
+                            paddingRight: (theme) => theme.spacing(1),
+                          }}
                         />
-                        <Typography className={classes.labelText}>{node.name}</Typography>
+                        <Typography
+                          sx={{
+                            fontWeight: "inherit",
+                            flexGrow: 1,
+                          }}
+                        >
+                          {node.name}
+                        </Typography>
                       </CustomAccordionSummary>
                       <AccordionDetails onClick={(e) => e.stopPropagation()} onFocus={(e) => e.stopPropagation()}>
                         <Grid container>
