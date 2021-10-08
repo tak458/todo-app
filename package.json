@@ -36,7 +36,7 @@
     "@mui/lab": "5.0.0-alpha.48",
     "@mui/material": "5.0.1",
     "@mui/styles": "5.0.1",
-    "@reduxjs/toolkit": "1.6.1",
+    "@reduxjs/toolkit": "1.6.2",
     "babel-plugin-prismjs": "2.1.0",
     "date-fns": "2.24.0",
     "markdown-to-jsx": "7.1.3",
