@@ -53,7 +53,7 @@ export const TaskEditDialog: FC<TaskEditDialogProps> = (props) => {
         <DialogTitle>タスクの編集</DialogTitle>
         <DialogContent>
           <ErrorBoundary FallbackComponent={ErrorFallback}>
-            <Grid container spacing={2}>
+            <Grid container spacing={2} marginTop={1}>
               <Grid item xs={12}>
                 <Controller
                   name="name"

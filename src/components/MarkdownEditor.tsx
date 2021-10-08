@@ -1,11 +1,21 @@
-import makeStyles from '@mui/styles/makeStyles';
+import { styled } from "@mui/material/styles";
 import clsx from "clsx";
 import Prism from "prismjs";
 import React, { createRef, VFC, useCallback, useEffect, useState } from "react";
 
 import "prismjs/themes/prism.css";
 
-const useStyles = makeStyles((theme) => {
+const PREFIX = "MarkdownEditor";
+
+const classes = {
+  codeEditContainer: `${PREFIX}-codeEditContainer`,
+  codeInOutBase: `${PREFIX}-codeInOutBase`,
+  codeInput: `${PREFIX}-codeInput`,
+  codeOutput: `${PREFIX}-codeOutput`,
+  languageMarkdown: `${PREFIX}-languageMarkdown`,
+};
+
+const Root = styled("div")(({ theme }) => {
   const editorFont = {
     fontSize: "1em",
     fontFamily: "monospace",
@@ -15,7 +25,7 @@ const useStyles = makeStyles((theme) => {
   const editorPadding = 5;
 
   return {
-    codeEditContainer: {
+    [`&.${classes.codeEditContainer}`]: {
       position: "relative",
       marginTop: theme.spacing(2),
       height: editorHeight,
@@ -28,7 +38,7 @@ const useStyles = makeStyles((theme) => {
         ...editorFont,
       },
     },
-    codeInOutBase: {
+    [`& .${classes.codeInOutBase}`]: {
       position: "absolute",
       margin: 0,
       padding: editorPadding,
@@ -40,7 +50,7 @@ const useStyles = makeStyles((theme) => {
       overflow: "auto",
       whiteSpace: "nowrap",
     },
-    codeInput: {
+    [`& .${classes.codeInput}`]: {
       zIndex: 1,
       color: "transparent",
       background: "transparent",
@@ -48,11 +58,11 @@ const useStyles = makeStyles((theme) => {
       resize: "none",
       ...editorFont,
     },
-    codeOutput: {
+    [`& .${classes.codeOutput}`]: {
       zIndex: 0,
       ...editorFont,
     },
-    languageMarkdown: {
+    [`& .${classes.languageMarkdown}`]: {
       margin: 0,
       padding: 0,
       ...editorFont,
@@ -67,8 +77,6 @@ export interface MarkdownEditorProps {
 }
 
 export const MarkdownEditor: VFC<MarkdownEditorProps> = (props) => {
-  const classes = useStyles();
-
   const [text, setText] = useState(props.value);
 
   const handleChange = useCallback(
@@ -117,7 +125,7 @@ export const MarkdownEditor: VFC<MarkdownEditorProps> = (props) => {
   }, [text]);
 
   return (
-    <div className={classes.codeEditContainer}>
+    <Root className={classes.codeEditContainer}>
       <textarea
         id={props.id}
         value={props.value}
@@ -130,6 +138,6 @@ export const MarkdownEditor: VFC<MarkdownEditorProps> = (props) => {
       <pre className={clsx(classes.codeInOutBase, classes.codeOutput)} aria-hidden="true" ref={preRef}>
         <code className={clsx("language-markdown", classes.languageMarkdown)}>{text}</code>
       </pre>
-    </div>
+    </Root>
   );
 };

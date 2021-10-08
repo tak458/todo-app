@@ -54,7 +54,7 @@ export const TaskAddDialog: FC<TaskAddDialogProps> = (props) => {
         <DialogTitle>タスクの追加</DialogTitle>
         <DialogContent>
           <ErrorBoundary FallbackComponent={ErrorFallback}>
-            <Grid container spacing={2}>
+            <Grid container spacing={2} marginTop={1}>
               <Grid item xs={12}>
                 <Controller
                   name="name"
