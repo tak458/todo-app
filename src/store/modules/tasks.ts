@@ -69,11 +69,9 @@ export const getTaskTree = createSelector(
     const children = Object.entries(tasks.entities)
       .filter(([key, value]) => key === "root" || !value.completedAt)
       .map(([key, value]) => [key, { ...value, children: value.children.filter((id) => !ids.includes(id)) }]);
-    console.log({ ids, children });
     const result = denormalize(["root"], categoriesSchema, {
       children: visibleCompleted ? Object.fromEntries(children) : tasks.entities,
     })[0] as Task;
-    console.log(result);
     return result;
   }
 );
