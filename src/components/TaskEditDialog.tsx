@@ -12,6 +12,7 @@ import {
   InputLabel,
 } from "@mui/material";
 import React, { FC, useCallback } from "react";
+import { useSnackbar } from "notistack";
 import { useAppDispatch } from "../hooks/toolkit";
 import { tasks } from "../store/modules/tasks";
 import { Task } from "../models/Task";
@@ -29,18 +30,19 @@ export interface TaskEditDialogProps {
 
 export const TaskEditDialog: FC<TaskEditDialogProps> = (props) => {
   const dispatch = useAppDispatch();
+  const { enqueueSnackbar } = useSnackbar();
   const { control, handleSubmit } = useForm<TaskForm>({ defaultValues: convertFromTask(props.model) });
 
   const onSubmit = useCallback(
     (data) => {
-      console.log(data);
       if (data.name !== undefined && data.name !== "") {
         const model: Task = { ...convertToTask(data), id: props.model.id, children: props.model.children };
         dispatch(tasks.actions.update(model));
       }
       props.setOpen(false);
+      enqueueSnackbar("タスクを追加しました", { variant: "success" });
     },
-    [dispatch, props]
+    [dispatch, enqueueSnackbar, props]
   );
 
   const onCancel = useCallback(() => {

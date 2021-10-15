@@ -13,6 +13,7 @@ import {
 } from "@mui/material";
 import { nanoid } from "@reduxjs/toolkit";
 import React, { FC, useCallback } from "react";
+import { useSnackbar } from "notistack";
 import { useAppDispatch } from "../hooks/toolkit";
 import { tasks } from "../store/modules/tasks";
 import { Task } from "../models/Task";
@@ -30,18 +31,19 @@ export interface TaskAddDialogProps {
 
 export const TaskAddDialog: FC<TaskAddDialogProps> = (props) => {
   const dispatch = useAppDispatch();
+  const { enqueueSnackbar } = useSnackbar();
   const { control, handleSubmit } = useForm<TaskForm>({ defaultValues: createNewTaskForm() });
 
   const onSubmit = useCallback(
     (data) => {
-      console.log(data);
       if (data.name !== undefined && data.name !== "") {
         const model: Task = { ...convertToTask(data), id: nanoid(), children: [] };
         dispatch(tasks.actions.add({ parentId: props.parentId, model }));
       }
       props.setOpen(false);
+      enqueueSnackbar("タスクを追加しました", { variant: "success" });
     },
-    [dispatch, props]
+    [dispatch, enqueueSnackbar, props]
   );
 
   const onCancel = useCallback(() => {

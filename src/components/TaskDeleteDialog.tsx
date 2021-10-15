@@ -1,5 +1,6 @@
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from "@mui/material";
 import React, { FC, useCallback } from "react";
+import { useSnackbar } from "notistack";
 import { ErrorBoundary } from "react-error-boundary";
 import { useAppDispatch } from "../hooks/toolkit";
 import { tasks } from "../store/modules/tasks";
@@ -14,12 +15,14 @@ export interface TaskDeleteDialogProps {
 
 export const TaskDeleteDialog: FC<TaskDeleteDialogProps> = (props) => {
   const dispatch = useAppDispatch();
+  const { enqueueSnackbar } = useSnackbar();
 
   const onSubmit = useCallback(() => {
     const model: Task = { ...props.model };
     dispatch(tasks.actions.remove(model));
     props.setOpen(false);
-  }, [dispatch, props]);
+    enqueueSnackbar("タスクを削除しました", { variant: "success" });
+  }, [dispatch, enqueueSnackbar, props]);
 
   const onCancel = useCallback(() => {
     props.setOpen(false);
