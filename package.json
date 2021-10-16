@@ -11,8 +11,7 @@
     "format": "prettier src/**/* --write",
     "test": "jest",
     "test:ci": "jest --ci --coverage",
-    "build": "cross-env NODE_ENV='production' next build",
-    "export": "next export",
+    "build": "next build",
     "start": "next start"
   },
   "browserslist": {
