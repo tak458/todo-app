@@ -11,8 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
-    env:
-      NODE_ENV: production
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -21,6 +19,8 @@ jobs:
 
       - run: npm ci
       - run: npm run build
+        env:
+          NODE_ENV: production
       - run: npx next export
 
       - name: deploy
