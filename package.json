@@ -39,7 +39,7 @@
     "babel-plugin-prismjs": "2.1.0",
     "date-fns": "2.27.0",
     "markdown-to-jsx": "7.1.5",
-    "next": "12.0.4",
+    "next": "12.0.7",
     "normalizr": "3.6.1",
     "notistack": "2.0.3",
     "prismjs": "1.25.0",
