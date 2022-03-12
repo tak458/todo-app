@@ -38,7 +38,7 @@
     "@reduxjs/toolkit": "1.8.0",
     "babel-plugin-prismjs": "2.1.0",
     "date-fns": "2.28.0",
-    "markdown-to-jsx": "7.1.6",
+    "markdown-to-jsx": "7.1.7",
     "next": "12.1.0",
     "normalizr": "3.6.1",
     "notistack": "2.0.3",
