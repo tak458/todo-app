@@ -1,6 +1,8 @@
 import {
+  Accordion,
   AccordionActions,
   AccordionDetails,
+  AccordionSummary,
   Card,
   CardContent,
   CardHeader,
@@ -29,7 +31,6 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { useDispatch } from "react-redux";
 import * as StoreTasks from "../store/modules/tasks";
 import Markdown from "markdown-to-jsx";
-import { CustomAccordion, CustomAccordionSummary } from "../components/CustomAccordion";
 import { fromDurationFormat } from "../models/DurationFormat";
 import { DataExport } from "../components/DataExport";
 import { DataImport } from "../components/DataImport";
@@ -104,8 +105,8 @@ export default function Home() {
                   treeNode={tasks}
                   defaultExpanded={ids}
                   renderLabel={(node) => (
-                    <CustomAccordion square={true} elevation={0}>
-                      <CustomAccordionSummary
+                    <Accordion square={true} elevation={0}>
+                      <AccordionSummary
                         expandIcon={<ExpandMoreIcon />}
                         onClick={(e) => e.stopPropagation()}
                         onFocus={(e) => e.stopPropagation()}
@@ -133,7 +134,7 @@ export default function Home() {
                         >
                           {node.name}
                         </Typography>
-                      </CustomAccordionSummary>
+                      </AccordionSummary>
                       <AccordionDetails onClick={(e) => e.stopPropagation()} onFocus={(e) => e.stopPropagation()}>
                         <Grid container>
                           <Grid item xs={12} sm={6} md={3}>
@@ -158,7 +159,7 @@ export default function Home() {
                         <EditButton size="small" onClick={onOpenEdit(node)} />
                         <DeleteButton size="small" onClick={onOpenDelete(node)} />
                       </AccordionActions>
-                    </CustomAccordion>
+                    </Accordion>
                   )}
                 />
               </CardContent>

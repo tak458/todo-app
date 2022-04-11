@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, ReactNode, useState } from "react";
 import Head from "next/head";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
@@ -11,7 +11,7 @@ const StyledMain = styled("main")({
   flex: "1 0 auto",
 });
 
-export const Layout: FC = (props) => {
+export const Layout: FC<{ children: ReactNode }> = (props) => {
   const [open, setOpen] = useState(false);
 
   return (

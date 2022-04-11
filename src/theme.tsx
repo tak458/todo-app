@@ -1,7 +1,6 @@
 import { createTheme } from "@mui/material/styles";
 import { red } from "@mui/material/colors";
 
-// Create a theme instance.
 export const theme = createTheme({
   palette: {
     primary: {
@@ -15,6 +14,22 @@ export const theme = createTheme({
     },
     background: {
       default: "#fff",
+    },
+  },
+  components: {
+    MuiAccordionSummary: {
+      styleOverrides: {
+        root: {
+          "&.Mui-expanded": {
+            borderBottom: "dotted 1px #ccc",
+          },
+        },
+        content: {
+          "&.Mui-expanded": {
+            margin: "unset",
+          },
+        },
+      },
     },
   },
 });
