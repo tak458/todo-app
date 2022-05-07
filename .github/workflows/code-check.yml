@@ -17,4 +17,5 @@ jobs:
       - run: npm ci
       - run: npm run lint -- -f stylish
       - run: npm run test -- --passWithNoTests
-      - run: npm run build
+      - name: type check
+        run: npx tsc -p tsconfig.check.json
