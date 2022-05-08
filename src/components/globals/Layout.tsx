@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, useState } from "react";
+import React, { FC, useState, ReactNode } from "react";
 import Head from "next/head";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
