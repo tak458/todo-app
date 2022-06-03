@@ -19,3 +19,7 @@ jobs:
       - run: npm run test -- --passWithNoTests
       - name: type check
         run: npx tsc -p tsconfig.check.json
+      - uses: ArtiomTr/jest-coverage-report-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          test-script: npm run test:ci -- --passWithNoTests --testLocationInResults --json --outputFile=report.json
