@@ -4,6 +4,7 @@ import Prism from "prismjs";
 import React, { createRef, VFC, useCallback, useEffect, useState } from "react";
 
 import "prismjs/themes/prism.css";
+import "prismjs/components/prism-markdown";
 
 const PREFIX = "MarkdownEditor";
 
