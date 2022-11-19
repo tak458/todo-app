@@ -150,7 +150,7 @@ export default function Home() {
                             実績時間:{node.actualTime ? fromDurationFormat(node.actualTime) : "---"}
                           </Grid>
                           <Grid item xs={12}>
-                            <Markdown>{node.note}</Markdown>
+                            <Markdown>{node.note ?? ""}</Markdown>
                           </Grid>
                         </Grid>
                       </AccordionDetails>
@@ -165,8 +165,8 @@ export default function Home() {
               </CardContent>
             </Card>
             {openAdd && <TaskAddDialog open={openAdd} setOpen={setOpenAdd} parentId={id} />}
-            {openEdit && <TaskEditDialog open={openEdit} setOpen={setOpenEdit} model={model} />}
-            {openDelete && <TaskDeleteDialog open={openDelete} setOpen={setOpenDelete} model={model} />}
+            {openEdit && model && <TaskEditDialog open={openEdit} setOpen={setOpenEdit} model={model} />}
+            {openDelete && model && <TaskDeleteDialog open={openDelete} setOpen={setOpenDelete} model={model} />}
           </Grid>
         </Grid>
       </Container>

@@ -112,8 +112,10 @@ export const MarkdownEditor = (props: MarkdownEditorProps) => {
   const handleScroll = useCallback(() => {
     const editing = textareaRef.current;
     const highlighting = preRef.current;
-    highlighting.scrollTop = editing.scrollTop;
-    highlighting.scrollLeft = editing.scrollLeft;
+    if (highlighting && editing) {
+      highlighting.scrollTop = editing.scrollTop;
+      highlighting.scrollLeft = editing.scrollLeft;
+    }
   }, [preRef, textareaRef]);
 
   useEffect(() => {

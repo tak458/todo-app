@@ -24,11 +24,15 @@ export const DataImport: VFC = () => {
   const [isRemoveAll, setIsRemoveAll] = useState(false);
 
   const onChange: ChangeEventHandler<HTMLInputElement> = useCallback((e) => {
-    setFiles(Array.from(e.target.files));
+    if (e.target.files) {
+      setFiles(Array.from(e.target.files));
+    }
   }, []);
 
   const onDrop: DragEventHandler<HTMLInputElement> = useCallback((e) => {
-    setFiles(Array.from(e.dataTransfer.files));
+    if (e.dataTransfer.files) {
+      setFiles(Array.from(e.dataTransfer.files));
+    }
   }, []);
 
   const onImport = useCallback(() => {

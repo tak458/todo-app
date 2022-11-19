@@ -18,7 +18,11 @@ export function toDurationFormat(value: string): number {
   return 60 * 60 * 24 * days + 60 * 60 * hours + 60 * minutes;
 }
 
-export function fromDurationFormat(value: number): string {
+export function fromDurationFormat(value: number | undefined): string {
+  if (value === undefined || value === null) {
+    return "";
+  }
+
   const days = Math.floor(value / (60 * 60 * 24));
   const hours = Math.floor((value % (60 * 60 * 24)) / (60 * 60));
   const minutes = Math.floor((value % (60 * 60)) / 60);

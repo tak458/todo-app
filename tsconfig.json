@@ -2,9 +2,7 @@
   "extends": "@tsconfig/next/tsconfig.json",
   "compilerOptions": {
     // strict のうち対応できていないものを無効にしている
-    "strictFunctionTypes": false,
-    "strictNullChecks": false,
-    "strictPropertyInitialization": false
+    "strictFunctionTypes": false
   },
   "include": ["next-env.d.ts", "src", "test"],
   "exclude": ["node_modules"]

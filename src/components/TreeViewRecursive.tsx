@@ -19,7 +19,7 @@ function renderTree<T extends RenderTree>(node: T, renderLabel: (node: T) => Rea
 
 export interface TreeViewRecursiveProps<T extends RenderTree> {
   treeNode: T | T[];
-  selected?: string | null;
+  selected?: string;
   onSelected?: (event: React.ChangeEvent, nodeId: string) => void;
   renderLabel?: (node: T) => ReactNode;
   defaultExpanded?: TreeViewProps["defaultExpanded"];

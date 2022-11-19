@@ -6,7 +6,7 @@ import { Task } from "../../models/Task";
 type StoredTask = { children: StoredTask["id"][] } & Omit<Task, "children">;
 
 // normalizr schema
-const taskSchema = new schema.Entity("children");
+const taskSchema = new schema.Entity<StoredTask>("children");
 const categoriesSchema = new schema.Array(taskSchema);
 taskSchema.define({ children: categoriesSchema });
 
@@ -14,7 +14,7 @@ const tasksAdapter = createEntityAdapter<StoredTask>();
 
 export const tasks = createSlice({
   name: "tasks",
-  initialState: tasksAdapter.getInitialState({
+  initialState: tasksAdapter.getInitialState<{ ids: string[]; entities: { root: StoredTask } }>({
     ids: ["root"],
     entities: { root: { id: "root", name: "root", children: [] } },
   }),
@@ -39,6 +39,7 @@ export const tasks = createSlice({
       const model = normalize(action.payload, taskSchema);
       // 親エンティティの children から id を取り除く
       const parent = Object.values(state.entities).find((ent) => ent?.children.includes(model.result));
+      if (!parent) return;
       tasksAdapter.updateOne(state, {
         id: parent.id,
         changes: { ...parent, children: [...parent.children.filter((child) => child !== model.result)] },
@@ -63,12 +64,12 @@ export const getTaskTree = createSelector(
   (tasks, visibleCompleted) => {
     // 完了タスクのID一覧
     const ids = Object.entries(tasks.entities)
-      .filter(([, value]) => value.completedAt)
+      .filter(([, value]) => value?.completedAt)
       .map(([key]) => key);
     // 未完了タスクの一覧
     const children = Object.entries(tasks.entities)
-      .filter(([key, value]) => key === "root" || !value.completedAt)
-      .map(([key, value]) => [key, { ...value, children: value.children.filter((id) => !ids.includes(id)) }]);
+      .filter(([key, value]) => key === "root" || !value?.completedAt)
+      .map(([key, value]) => [key, { ...value, children: value?.children.filter((id) => !ids.includes(id)) }]);
     const result = denormalize(["root"], categoriesSchema, {
       children: visibleCompleted ? Object.fromEntries(children) : tasks.entities,
     })[0] as Task;
