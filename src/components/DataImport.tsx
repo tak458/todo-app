@@ -10,7 +10,7 @@ import {
   IconButton,
   Input,
 } from "@mui/material";
-import React, { useState, VFC } from "react";
+import React, { ChangeEventHandler, DragEventHandler, useState, VFC } from "react";
 import UploadIcon from "@mui/icons-material/ArrowDownward";
 import { useCallback } from "react";
 import { tasks } from "../store/modules/tasks";
@@ -20,11 +20,15 @@ import { useAppDispatch } from "../hooks/toolkit";
 export const DataImport: VFC = () => {
   const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
-  const [files, setFiles] = useState([]);
+  const [files, setFiles] = useState<File[]>([]);
   const [isRemoveAll, setIsRemoveAll] = useState(false);
 
-  const onDrop = useCallback((e) => {
-    setFiles(e.target.files ? e.target.files : e.dataTransfer.files);
+  const onChange: ChangeEventHandler<HTMLInputElement> = useCallback((e) => {
+    setFiles(Array.from(e.target.files));
+  }, []);
+
+  const onDrop: DragEventHandler<HTMLInputElement> = useCallback((e) => {
+    setFiles(Array.from(e.dataTransfer.files));
   }, []);
 
   const onImport = useCallback(() => {
@@ -58,36 +62,38 @@ export const DataImport: VFC = () => {
     setOpen(false);
   }, []);
 
-  return <>
-    <IconButton onClick={() => setOpen(true)} size="large">
-      <UploadIcon />
-    </IconButton>
-    <Dialog open={open} onClose={onCancel}>
-      <DialogTitle>インポート</DialogTitle>
-      <DialogContent>
-        <Grid container spacing={2}>
-          <Grid item>
-            <Input type="file" onChange={onDrop} />
+  return (
+    <>
+      <IconButton onClick={() => setOpen(true)} size="large">
+        <UploadIcon />
+      </IconButton>
+      <Dialog open={open} onClose={onCancel}>
+        <DialogTitle>インポート</DialogTitle>
+        <DialogContent>
+          <Grid container spacing={2}>
+            <Grid item>
+              <Input type="file" onChange={onChange} onDrag={onDrop} />
+            </Grid>
+            <Grid item>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={isRemoveAll}
+                    onChange={(_, checked) => {
+                      setIsRemoveAll(checked);
+                    }}
+                  />
+                }
+                label="すべて削除してからインポートする"
+              />
+            </Grid>
           </Grid>
-          <Grid item>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={isRemoveAll}
-                  onChange={(_, checked) => {
-                    setIsRemoveAll(checked);
-                  }}
-                />
-              }
-              label="すべて削除してからインポートする"
-            />
-          </Grid>
-        </Grid>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={onImport}>インポート</Button>
-        <Button onClick={onCancel}>キャンセル</Button>
-      </DialogActions>
-    </Dialog>
-  </>;
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={onImport}>インポート</Button>
+          <Button onClick={onCancel}>キャンセル</Button>
+        </DialogActions>
+      </Dialog>
+    </>
+  );
 };

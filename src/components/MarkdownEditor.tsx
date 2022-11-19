@@ -1,7 +1,7 @@
 import { styled } from "@mui/material/styles";
 import clsx from "clsx";
 import Prism from "prismjs";
-import React, { createRef, VFC, useCallback, useEffect, useState } from "react";
+import React, { ChangeEventHandler, createRef, KeyboardEventHandler, useCallback, useEffect, useState } from "react";
 
 import "prismjs/themes/prism.css";
 import "prismjs/components/prism-markdown";
@@ -77,10 +77,10 @@ export interface MarkdownEditorProps {
   onChange: (value: string) => void;
 }
 
-export const MarkdownEditor: VFC<MarkdownEditorProps> = (props) => {
+export const MarkdownEditor = (props: MarkdownEditorProps) => {
   const [text, setText] = useState(props.value);
 
-  const handleChange = useCallback(
+  const handleChange: ChangeEventHandler<HTMLTextAreaElement> = useCallback(
     (event) => {
       const text = event.target.value;
       props.onChange(text);
@@ -89,7 +89,7 @@ export const MarkdownEditor: VFC<MarkdownEditorProps> = (props) => {
     [props]
   );
 
-  const handleKeyDown = useCallback(
+  const handleKeyDown: KeyboardEventHandler<HTMLTextAreaElement> = useCallback(
     (evt) => {
       let value = props.value;
       const selStartPos = evt.currentTarget.selectionStart;

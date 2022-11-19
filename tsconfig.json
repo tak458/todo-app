@@ -2,7 +2,6 @@
   "extends": "@tsconfig/next/tsconfig.json",
   "compilerOptions": {
     // strict のうち対応できていないものを無効にしている
-    "noImplicitAny": false,
     "strictFunctionTypes": false,
     "strictNullChecks": false,
     "strictPropertyInitialization": false

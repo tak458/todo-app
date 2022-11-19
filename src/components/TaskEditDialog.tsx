@@ -16,7 +16,7 @@ import { useSnackbar } from "notistack";
 import { useAppDispatch } from "../hooks/toolkit";
 import { tasks } from "../store/modules/tasks";
 import { Task } from "../models/Task";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { ErrorBoundary } from "react-error-boundary";
 import { ErrorFallback } from "./globals/ErrorFallback";
 import { MarkdownEditor } from "./MarkdownEditor";
@@ -33,7 +33,7 @@ export const TaskEditDialog: FC<TaskEditDialogProps> = (props) => {
   const { enqueueSnackbar } = useSnackbar();
   const { control, handleSubmit } = useForm<TaskForm>({ defaultValues: convertFromTask(props.model) });
 
-  const onSubmit = useCallback(
+  const onSubmit: SubmitHandler<TaskForm> = useCallback(
     (data) => {
       if (data.name !== undefined && data.name !== "") {
         const model: Task = { ...convertToTask(data), id: props.model.id, children: props.model.children };
