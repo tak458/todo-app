@@ -63,7 +63,7 @@ export const getTaskTree = createSelector(
   (tasks, visibleCompleted) => {
     // 完了タスクのID一覧
     const ids = Object.entries(tasks.entities)
-      .filter(([key, value]) => value.completedAt)
+      .filter(([, value]) => value.completedAt)
       .map(([key]) => key);
     // 未完了タスクの一覧
     const children = Object.entries(tasks.entities)
