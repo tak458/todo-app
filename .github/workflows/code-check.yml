@@ -17,8 +17,7 @@ jobs:
       - run: npm ci
       - run: npm run lint -- -f stylish
       - run: npm run test -- --passWithNoTests
-      - name: type check
-        run: npx tsc -p tsconfig.check.json
+      - run: npm run type-check
       - uses: ArtiomTr/jest-coverage-report-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
