@@ -3,13 +3,13 @@ import React, { ReactNode } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
-interface RenderTree {
+type RenderTree<T> = {
   id: string;
   name: ReactNode;
-  children: RenderTree[];
-}
+  children: RenderTree<T>[];
+} & T;
 
-function renderTree<T extends RenderTree>(node: T, renderLabel: (node: T) => ReactNode = (node) => node.name) {
+function renderTree<T>(node: RenderTree<T>, renderLabel: (node: RenderTree<T>) => ReactNode = (node) => node.name) {
   return (
     <TreeItem key={node.id} nodeId={String(node.id)} label={renderLabel(node)}>
       {Array.isArray(node.children) ? node.children.map((node) => renderTree(node, renderLabel)) : null}
@@ -17,15 +17,15 @@ function renderTree<T extends RenderTree>(node: T, renderLabel: (node: T) => Rea
   );
 }
 
-export interface TreeViewRecursiveProps<T extends RenderTree> {
-  treeNode: T | T[];
+export interface TreeViewRecursiveProps<T> {
+  treeNode: RenderTree<T> | RenderTree<T>[];
   selected?: string;
-  onSelected?: (event: React.ChangeEvent, nodeId: string) => void;
-  renderLabel?: (node: T) => ReactNode;
+  onSelected?: (event: React.SyntheticEvent, nodeId: string) => void;
+  renderLabel?: (node: RenderTree<T>) => ReactNode;
   defaultExpanded?: TreeViewProps["defaultExpanded"];
 }
 
-export function TreeViewRecursive<T extends RenderTree>(props: TreeViewRecursiveProps<T>) {
+export function TreeViewRecursive<T>(props: TreeViewRecursiveProps<T>) {
   return (
     <>
       {(Array.isArray(props.treeNode) ? props.treeNode : [props.treeNode]).map((taskTree) => {
