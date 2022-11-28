@@ -9,7 +9,7 @@
     "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
     "lint": "next lint",
     "format": "prettier src/**/* --write",
-    "type-check": "tsc -p tsconfig.check.json",
+    "type-check": "tsc",
     "test": "jest",
     "test:ci": "jest --ci --coverage",
     "build": "next build",
