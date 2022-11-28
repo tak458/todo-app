@@ -1,5 +1,5 @@
+import type { ReactNode, SyntheticEvent } from "react";
 import { TreeItem, TreeView, TreeViewProps } from "@mui/lab";
-import React, { ReactNode } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
@@ -20,7 +20,7 @@ function renderTree<T>(node: RenderTree<T>, renderLabel: (node: RenderTree<T>) =
 export interface TreeViewRecursiveProps<T> {
   treeNode: RenderTree<T> | RenderTree<T>[];
   selected?: string;
-  onSelected?: (event: React.SyntheticEvent, nodeId: string) => void;
+  onSelected?: (event: SyntheticEvent, nodeId: string) => void;
   renderLabel?: (node: RenderTree<T>) => ReactNode;
   defaultExpanded?: TreeViewProps["defaultExpanded"];
 }
