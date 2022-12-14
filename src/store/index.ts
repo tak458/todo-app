@@ -1,4 +1,4 @@
-import { combineReducers, configureStore, Action, EnhancedStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore, Action } from "@reduxjs/toolkit";
 import { ThunkAction } from "redux-thunk";
 import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER, Storage } from "redux-persist";
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
@@ -35,23 +35,21 @@ const persistConfig = {
   whitelist: ["tasks"],
 };
 
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+export function useStore() {
+  const store = configureStore({
+    reducer: persistReducer(persistConfig, rootReducer),
+    middleware: (getDefaultMiddleware) => [
+      ...getDefaultMiddleware({
+        serializableCheck: {
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+        },
+      }),
+    ],
+  });
 
-export const store = configureStore({
-  reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) => [
-    ...getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }),
-  ],
-});
-
-export function useStore(): EnhancedStore {
   return store;
 }
 
 export type AppState = ReturnType<typeof rootReducer>;
-export type AppDispatch = typeof store.dispatch;
+export type AppDispatch = ReturnType<typeof useStore>["dispatch"];
 export type AppThunk = ThunkAction<void, AppState, null, Action<string>>;
