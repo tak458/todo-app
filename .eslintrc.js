@@ -4,10 +4,5 @@ module.exports = {
   env: {
     "jest/globals": true,
   },
-  rules: {
-    "no-redeclare": "off",
-    "react/prop-types": "off",
-    "@typescript-eslint/explicit-module-boundary-types": "off",
-    "@typescript-eslint/no-empty-interface": "off",
-  },
+  rules: {},
 };
