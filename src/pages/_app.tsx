@@ -5,7 +5,8 @@ import { ThemeProvider, Theme, StyledEngineProvider } from "@mui/material/styles
 import CssBaseline from "@mui/material/CssBaseline";
 import { theme } from "../theme";
 import "../styles/globals.css";
-import { store } from "../store";
+import { persistStore } from "redux-persist";
+import { useStore } from "../store";
 import { EmotionCache } from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
 import createEmotionCache from "../models/createEmotionCache";
@@ -25,6 +26,11 @@ interface MyAppProps extends AppProps {
 
 export default function MyApp(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+  const store = useStore();
+  const persistor = persistStore(store, {}, function () {
+    persistor.persist();
+  });
+
   return (
     <CacheProvider value={emotionCache}>
       <Head>

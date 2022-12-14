@@ -1,9 +1,29 @@
-import { combineReducers, configureStore, Action } from "@reduxjs/toolkit";
+import { combineReducers, configureStore, Action, EnhancedStore } from "@reduxjs/toolkit";
 import { ThunkAction } from "redux-thunk";
-import { persistStore, persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import { persistReducer, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER, Storage } from "redux-persist";
+import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 
 import { tasks } from "./modules/tasks";
+
+// HACK: `redux-persist failed to create sync storage. falling back to noop storage.`の対応
+// https://github.com/vercel/next.js/discussions/15687#discussioncomment-45319
+const createNoopStorage = (): Storage => {
+  return {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    getItem(_key) {
+      return Promise.resolve(null);
+    },
+    setItem(_key, value) {
+      return Promise.resolve(value);
+    },
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    removeItem(_key) {
+      return Promise.resolve();
+    },
+  };
+};
+
+const storage = typeof window !== "undefined" ? createWebStorage("local") : createNoopStorage();
 
 const rootReducer = combineReducers({
   tasks: tasks.reducer,
@@ -15,8 +35,10 @@ const persistConfig = {
   whitelist: ["tasks"],
 };
 
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
 export const store = configureStore({
-  reducer: persistReducer(persistConfig, rootReducer),
+  reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
@@ -25,7 +47,9 @@ export const store = configureStore({
     }),
 });
 
-export const persistor = persistStore(store);
+export function useStore(): EnhancedStore {
+  return store;
+}
 
 export type AppState = ReturnType<typeof rootReducer>;
 export type AppDispatch = typeof store.dispatch;
