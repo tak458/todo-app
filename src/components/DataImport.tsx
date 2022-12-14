@@ -9,9 +9,10 @@ import {
   Grid,
   IconButton,
   Input,
+  Tooltip,
 } from "@mui/material";
 import React, { ChangeEventHandler, DragEventHandler, useState, VFC } from "react";
-import UploadIcon from "@mui/icons-material/ArrowDownward";
+import UploadIcon from "@mui/icons-material/FileOpen";
 import { useCallback } from "react";
 import { tasks } from "../store/modules/tasks";
 import { Task } from "../models/Task";
@@ -68,9 +69,11 @@ export const DataImport: VFC = () => {
 
   return (
     <>
-      <IconButton onClick={() => setOpen(true)} size="large">
-        <UploadIcon />
-      </IconButton>
+      <Tooltip title="ファイルを開く">
+        <IconButton onClick={() => setOpen(true)} size="large">
+          <UploadIcon />
+        </IconButton>
+      </Tooltip>
       <Dialog open={open} onClose={onCancel}>
         <DialogTitle>インポート</DialogTitle>
         <DialogContent>
