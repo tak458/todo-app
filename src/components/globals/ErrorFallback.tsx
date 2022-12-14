@@ -1,4 +1,3 @@
-import { FC } from "react";
 import type { FallbackProps } from "react-error-boundary";
 
 export interface ErrorFallbackProps {
@@ -6,7 +5,7 @@ export interface ErrorFallbackProps {
   resetErrorBoundary: FallbackProps["resetErrorBoundary"];
 }
 
-export const ErrorFallback: FC<ErrorFallbackProps> = ({ error, resetErrorBoundary }) => {
+export const ErrorFallback = ({ error, resetErrorBoundary }: ErrorFallbackProps) => {
   return (
     <div role="alert">
       <p>Something went wrong:</p>

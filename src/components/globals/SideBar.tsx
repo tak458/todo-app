@@ -1,14 +1,15 @@
-import { Drawer, List, ListItem } from "@mui/material";
-import { FC } from "react";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
 
 export interface SideBarProps {
   open: boolean;
   onClose: () => void;
 }
 
-export const SideBar: FC<SideBarProps> = (props) => {
+export const SideBar = ({ open, onClose }: SideBarProps) => {
   return (
-    <Drawer anchor="left" open={props.open} onClose={props.onClose}>
+    <Drawer anchor="left" open={open} onClose={onClose}>
       <List>
         <ListItem>menu</ListItem>
       </List>

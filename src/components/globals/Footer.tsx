@@ -1,5 +1,4 @@
 import { styled } from "@mui/material/styles";
-import { FC } from "react";
 
 const StyledFooter = styled("footer")(({ theme }) => ({
   padding: theme.spacing(1, 2),
@@ -15,6 +14,6 @@ const StyledFooter = styled("footer")(({ theme }) => ({
 export interface FooterProps {}
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const Footer: FC<FooterProps> = (props) => {
+export const Footer = (props: FooterProps) => {
   return <StyledFooter>footer&nbsp;</StyledFooter>;
 };
