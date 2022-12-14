@@ -1,11 +1,10 @@
 import { IconButton, Tooltip } from "@mui/material";
-import { VFC } from "react";
 import { useAppSelector } from "../hooks/toolkit";
 import { getTaskTree } from "../store/modules/tasks";
 import DownloadIcon from "@mui/icons-material/Save";
 import { useCallback } from "react";
 
-export const DataExport: VFC = () => {
+export const DataExport = () => {
   const taskTree = useAppSelector((state) => getTaskTree(state, false));
 
   const onClick = useCallback(() => {

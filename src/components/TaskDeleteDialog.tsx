@@ -1,5 +1,5 @@
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from "@mui/material";
-import React, { FC, useCallback } from "react";
+import { Dispatch, FC, SetStateAction, useCallback } from "react";
 import { useSnackbar } from "notistack";
 import { ErrorBoundary } from "react-error-boundary";
 import { useAppDispatch } from "../hooks/toolkit";
@@ -9,7 +9,7 @@ import { ErrorFallback } from "./globals/ErrorFallback";
 
 export interface TaskDeleteDialogProps {
   open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpen: Dispatch<SetStateAction<boolean>>;
   model: Task;
 }
 

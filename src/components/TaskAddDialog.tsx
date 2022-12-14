@@ -12,7 +12,7 @@ import {
   FormControl,
 } from "@mui/material";
 import { nanoid } from "@reduxjs/toolkit";
-import React, { FC, useCallback } from "react";
+import { Dispatch, FC, SetStateAction, useCallback } from "react";
 import { useSnackbar } from "notistack";
 import { useAppDispatch } from "../hooks/toolkit";
 import { tasks } from "../store/modules/tasks";
@@ -25,7 +25,7 @@ import { convertToTask, createNewTaskForm, TaskForm } from "../models/TaskForm";
 
 export interface TaskAddDialogProps {
   open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpen: Dispatch<SetStateAction<boolean>>;
   parentId: string;
 }
 

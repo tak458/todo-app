@@ -1,7 +1,7 @@
 import { styled } from "@mui/material/styles";
 import clsx from "clsx";
 import Prism from "prismjs";
-import React, { ChangeEventHandler, createRef, KeyboardEventHandler, useCallback, useEffect, useState } from "react";
+import { ChangeEventHandler, createRef, KeyboardEventHandler, useCallback, useEffect, useState } from "react";
 
 import "prismjs/themes/prism.css";
 import "prismjs/components/prism-markdown";

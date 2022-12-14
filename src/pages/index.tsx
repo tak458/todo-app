@@ -14,7 +14,7 @@ import {
   Typography,
 } from "@mui/material";
 import { format } from "date-fns";
-import React, { useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { AddButton } from "../components/buttons/AddButton";
 import { DeleteButton } from "../components/buttons/DeleteButton";
 import { EditButton } from "../components/buttons/EditButton";

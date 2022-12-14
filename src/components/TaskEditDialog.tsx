@@ -11,7 +11,7 @@ import {
   FormControl,
   InputLabel,
 } from "@mui/material";
-import React, { FC, useCallback } from "react";
+import { Dispatch, FC, SetStateAction, useCallback } from "react";
 import { useSnackbar } from "notistack";
 import { useAppDispatch } from "../hooks/toolkit";
 import { tasks } from "../store/modules/tasks";
@@ -24,7 +24,7 @@ import { convertFromTask, convertToTask, TaskForm } from "../models/TaskForm";
 
 export interface TaskEditDialogProps {
   open: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setOpen: Dispatch<SetStateAction<boolean>>;
   model: Task;
 }
 

@@ -4,7 +4,7 @@ import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
-import React, { FC, useCallback } from "react";
+import { useCallback } from "react";
 
 const PREFIX = "Header";
 
@@ -27,7 +27,7 @@ export interface HeaderProps {
   onOpen: () => void;
 }
 
-export const Header: FC<HeaderProps> = (props) => {
+export const Header = (props: HeaderProps) => {
   const onOpen = useCallback(() => {
     props.onOpen();
   }, [props]);

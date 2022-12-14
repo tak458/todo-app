@@ -11,14 +11,14 @@ import {
   Input,
   Tooltip,
 } from "@mui/material";
-import React, { ChangeEventHandler, DragEventHandler, useState, VFC } from "react";
+import { ChangeEventHandler, DragEventHandler, useState } from "react";
 import UploadIcon from "@mui/icons-material/FileOpen";
 import { useCallback } from "react";
 import { tasks } from "../store/modules/tasks";
 import { Task } from "../models/Task";
 import { useAppDispatch } from "../hooks/toolkit";
 
-export const DataImport: VFC = () => {
+export const DataImport = () => {
   const dispatch = useAppDispatch();
   const [open, setOpen] = useState(false);
   const [files, setFiles] = useState<File[]>([]);
