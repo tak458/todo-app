@@ -2,6 +2,7 @@ import Document, { Html, Head, Main, NextScript } from "next/document";
 import createEmotionServer from "@emotion/server/create-instance";
 import { theme, roboto } from "../theme";
 import createEmotionCache from "../models/createEmotionCache";
+import { GTM_ID } from "../lib/gtm";
 
 export default class MyDocument extends Document {
   render() {
@@ -16,6 +17,14 @@ export default class MyDocument extends Document {
           {(this.props as any).emotionStyleTags}
         </Head>
         <body>
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            />
+          </noscript>
           <Main />
           <NextScript />
         </body>
