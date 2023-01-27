@@ -54,7 +54,7 @@
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "13.4.0",
     "@testing-library/user-event": "14.4.3",
-    "@tsconfig/next": "1.0.4",
+    "@tsconfig/next": "1.0.5",
     "@types/jest": "29.2.6",
     "@types/node": "16.18.11",
     "@types/prismjs": "1.26.0",
