@@ -1,16 +1,17 @@
-import type { FallbackProps } from "react-error-boundary";
+import { useErrorBoundary } from "react-error-boundary";
 
 export interface ErrorFallbackProps {
   error: Error;
-  resetErrorBoundary: FallbackProps["resetErrorBoundary"];
 }
 
-export const ErrorFallback = ({ error, resetErrorBoundary }: ErrorFallbackProps) => {
+export function ErrorFallback({ error }: ErrorFallbackProps) {
+  const { resetBoundary } = useErrorBoundary();
+
   return (
     <div role="alert">
       <p>Something went wrong:</p>
       <pre>{error.message}</pre>
-      <button onClick={resetErrorBoundary}>Try again</button>
+      <button onClick={resetBoundary}>Try again</button>
     </div>
   );
-};
+}
