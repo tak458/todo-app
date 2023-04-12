@@ -4,6 +4,7 @@ import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
+import GitHubIcon from "@mui/icons-material/GitHub";
 import { useCallback } from "react";
 
 const PREFIX = "Header";
@@ -48,6 +49,9 @@ export const Header = (props: HeaderProps) => {
         <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
           Tasks Local
         </Typography>
+        <IconButton edge="start" color="inherit" href="https://github.com/tak458/todo-app">
+          <GitHubIcon />
+        </IconButton>
       </Toolbar>
     </StyledAppBar>
   );
