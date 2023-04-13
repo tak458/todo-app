@@ -1,7 +1,17 @@
+import {
+  ChangeEventHandler,
+  createRef,
+  forwardRef,
+  KeyboardEventHandler,
+  LegacyRef,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { styled } from "@mui/material/styles";
 import clsx from "clsx";
 import Prism from "prismjs";
-import { ChangeEventHandler, createRef, KeyboardEventHandler, useCallback, useEffect, useState } from "react";
 
 import "prismjs/themes/prism.css";
 import "prismjs/components/prism-markdown";
@@ -77,8 +87,11 @@ export interface MarkdownEditorProps {
   onChange: (value: string) => void;
 }
 
-export const MarkdownEditor = (props: MarkdownEditorProps) => {
-  const [text, setText] = useState(props.value);
+export const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(function MarkdownEditor(
+  props: MarkdownEditorProps,
+  ref
+) {
+  const [text, setText] = useState(props.value ?? "");
 
   const handleChange: ChangeEventHandler<HTMLTextAreaElement> = useCallback(
     (event) => {
@@ -108,7 +121,20 @@ export const MarkdownEditor = (props: MarkdownEditorProps) => {
   );
 
   const preRef = createRef<HTMLPreElement>();
-  const textareaRef = createRef<HTMLTextAreaElement>();
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+
+  const setRef: LegacyRef<HTMLTextAreaElement> = useCallback(
+    (node: HTMLTextAreaElement) => {
+      textareaRef.current = node;
+      if (typeof ref === "function") {
+        ref(node);
+      } else if (ref) {
+        ref.current = node;
+      }
+    },
+    [ref]
+  );
+
   const handleScroll = useCallback(() => {
     const editing = textareaRef.current;
     const highlighting = preRef.current;
@@ -136,11 +162,11 @@ export const MarkdownEditor = (props: MarkdownEditorProps) => {
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         onScroll={handleScroll}
-        ref={textareaRef}
+        ref={setRef}
       />
       <pre className={clsx(classes.codeInOutBase, classes.codeOutput)} aria-hidden="true" ref={preRef}>
         <code className={clsx("language-markdown", classes.languageMarkdown)}>{text}</code>
       </pre>
     </Root>
   );
-};
+});
