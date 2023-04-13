@@ -1,0 +1,31 @@
+<svg host="65bd71144e" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="81px" height="81px" viewBox="-0.5 -0.5 81 81" content="&lt;mxfile host=&quot;embed.diagrams.net&quot; modified=&quot;2023-04-12T14:17:03.344Z&quot; agent=&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.77.2 Chrome/102.0.5005.196 Electron/19.1.11 Safari/537.36&quot; etag=&quot;s5AdDYaDd7EXRO83pRrM&quot; version=&quot;21.1.7&quot; type=&quot;embed&quot;&gt;&lt;diagram id=&quot;n4VXLNZJb2VUI3Nmve3b&quot; name=&quot;ページ1&quot;&gt;vZRNb8IwDIZ/Te+0QcCOwPi47MSknaPGtBFpXKWBlv36JdShLQVph2kgofixg+P3TRuxddHsDC/zDxSgomQimoi9R0kyncXu14NrC+LJYtGSzEhBrAMH+Q2hkOhZCqgGhRZRWVkOYYpaQ2oHjBuD9bDsiGrYteQZjMAh5WpMv6SweUsXybzje5BZHjrHs7c2U/BQTJNUORdY9xDbRGxtEG27Kpo1KC9e0KXdt32RvR/MgLa/2cDaDReuzjQbnctew7AGz1qAr48jtqpzaeFQ8tRna2evY7ktFKWPqC355TqzVWUNnmCNCo1DGjX4IqlUQFHC4qX/Oj4+PM1zAWOh6SEaZgdYgDVXVxKyMxKWrlYypbju+UQo71kUGKebkd3/uRPPLUi/51omIy0/eXUa6ekmsa+U4Upm2oWpUwDMg1RU01Pb6yLdtVzStkIK4ds8danzcfJg1DzEdEhG8ZYXUnkh96Au4DtRomfe9vb5P/Pmf2OeC7uH7JbrvarY5gc=&lt;/diagram&gt;&lt;/mxfile&gt;">
+    <defs/>
+    <g>
+        <rect x="0" y="0" width="80" height="80" rx="12" ry="12" fill="#1a1a1a" stroke="none" pointer-events="all"/>
+        <rect x="0" y="0" width="70" height="80" fill="none" stroke="none" pointer-events="all"/>
+        <g transform="translate(-0.5 -0.5)">
+            <switch>
+                <foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe center; width: 68px; height: 1px; padding-top: 40px; margin-left: 1px;">
+                        <div data-drawio-colors="color: #FFFFFF; " style="box-sizing: border-box; font-size: 0px; text-align: center;">
+                            <div style="display: inline-block; font-size: 27px; font-family: Helvetica; color: rgb(255, 255, 255); line-height: 1.2; pointer-events: all; font-weight: bold; font-style: italic; white-space: normal; overflow-wrap: normal;">
+                                Task
+                            </div>
+                        </div>
+                    </div>
+                </foreignObject>
+                <text x="35" y="48" fill="#FFFFFF" font-family="Helvetica" font-size="27px" text-anchor="middle" font-weight="bold" font-style="italic">
+                    Task
+                </text>
+            </switch>
+        </g>
+    </g>
+    <switch>
+        <g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"/>
+        <a transform="translate(0,-5)" xlink:href="https://www.diagrams.net/doc/faq/svg-export-text-problems" target="_blank">
+            <text text-anchor="middle" font-size="10px" x="50%" y="100%">
+                Text is not SVG - cannot display
+            </text>
+        </a>
+    </switch>
+</svg>

@@ -9,7 +9,7 @@ export const roboto = Roboto({
   fallback: ["Helvetica", "Arial", "sans-serif"],
 });
 
-export const theme = createTheme({
+let theme = createTheme({
   palette: {
     primary: {
       main: "#424242",
@@ -24,6 +24,9 @@ export const theme = createTheme({
       default: "#fff",
     },
   },
+});
+
+theme = createTheme(theme, {
   components: {
     MuiAccordionSummary: {
       styleOverrides: {
@@ -41,3 +44,5 @@ export const theme = createTheme({
     },
   },
 });
+
+export { theme };

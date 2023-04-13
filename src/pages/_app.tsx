@@ -57,7 +57,9 @@ export default function MyApp(props: MyAppProps) {
   return (
     <CacheProvider value={emotionCache}>
       <Head>
-        <title>Tasks Local</title>
+        <title>{process.env.NEXT_PUBLIC_SITE_TITLE}</title>
+        <meta name="description" content={process.env.NEXT_PUBLIC_SITE_TITLE} />
+        <link rel="icon" href="/icon.drawio.svg" />
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
       {/* Google Tag Manager - Global base code */}

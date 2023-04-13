@@ -1,5 +1,4 @@
 import { useState, ReactNode } from "react";
-import Head from "next/head";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { SideBar } from "./SideBar";
@@ -16,12 +15,6 @@ export const Layout = (props: { children: ReactNode }) => {
 
   return (
     <>
-      <Head>
-        <title>Tasks Local</title>
-        <meta name="description" content="TODOアプリ" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <Header onOpen={() => setOpen(true)} />
       <SideBar onClose={() => setOpen(false)} open={open} />
 

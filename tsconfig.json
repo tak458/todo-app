@@ -4,5 +4,5 @@
     "jsxImportSource": "@emotion/react"
   },
   "include": ["next-env.d.ts", "src", "test"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "next.config.mjs"]
 }

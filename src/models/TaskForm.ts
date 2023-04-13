@@ -2,36 +2,32 @@ import { format, parse } from "date-fns";
 import { DateTimePattern } from "./constants";
 import { fromDurationFormat, toDurationFormat } from "./DurationFormat";
 import { Task } from "./Task";
+import { z } from "zod";
 
-export interface TaskForm {
-  /** タスク名 */
-  name: string;
-  /** メモ */
-  note: string;
-  /** 完了日時 */
-  completedAt: string;
-  /** 開始日時 */
-  startedAt: string;
-  /** 終了日時 */
-  finishedAt: string;
-  /** 見積もり時間（時間） */
-  estimatedTime: string;
-  /** 実績時間（時間） */
-  actualTime: string;
-}
+export const taskFormSchema = z.object({
+  name: z.string().min(1, { message: "Required" }).default(""),
+  note: z.string().default(""),
+  actualTime: z.string().default(""),
+  estimatedTime: z.string().default(""),
+  completedAt: z.boolean().default(false),
+  startedAt: z.string().default(""),
+  finishedAt: z.string().default(""),
+});
 
-export function convertToTask(taskForm: TaskForm): Omit<Task, "id" | "children"> {
+export type TaskFormSchema = z.infer<typeof taskFormSchema>;
+
+export function convertToTask(taskForm: TaskFormSchema): Omit<Task, "id" | "children"> {
   return {
     ...taskForm,
     estimatedTime: toDurationFormat(taskForm.estimatedTime),
     actualTime: toDurationFormat(taskForm.actualTime),
     startedAt: toTimestamp(taskForm.startedAt),
     finishedAt: toTimestamp(taskForm.finishedAt),
-    completedAt: toTimestamp(taskForm.completedAt),
+    completedAt: taskForm.completedAt ? new Date().getTime() : undefined,
   };
 }
 
-export function convertFromTask(task: Omit<Task, "id" | "children">): TaskForm {
+export function convertFromTask(task: Omit<Task, "id" | "children">): TaskFormSchema {
   return {
     note: "",
     ...task,
@@ -39,32 +35,20 @@ export function convertFromTask(task: Omit<Task, "id" | "children">): TaskForm {
     actualTime: fromDurationFormat(task.actualTime),
     startedAt: fromTimestamp(task.startedAt),
     finishedAt: fromTimestamp(task.finishedAt),
-    completedAt: fromTimestamp(task.completedAt),
+    completedAt: !!(task.completedAt && task.completedAt > 0),
   };
 }
 
-function toTimestamp(value: string): number | undefined {
+export function toTimestamp(value: string): number | undefined {
   if (value) {
     return parse(value, DateTimePattern, new Date()).getTime();
   }
   return undefined;
 }
 
-function fromTimestamp(value: number | undefined): string {
+export function fromTimestamp(value: number | undefined): string {
   if (value) {
     return format(value, DateTimePattern);
   }
   return "";
-}
-
-export function createNewTaskForm(): TaskForm {
-  return {
-    name: "",
-    note: "",
-    actualTime: "",
-    estimatedTime: "",
-    completedAt: "",
-    startedAt: "",
-    finishedAt: "",
-  };
 }
