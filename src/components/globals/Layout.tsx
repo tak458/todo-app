@@ -1,4 +1,5 @@
 import { useState, ReactNode } from "react";
+import Head from "next/head";
 import { Footer } from "./Footer";
 import { Header } from "./Header";
 import { SideBar } from "./SideBar";
@@ -15,6 +16,11 @@ export const Layout = (props: { children: ReactNode }) => {
 
   return (
     <>
+      <Head>
+        <title>{process.env.NEXT_PUBLIC_SITE_TITLE}</title>
+        <meta name="description" content={process.env.NEXT_PUBLIC_SITE_TITLE} />
+      </Head>
+
       <Header onOpen={() => setOpen(true)} />
       <SideBar onClose={() => setOpen(false)} open={open} />
 

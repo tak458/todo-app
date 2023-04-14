@@ -11,7 +11,7 @@ export default class MyDocument extends Document {
         <Head>
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.primary.main} />
-          <link rel="shortcut icon" href="/favicon.ico" />
+          <link rel="icon" href="/icon.drawio.svg" />
           <meta name="emotion-insertion-point" content="" />
           {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
           {(this.props as any).emotionStyleTags}
