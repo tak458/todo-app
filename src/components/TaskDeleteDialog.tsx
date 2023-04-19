@@ -30,16 +30,22 @@ export const TaskDeleteDialog: FC<TaskDeleteDialogProps> = (props) => {
 
   return (
     <Dialog open={props.open} onClose={onCancel}>
-      <DialogTitle>タスクの削除</DialogTitle>
-      <DialogContent>
-        <ErrorBoundary FallbackComponent={ErrorFallback}>{props.model.name} を削除してもよろしいですか？</ErrorBoundary>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={onSubmit} color="primary">
-          OK
-        </Button>
-        <Button onClick={onCancel}>キャンセル</Button>
-      </DialogActions>
+      <form onSubmit={onSubmit}>
+        <DialogTitle>タスクの削除</DialogTitle>
+        <DialogContent>
+          <ErrorBoundary FallbackComponent={ErrorFallback}>
+            {props.model.name} を削除してもよろしいですか？
+          </ErrorBoundary>
+        </DialogContent>
+        <DialogActions>
+          <Button type="submit" color="primary" variant="contained">
+            OK
+          </Button>
+          <Button onClick={onCancel} variant="outlined">
+            キャンセル
+          </Button>
+        </DialogActions>
+      </form>
     </Dialog>
   );
 };

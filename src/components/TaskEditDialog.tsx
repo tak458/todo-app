@@ -107,10 +107,12 @@ export const TaskEditDialog: FC<TaskEditDialogProps> = (props) => {
           </ErrorBoundary>
         </DialogContent>
         <DialogActions>
-          <Button type="submit" color="primary">
+          <Button type="submit" color="primary" variant="contained">
             OK
           </Button>
-          <Button onClick={onCancel}>キャンセル</Button>
+          <Button onClick={onCancel} variant="outlined">
+            キャンセル
+          </Button>
         </DialogActions>
       </form>
     </Dialog>
