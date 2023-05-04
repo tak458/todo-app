@@ -52,6 +52,8 @@ jobs:
       - run: npm run build
       - run: npx next export
 
+      - run: npm run build-storybook -- -o "./out/storybook"
+
       - uses: actions/upload-pages-artifact@v1
         if: ${{ github.ref == 'refs/heads/master' }}
         with:
