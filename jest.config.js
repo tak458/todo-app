@@ -1,14 +1,11 @@
 module.exports = {
   preset: "ts-jest",
   testEnvironment: "node",
-  globals: {
-    "ts-jest": {
-      tsconfig: "<rootDir>/tsconfig.test.json",
-    },
-  },
+  globals: {},
   setupFilesAfterEnv: ["<rootDir>/config/jest/setupTests.ts"],
   testPathIgnorePatterns: ["/node_modules/", "/.next/"],
   transform: {
+    "^.+\\.tsx?$": ["ts-jest", { tsconfig: "<rootDir>/tsconfig.test.json" }],
     "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
   },
   transformIgnorePatterns: ["/node_modules/", "^.+\\.module\\.(css|sass|scss)$"],
