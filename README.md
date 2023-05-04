@@ -22,6 +22,12 @@ npm run dev
 npm run build
 ```
 
+### Build Storybook
+
+```shell
+npm run build-storybook
+```
+
 ### Run your tests
 
 ```shell
