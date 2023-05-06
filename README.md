@@ -4,6 +4,8 @@
 
 GitHub IO : https://tak458.github.io/todo-app/
 
+Storybook : https://tak458.github.io/todo-app/storybook/
+
 ## Project setup
 
 ```shell
