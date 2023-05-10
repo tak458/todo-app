@@ -1,19 +1,15 @@
-import { styled } from "@mui/material/styles";
-
-const StyledFooter = styled("footer")(({ theme }) => ({
-  padding: theme.spacing(1, 2),
-  backgroundColor: theme.palette.primary.main,
-  color: theme.palette.primary.contrastText,
-  width: "100%",
-  display: "flex",
-  // justifyContent: "center",
-  alignItems: "center",
-}));
+import { AppBar, Toolbar, Typography } from "@mui/material";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface FooterProps {}
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const Footer = (props: FooterProps) => {
-  return <StyledFooter>footer&nbsp;</StyledFooter>;
+  return (
+    <AppBar component={"footer"} position="relative">
+      <Toolbar variant="dense">
+        <Typography>footer</Typography>
+      </Toolbar>
+    </AppBar>
+  );
 };
