@@ -6,7 +6,7 @@ import { AppProps } from "next/app";
 import { ThemeProvider, Theme, StyledEngineProvider } from "@mui/material/styles";
 import Script from "next/script";
 import CssBaseline from "@mui/material/CssBaseline";
-import { theme } from "../theme";
+import { ColorModeContext, useThemeMode } from "../theme";
 import { persistStore } from "redux-persist";
 import { useStore } from "../store";
 import { EmotionCache } from "@emotion/cache";
@@ -31,6 +31,7 @@ interface MyAppProps extends AppProps {
 
 export default function MyApp(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
+  const { theme, colorMode } = useThemeMode();
   const store = useStore();
   const persistor = persistStore(store, {}, function () {
     persistor.persist();
@@ -75,13 +76,15 @@ export default function MyApp(props: MyAppProps) {
       />
       <Provider store={store}>
         <StyledEngineProvider injectFirst>
-          <ThemeProvider theme={theme}>
-            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-            <CssBaseline />
-            <SnackbarProvider maxSnack={3}>
-              <Component {...pageProps} />
-            </SnackbarProvider>
-          </ThemeProvider>
+          <ColorModeContext.Provider value={colorMode}>
+            <ThemeProvider theme={theme}>
+              {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+              <CssBaseline />
+              <SnackbarProvider maxSnack={3}>
+                <Component {...pageProps} />
+              </SnackbarProvider>
+            </ThemeProvider>
+          </ColorModeContext.Provider>
         </StyledEngineProvider>
       </Provider>
     </CacheProvider>
