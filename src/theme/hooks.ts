@@ -1,11 +1,17 @@
-import { PaletteMode, createTheme } from "@mui/material";
-import { createContext, useMemo, useState } from "react";
+import { PaletteMode, createTheme, useMediaQuery } from "@mui/material";
+import { createContext, useEffect, useMemo, useState } from "react";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 export const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
 export function useThemeMode() {
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
   const [mode, setMode] = useState<PaletteMode>("light");
+
+  useEffect(() => {
+    setMode(prefersDarkMode ? "dark" : "light");
+  }, [prefersDarkMode]);
+
   const colorMode = useMemo(
     () => ({
       toggleColorMode: () => {
