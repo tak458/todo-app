@@ -5,8 +5,6 @@ import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import { SiStorybook } from "react-icons/si";
 import { ColorModeContext } from "../../theme/hooks";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
@@ -43,24 +41,6 @@ export const Header = (props: HeaderProps) => {
         <Stack direction="row" spacing={1}>
           <IconButton color="inherit" onClick={colorMode.toggleColorMode}>
             {theme.palette.mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
-          </IconButton>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="storybook link"
-            size="large"
-            href="https://tak458.github.io/todo-app/storybook"
-          >
-            <SiStorybook style={{ width: 24, height: 24 }} />
-          </IconButton>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="github link"
-            size="large"
-            href="https://github.com/tak458/todo-app"
-          >
-            <GitHubIcon />
           </IconButton>
         </Stack>
       </Toolbar>
