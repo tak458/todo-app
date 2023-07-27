@@ -88,6 +88,6 @@
     "react-test-renderer": "18.2.0",
     "storybook": "7.0.18",
     "ts-jest": "29.1.1",
-    "typescript": "5.0.4"
+    "typescript": "5.1.6"
   }
 }
