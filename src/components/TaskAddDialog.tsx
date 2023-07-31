@@ -42,7 +42,7 @@ export const TaskAddDialog: FC<TaskAddDialogProps> = (props) => {
       props.setOpen(false);
       enqueueSnackbar("タスクを追加しました", { variant: "success" });
     },
-    [dispatch, enqueueSnackbar, props]
+    [dispatch, enqueueSnackbar, props],
   );
 
   const onCancel = useCallback(() => {

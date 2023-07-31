@@ -18,7 +18,7 @@ export function useThemeMode() {
         setMode((prevMode) => (prevMode == "light" ? "dark" : "light"));
       },
     }),
-    []
+    [],
   );
 
   // Update the theme only if the mode changes
@@ -29,7 +29,7 @@ export function useThemeMode() {
           mode,
         },
       }),
-    [mode]
+    [mode],
   );
 
   return { theme, colorMode };
