@@ -89,7 +89,7 @@ export interface MarkdownEditorProps {
 
 export const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(function MarkdownEditor(
   props: MarkdownEditorProps,
-  ref
+  ref,
 ) {
   const [text, setText] = useState(props.value ?? "");
 
@@ -99,7 +99,7 @@ export const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProp
       props.onChange(text);
       setText(text);
     },
-    [props]
+    [props],
   );
 
   const handleKeyDown: KeyboardEventHandler<HTMLTextAreaElement> = useCallback(
@@ -117,7 +117,7 @@ export const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProp
         props.onChange(value);
       }
     },
-    [props]
+    [props],
   );
 
   const preRef = createRef<HTMLPreElement>();
@@ -132,7 +132,7 @@ export const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProp
         ref.current = node;
       }
     },
-    [ref]
+    [ref],
   );
 
   const handleScroll = useCallback(() => {

@@ -49,7 +49,7 @@ export default function Home() {
       setOpenAdd(true);
       setId(node?.id ?? "root");
     },
-    []
+    [],
   );
 
   const [openEdit, setOpenEdit] = useState(false);
@@ -58,7 +58,7 @@ export default function Home() {
       setOpenEdit(true);
       setModel(node);
     },
-    []
+    [],
   );
 
   const [openDelete, setOpenDelete] = useState(false);
@@ -67,7 +67,7 @@ export default function Home() {
       setOpenDelete(true);
       setModel(node);
     },
-    []
+    [],
   );
 
   return (

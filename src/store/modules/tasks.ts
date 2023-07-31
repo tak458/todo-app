@@ -55,7 +55,7 @@ export const tasks = createSlice({
 });
 
 export const { selectById, selectIds, selectEntities, selectAll, selectTotal } = tasksAdapter.getSelectors(
-  (state: AppState) => state.tasks
+  (state: AppState) => state.tasks,
 );
 
 export const getTaskTree = createSelector(
@@ -74,5 +74,5 @@ export const getTaskTree = createSelector(
       children: visibleCompleted ? Object.fromEntries(children) : tasks.entities,
     })[0] as Task;
     return result;
-  }
+  },
 );
