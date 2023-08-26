@@ -67,7 +67,7 @@
     "@testing-library/react": "14.0.0",
     "@testing-library/user-event": "14.4.3",
     "@tsconfig/next": "2.0.0",
-    "@types/jest": "29.5.3",
+    "@types/jest": "29.5.4",
     "@types/node": "18.17.1",
     "@types/prismjs": "1.26.0",
     "@types/react": "18.2.17",
