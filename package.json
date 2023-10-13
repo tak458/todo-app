@@ -41,7 +41,7 @@
     "@reduxjs/toolkit": "1.9.5",
     "date-fns": "2.30.0",
     "markdown-to-jsx": "7.3.2",
-    "next": "13.5.3",
+    "next": "13.5.4",
     "normalizr": "3.6.2",
     "notistack": "3.0.1",
     "prismjs": "1.29.0",
