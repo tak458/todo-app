@@ -2,6 +2,10 @@ name: code check on pull requests
 
 on:
   pull_request:
+  # refs https://github.com/ArtiomTr/jest-coverage-report-action#forks-with-no-write-permission
+  pull_request_target:
+    branches:
+      - master
 
 jobs:
   linter:
