@@ -9,7 +9,7 @@
     "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
     "storybook": "storybook dev -p 6006",
     "lint": "next lint -f stylish",
-    "format": "prettier src/**/* --write",
+    "format": "prettier --write src/**/*",
     "type-check": "tsc --noEmit",
     "test": "jest --passWithNoTests",
     "test:ci": "jest --ci --coverage --passWithNoTests",
