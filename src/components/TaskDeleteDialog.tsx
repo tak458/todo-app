@@ -1,10 +1,14 @@
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button } from "@mui/material";
-import { Dispatch, FC, SetStateAction, useCallback } from "react";
+import { useAppDispatch } from "@/hooks/toolkit";
+import { Task } from "@/models/Task";
+import { tasks } from "@/store/modules/tasks";
+import Button from "@mui/material/Button";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
 import { useSnackbar } from "notistack";
+import { Dispatch, FC, SetStateAction, useCallback } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { useAppDispatch } from "../hooks/toolkit";
-import { tasks } from "../store/modules/tasks";
-import { Task } from "../models/Task";
 import { ErrorFallback } from "./globals/ErrorFallback";
 
 export interface TaskDeleteDialogProps {

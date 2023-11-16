@@ -1,14 +1,14 @@
-import { useCallback, useContext } from "react";
-import AppBar from "@mui/material/AppBar";
-import Stack from "@mui/material/Stack";
-import IconButton from "@mui/material/IconButton";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import MenuIcon from "@mui/icons-material/Menu";
-import { ColorModeContext } from "../../theme/hooks";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
-import { useTheme } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import AppBar from "@mui/material/AppBar";
+import IconButton from "@mui/material/IconButton";
+import Stack from "@mui/material/Stack";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import { useTheme } from "@mui/material/styles";
+import { useCallback, useContext } from "react";
+import { ColorModeContext } from "../../theme/hooks";
 
 export interface HeaderProps {
   onOpen: () => void;

@@ -1,6 +1,6 @@
-import { Roboto } from "next/font/google";
-import { createTheme } from "@mui/material/styles";
 import { red } from "@mui/material/colors";
+import { createTheme } from "@mui/material/styles";
+import { Roboto } from "next/font/google";
 
 declare module "@mui/material/Button" {
   interface ButtonPropsVariantOverrides {
@@ -29,6 +29,9 @@ let theme = createTheme({
     background: {
       default: "#fff",
     },
+  },
+  typography: {
+    fontFamily: roboto.style.fontFamily,
   },
 });
 

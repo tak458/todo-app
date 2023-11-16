@@ -1,22 +1,19 @@
-import {
-  Button,
-  Checkbox,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  FormControlLabel,
-  Grid,
-  IconButton,
-  Input,
-  Tooltip,
-} from "@mui/material";
-import { ChangeEventHandler, DragEventHandler, useState } from "react";
+import { useAppDispatch } from "@/hooks/toolkit";
+import { Task } from "@/models/Task";
+import { tasks } from "@/store/modules/tasks";
 import UploadIcon from "@mui/icons-material/FileOpen";
-import { useCallback } from "react";
-import { tasks } from "../store/modules/tasks";
-import { Task } from "../models/Task";
-import { useAppDispatch } from "../hooks/toolkit";
+import Button from "@mui/material/Button";
+import Checkbox from "@mui/material/Checkbox";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Grid from "@mui/material/Grid";
+import IconButton from "@mui/material/IconButton";
+import Input from "@mui/material/Input";
+import Tooltip from "@mui/material/Tooltip";
+import { ChangeEventHandler, DragEventHandler, useCallback, useState } from "react";
 
 export const DataImport = () => {
   const dispatch = useAppDispatch();

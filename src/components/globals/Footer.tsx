@@ -1,6 +1,11 @@
-import { AppBar, IconButton, Link, Stack, Toolbar, Typography } from "@mui/material";
-import { SiStorybook } from "react-icons/si";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import AppBar from "@mui/material/AppBar";
+import IconButton from "@mui/material/IconButton";
+import Link from "@mui/material/Link";
+import Stack from "@mui/material/Stack";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import { SiStorybook } from "react-icons/si";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface FooterProps {}

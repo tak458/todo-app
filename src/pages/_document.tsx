@@ -1,41 +1,43 @@
-import Document, { Html, Head, Main, NextScript } from "next/document";
+import { GTM_ID } from "@/lib/gtm";
+import createEmotionCache from "@/models/createEmotionCache";
+import { roboto, theme } from "@/theme";
 import createEmotionServer from "@emotion/server/create-instance";
-import { theme, roboto } from "../theme";
-import createEmotionCache from "../models/createEmotionCache";
-import { GTM_ID } from "../lib/gtm";
+import Document, { DocumentContext, DocumentProps, Head, Html, Main, NextScript } from "next/document";
 
-export default class MyDocument extends Document {
-  render() {
-    return (
-      <Html lang="ja" className={roboto.className}>
-        <Head>
-          {/* PWA primary color */}
-          <meta name="theme-color" content={theme.palette.primary.main} />
-          <link rel="icon" href="/icon.drawio.svg" />
-          <meta name="emotion-insertion-point" content="" />
-          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-          {(this.props as any).emotionStyleTags}
-        </Head>
-        <body>
-          <noscript>
-            <iframe
-              src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
-              height="0"
-              width="0"
-              style={{ display: "none", visibility: "hidden" }}
-            />
-          </noscript>
-          <Main />
-          <NextScript />
-        </body>
-      </Html>
-    );
-  }
+interface MyDocumentProps extends DocumentProps {
+  emotionStyleTags: JSX.Element[];
+}
+
+export default function MyDocument({ emotionStyleTags }: MyDocumentProps) {
+  return (
+    <Html lang="ja" className={roboto.className}>
+      <Head>
+        {/* PWA primary color */}
+        <meta name="theme-color" content={theme.palette.primary.main} />
+        <link rel="icon" href="/icon.drawio.svg" />
+        <meta name="emotion-insertion-point" content="" />
+        {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
+        {emotionStyleTags}
+      </Head>
+      <body>
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
+        <Main />
+        <NextScript />
+      </body>
+    </Html>
+  );
 }
 
 // `getInitialProps` belongs to `_document` (instead of `_app`),
 // it's compatible with static-site generation (SSG).
-MyDocument.getInitialProps = async (ctx) => {
+MyDocument.getInitialProps = async (ctx: DocumentContext) => {
   // Resolution order
   //
   // On the server:

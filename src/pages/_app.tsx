@@ -1,21 +1,21 @@
-import { useEffect } from "react";
-import { Provider } from "react-redux";
-import { useRouter } from "next/router";
-import Head from "next/head";
-import { AppProps } from "next/app";
-import { ThemeProvider, Theme, StyledEngineProvider } from "@mui/material/styles";
-import Script from "next/script";
-import CssBaseline from "@mui/material/CssBaseline";
-import { ColorModeContext, useThemeMode } from "../theme";
-import { persistStore } from "redux-persist";
-import { useStore } from "../store";
+import createEmotionCache from "@/models/createEmotionCache";
+import { useStore } from "@/store";
+import { ColorModeContext, useThemeMode } from "@/theme";
 import { EmotionCache } from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
-import createEmotionCache from "../models/createEmotionCache";
+import CssBaseline from "@mui/material/CssBaseline";
+import { StyledEngineProvider, Theme, ThemeProvider } from "@mui/material/styles";
+import { AppProps } from "next/app";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import Script from "next/script";
 import { SnackbarProvider } from "notistack";
+import { useEffect } from "react";
+import { Provider } from "react-redux";
+import { persistStore } from "redux-persist";
 
-import "../styles/globals.css";
-import { GTM_ID, pageview } from "../lib/gtm";
+import { GTM_ID, pageview } from "@/lib/gtm";
+import "@/styles/globals.css";
 
 declare module "@mui/material/styles" {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -25,11 +25,11 @@ declare module "@mui/material/styles" {
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
-interface MyAppProps extends AppProps {
+export interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
 }
 
-export default function MyApp(props: MyAppProps) {
+function MyApp(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   const { theme, colorMode } = useThemeMode();
   const store = useStore();
@@ -90,3 +90,5 @@ export default function MyApp(props: MyAppProps) {
     </CacheProvider>
   );
 }
+
+export default MyApp;

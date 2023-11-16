@@ -1,4 +1,5 @@
-import { FormControlLabel, Switch, SwitchProps } from "@mui/material";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Switch, { SwitchProps } from "@mui/material/Switch";
 import { Control, Controller, FieldPath, FieldValues } from "react-hook-form";
 
 export interface RhfMuiSwitchProps<TFieldValues extends FieldValues> extends Omit<SwitchProps, "id"> {

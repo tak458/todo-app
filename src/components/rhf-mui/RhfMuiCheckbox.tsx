@@ -1,4 +1,5 @@
-import { FormControlLabel, Checkbox, CheckboxProps } from "@mui/material";
+import Checkbox, { CheckboxProps } from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
 import { Control, Controller, FieldPath, FieldValues } from "react-hook-form";
 
 export interface RhfMuiCheckboxProps<TFieldValues extends FieldValues> extends Omit<CheckboxProps, "id"> {

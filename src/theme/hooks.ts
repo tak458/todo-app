@@ -1,4 +1,6 @@
-import { PaletteMode, createTheme, useMediaQuery } from "@mui/material";
+import type { PaletteMode } from "@mui/material";
+import { createTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import { createContext, useEffect, useMemo, useState } from "react";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
