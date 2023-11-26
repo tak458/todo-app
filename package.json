@@ -69,7 +69,7 @@
     "@tsconfig/next": "2.0.1",
     "@types/jest": "29.5.10",
     "@types/node": "18.18.12",
-    "@types/prismjs": "1.26.2",
+    "@types/prismjs": "1.26.3",
     "@types/react": "18.2.33",
     "@types/react-dom": "18.2.14",
     "@types/react-test-renderer": "18.0.5",
