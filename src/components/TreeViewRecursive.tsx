@@ -1,7 +1,7 @@
-import type { ReactNode, SyntheticEvent } from "react";
-import { TreeItem, TreeView, TreeViewProps } from "@mui/lab";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { TreeItem, TreeView, TreeViewProps } from "@mui/lab";
+import type { ReactNode, SyntheticEvent } from "react";
 
 type RenderTree<T> = {
   id: string;
@@ -22,7 +22,7 @@ export interface TreeViewRecursiveProps<T> {
   selected?: string;
   onSelected?: (event: SyntheticEvent, nodeId: string) => void;
   renderLabel?: (node: RenderTree<T>) => ReactNode;
-  defaultExpanded?: TreeViewProps["defaultExpanded"];
+  defaultExpanded?: TreeViewProps<T>["defaultExpanded"];
 }
 
 export function TreeViewRecursive<T>(props: TreeViewRecursiveProps<T>) {
