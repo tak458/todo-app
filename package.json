@@ -38,7 +38,7 @@
     "@mui/icons-material": "5.15.11",
     "@mui/lab": "5.0.0-alpha.166",
     "@mui/material": "5.15.11",
-    "@reduxjs/toolkit": "2.1.0",
+    "@reduxjs/toolkit": "2.2.1",
     "date-fns": "3.3.1",
     "markdown-to-jsx": "7.4.1",
     "next": "14.1.0",
