@@ -39,7 +39,7 @@
     "@mui/lab": "5.0.0-alpha.169",
     "@mui/material": "5.15.14",
     "@reduxjs/toolkit": "2.2.2",
-    "date-fns": "3.3.1",
+    "date-fns": "3.6.0",
     "markdown-to-jsx": "7.4.5",
     "next": "14.1.4",
     "normalizr": "3.6.2",
