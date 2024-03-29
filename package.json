@@ -70,7 +70,7 @@
     "@types/jest": "29.5.12",
     "@types/node": "18.19.26",
     "@types/prismjs": "1.26.3",
-    "@types/react": "18.2.70",
+    "@types/react": "18.2.71",
     "@types/react-dom": "18.2.22",
     "@types/react-test-renderer": "18.0.7",
     "@typescript-eslint/eslint-plugin": "7.1.0",
