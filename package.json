@@ -56,12 +56,12 @@
   },
   "devDependencies": {
     "@hookform/devtools": "4.3.1",
-    "@storybook/addon-essentials": "7.6.17",
-    "@storybook/addon-interactions": "7.6.17",
-    "@storybook/addon-links": "7.6.17",
-    "@storybook/blocks": "7.6.17",
-    "@storybook/nextjs": "7.6.17",
-    "@storybook/react": "7.6.17",
+    "@storybook/addon-essentials": "8.0.5",
+    "@storybook/addon-interactions": "8.0.5",
+    "@storybook/addon-links": "8.0.5",
+    "@storybook/blocks": "8.0.5",
+    "@storybook/nextjs": "8.0.5",
+    "@storybook/react": "8.0.5",
     "@storybook/testing-library": "0.2.2",
     "@testing-library/jest-dom": "6.4.2",
     "@testing-library/react": "14.2.2",
@@ -86,7 +86,7 @@
     "jest-junit": "16.0.0",
     "prettier": "3.2.5",
     "react-test-renderer": "18.2.0",
-    "storybook": "7.6.17",
+    "storybook": "8.0.5",
     "ts-jest": "29.1.2",
     "typescript": "5.3.3"
   }
