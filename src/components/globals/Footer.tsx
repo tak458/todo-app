@@ -7,7 +7,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { SiStorybook } from "react-icons/si";
 
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 export interface FooterProps {}
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

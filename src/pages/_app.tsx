@@ -18,7 +18,7 @@ import { GTM_ID, pageview } from "@/lib/gtm";
 import "@/styles/globals.css";
 
 declare module "@mui/material/styles" {
-  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  // eslint-disable-next-line @typescript-eslint/no-empty-object-type
   interface DefaultTheme extends Theme {}
 }
 
