@@ -1,8 +1,7 @@
 {
   "editor.codeActionsOnSave": {
-    "source.organizeImports": true,
-    // for dbaeumer.vscode-eslint
-    "source.fixAll.eslint": true
+    "source.organizeImports": "explicit",
+    "source.fixAll.eslint": "explicit"
   },
   // for esbenp.prettier-vscode
   "editor.formatOnSave": true
