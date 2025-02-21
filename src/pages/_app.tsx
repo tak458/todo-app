@@ -1,10 +1,8 @@
-import createEmotionCache from "@/models/createEmotionCache";
 import { useStore } from "@/store";
-import { ColorModeContext, useThemeMode } from "@/theme";
-import { EmotionCache } from "@emotion/cache";
-import { CacheProvider } from "@emotion/react";
+import { theme } from "@/theme";
+import { AppCacheProvider } from "@mui/material-nextjs/v15-pagesRouter";
 import CssBaseline from "@mui/material/CssBaseline";
-import { StyledEngineProvider, Theme, ThemeProvider } from "@mui/material/styles";
+import { Theme, ThemeProvider } from "@mui/material/styles";
 import { AppProps } from "next/app";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -22,28 +20,12 @@ declare module "@mui/material/styles" {
   interface DefaultTheme extends Theme {}
 }
 
-// Client-side cache, shared for the whole session of the user in the browser.
-const clientSideEmotionCache = createEmotionCache();
-
-export interface MyAppProps extends AppProps {
-  emotionCache?: EmotionCache;
-}
-
-function MyApp(props: MyAppProps) {
-  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
-  const { theme, colorMode } = useThemeMode();
+export default function MyApp(props: AppProps) {
+  const { Component, pageProps } = props;
   const store = useStore();
   const persistor = persistStore(store, {}, function () {
     persistor.persist();
   });
-
-  useEffect(() => {
-    // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector("#jss-server-side");
-    if (jssStyles) {
-      jssStyles.parentElement?.removeChild(jssStyles);
-    }
-  }, []);
 
   const router = useRouter();
   useEffect(() => {
@@ -56,7 +38,7 @@ function MyApp(props: MyAppProps) {
   }, [router.events]);
 
   return (
-    <CacheProvider value={emotionCache}>
+    <AppCacheProvider {...props}>
       <Head>
         <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
       </Head>
@@ -75,20 +57,14 @@ function MyApp(props: MyAppProps) {
         }}
       />
       <Provider store={store}>
-        <StyledEngineProvider injectFirst>
-          <ColorModeContext.Provider value={colorMode}>
-            <ThemeProvider theme={theme}>
-              {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-              <CssBaseline />
-              <SnackbarProvider maxSnack={3}>
-                <Component {...pageProps} />
-              </SnackbarProvider>
-            </ThemeProvider>
-          </ColorModeContext.Provider>
-        </StyledEngineProvider>
+        <ThemeProvider theme={theme}>
+          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+          <CssBaseline />
+          <SnackbarProvider maxSnack={3}>
+            <Component {...pageProps} />
+          </SnackbarProvider>
+        </ThemeProvider>
       </Provider>
-    </CacheProvider>
+    </AppCacheProvider>
   );
 }
-
-export default MyApp;
