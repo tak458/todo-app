@@ -6,17 +6,15 @@ import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { useTheme } from "@mui/material/styles";
-import { useCallback, useContext } from "react";
-import { ColorModeContext } from "../../theme/hooks";
+import { useColorScheme } from "@mui/material/styles";
+import { useCallback } from "react";
 
 export interface HeaderProps {
   onOpen: () => void;
 }
 
 export const Header = (props: HeaderProps) => {
-  const theme = useTheme();
-  const colorMode = useContext(ColorModeContext);
+  const { mode, setMode } = useColorScheme();
 
   const onOpen = useCallback(() => {
     props.onOpen();
@@ -39,8 +37,8 @@ export const Header = (props: HeaderProps) => {
           {process.env.NEXT_PUBLIC_SITE_TITLE}
         </Typography>
         <Stack direction="row" spacing={1}>
-          <IconButton color="inherit" onClick={colorMode.toggleColorMode}>
-            {theme.palette.mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
+          <IconButton color="inherit" onClick={() => setMode(mode === "dark" ? "light" : "dark")}>
+            {mode === "dark" ? <Brightness7Icon /> : <Brightness4Icon />}
           </IconButton>
         </Stack>
       </Toolbar>
