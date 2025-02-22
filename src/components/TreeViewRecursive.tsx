@@ -1,6 +1,4 @@
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { TreeItem, TreeView, TreeViewProps } from "@mui/lab";
+import { SimpleTreeView, SimpleTreeViewProps, TreeItem } from "@mui/x-tree-view";
 import type { ReactNode, SyntheticEvent } from "react";
 
 type RenderTree<T> = {
@@ -11,7 +9,7 @@ type RenderTree<T> = {
 
 function renderTree<T>(node: RenderTree<T>, renderLabel: (node: RenderTree<T>) => ReactNode = (node) => node.name) {
   return (
-    <TreeItem key={node.id} nodeId={String(node.id)} label={renderLabel(node)}>
+    <TreeItem key={node.id} itemId={String(node.id)} label={renderLabel(node)}>
       {Array.isArray(node.children) ? node.children.map((node) => renderTree(node, renderLabel)) : null}
     </TreeItem>
   );
@@ -22,7 +20,7 @@ export interface TreeViewRecursiveProps<T> {
   selected?: string;
   onSelected?: (event: SyntheticEvent, nodeId: string) => void;
   renderLabel?: (node: RenderTree<T>) => ReactNode;
-  defaultExpanded?: TreeViewProps<T>["defaultExpanded"];
+  defaultExpanded?: SimpleTreeViewProps<false>["defaultExpandedItems"];
 }
 
 export function TreeViewRecursive<T>(props: TreeViewRecursiveProps<T>) {
@@ -30,16 +28,14 @@ export function TreeViewRecursive<T>(props: TreeViewRecursiveProps<T>) {
     <>
       {(Array.isArray(props.treeNode) ? props.treeNode : [props.treeNode]).map((taskTree) => {
         return (
-          <TreeView
+          <SimpleTreeView
             key={taskTree.id}
-            defaultCollapseIcon={<ExpandMoreIcon />}
-            defaultExpanded={props.defaultExpanded}
-            defaultExpandIcon={<ChevronRightIcon />}
-            onNodeSelect={props.onSelected}
-            selected={props.selected}
+            defaultExpandedItems={props.defaultExpanded}
+            onItemSelectionToggle={props.onSelected}
+            selectedItems={props.selected}
           >
             {renderTree(taskTree, props.renderLabel)}
-          </TreeView>
+          </SimpleTreeView>
         );
       })}
     </>
