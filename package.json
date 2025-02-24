@@ -38,7 +38,7 @@
     "@mui/icons-material": "6.4.4",
     "@mui/material": "6.4.4",
     "@mui/material-nextjs": "6.4.3",
-    "@mui/x-tree-view": "^7.26.0",
+    "@mui/x-tree-view": "7.26.0",
     "@reduxjs/toolkit": "2.5.1",
     "date-fns": "4.1.0",
     "markdown-to-jsx": "7.7.4",
