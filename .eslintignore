@@ -1,6 +1,0 @@
-.next/
-config/
-coverage/
-reports/
-.eslintrc*
-*.config.*js
