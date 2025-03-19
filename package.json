@@ -39,7 +39,7 @@
     "@mui/material": "6.4.5",
     "@mui/material-nextjs": "6.4.3",
     "@mui/x-tree-view": "7.26.0",
-    "@reduxjs/toolkit": "2.5.1",
+    "@reduxjs/toolkit": "2.6.1",
     "date-fns": "4.1.0",
     "markdown-to-jsx": "7.7.4",
     "next": "15.1.7",
