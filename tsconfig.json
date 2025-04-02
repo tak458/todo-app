@@ -1,6 +1,7 @@
 {
   "extends": "@tsconfig/next/tsconfig.json",
   "compilerOptions": {
+    "types": ["vitest/globals"],
     "jsxImportSource": "@emotion/react",
     "baseUrl": ".",
     "paths": {

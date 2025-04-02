@@ -18,9 +18,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run lint -- -f stylish
-      - run: npm run test -- --passWithNoTests
+      - run: npm run test:ci
       - run: npm run type-check
-      - uses: ArtiomTr/jest-coverage-report-action@v2
+      - uses: davelosert/vitest-coverage-report-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          test-script: npm run test:ci -- --passWithNoTests --testLocationInResults --json --outputFile=report.json

@@ -1,5 +1,5 @@
 import { FlatCompat } from "@eslint/eslintrc";
-import jest from "eslint-plugin-jest";
+import vitest from "@vitest/eslint-plugin";
 import storybook from "eslint-plugin-storybook";
 
 const compat = new FlatCompat({
@@ -12,12 +12,11 @@ const eslintConfig = [
   }),
   {
     plugins: {
-      jest,
+      vitest,
     },
-    languageOptions: {
-      globals: jest.environments.globals.globals,
+    rules: {
+      ...vitest.configs.recommended.rules,
     },
-    rules: {},
   },
   ...storybook.configs["flat/recommended"],
 ];
