@@ -1,5 +1,6 @@
 import { FlatCompat } from "@eslint/eslintrc";
 import vitest from "@vitest/eslint-plugin";
+import eslintConfigPrettier from "eslint-config-prettier/flat";
 import storybook from "eslint-plugin-storybook";
 
 const compat = new FlatCompat({
@@ -8,8 +9,9 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.config({
-    extends: ["next", "next/core-web-vitals", "next/typescript", "prettier"],
+    extends: ["next", "next/core-web-vitals", "next/typescript"],
   }),
+  eslintConfigPrettier,
   {
     plugins: {
       vitest,
