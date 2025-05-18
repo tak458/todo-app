@@ -1,14 +1,18 @@
 {
   "extends": "@tsconfig/next/tsconfig.json",
   "compilerOptions": {
+    /* Base Options: */
+    "target": "ES2017",
+
     "types": ["vitest/globals"],
     "jsxImportSource": "@emotion/react",
+
+    /* Path Aliases */
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
-    },
-    "target": "ES2017"
+    }
   },
   "include": ["next-env.d.ts", "src", "test"],
-  "exclude": ["node_modules", "next.config.mjs"]
+  "exclude": ["node_modules", "next.config.js"]
 }
