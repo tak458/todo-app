@@ -9,7 +9,7 @@ export interface RhfMuiSelectProps<TFieldValues extends FieldValues>
   extends Omit<SelectProps, "labelId" | "label" | "id"> {
   name: FieldPath<TFieldValues>;
   label: string;
-  control: Control<TFieldValues, FieldPath<TFieldValues>>;
+  control: Control<TFieldValues, unknown, TFieldValues>;
   children?: ReactNode;
 }
 

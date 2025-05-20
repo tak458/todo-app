@@ -5,7 +5,7 @@ import { Control, Controller, FieldPath, FieldValues } from "react-hook-form";
 export interface RhfMuiCheckboxProps<TFieldValues extends FieldValues> extends Omit<CheckboxProps, "id"> {
   name: FieldPath<TFieldValues>;
   label: string;
-  control: Control<TFieldValues, FieldPath<TFieldValues>>;
+  control: Control<TFieldValues, unknown, TFieldValues>;
 }
 
 export function RhfMuiCheckbox<TFieldValues extends FieldValues>(props: RhfMuiCheckboxProps<TFieldValues>) {

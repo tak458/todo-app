@@ -29,7 +29,7 @@ export interface TaskEditDialogProps {
 export const TaskEditDialog: FC<TaskEditDialogProps> = (props) => {
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
-  const { control, handleSubmit } = useForm<TaskFormSchema>({
+  const { control, handleSubmit } = useForm({
     resolver: zodResolver(taskFormSchema),
     defaultValues: taskFormSchema.parse(convertFromTask(props.model)),
   });
