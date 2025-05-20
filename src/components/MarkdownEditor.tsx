@@ -1,3 +1,6 @@
+import { styled } from "@mui/material/styles";
+import clsx from "clsx";
+import Prism from "prismjs";
 import {
   ChangeEventHandler,
   createRef,
@@ -9,12 +12,9 @@ import {
   useRef,
   useState,
 } from "react";
-import { styled } from "@mui/material/styles";
-import clsx from "clsx";
-import Prism from "prismjs";
 
-import "prismjs/themes/prism.css";
 import "prismjs/components/prism-markdown";
+import "prismjs/themes/prism.css";
 
 const PREFIX = "MarkdownEditor";
 
@@ -83,7 +83,7 @@ const Root = styled("div")(({ theme }) => {
 
 export interface MarkdownEditorProps {
   id: string;
-  value: string;
+  value?: string;
   onChange: (value: string) => void;
 }
 
@@ -109,7 +109,7 @@ export const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProp
 
       // handle 4-space indent on
       if (evt.key === "Tab") {
-        value = value.substring(0, selStartPos) + "    " + value.substring(selStartPos, value.length);
+        value = (value?.substring(0, selStartPos) ?? "") + "    " + (value?.substring(selStartPos, value.length) ?? "");
         evt.currentTarget.selectionStart = selStartPos + 3;
         evt.currentTarget.selectionEnd = selStartPos + 4;
         evt.preventDefault();

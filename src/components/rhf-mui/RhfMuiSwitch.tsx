@@ -5,7 +5,7 @@ import { Control, Controller, FieldPath, FieldValues } from "react-hook-form";
 export interface RhfMuiSwitchProps<TFieldValues extends FieldValues> extends Omit<SwitchProps, "id"> {
   name: FieldPath<TFieldValues>;
   label: string;
-  control: Control<TFieldValues, FieldPath<TFieldValues>>;
+  control: Control<TFieldValues, unknown, TFieldValues>;
 }
 
 export function RhfMuiSwitch<TFieldValues extends FieldValues>(props: RhfMuiSwitchProps<TFieldValues>) {

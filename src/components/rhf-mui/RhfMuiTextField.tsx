@@ -5,7 +5,7 @@ export interface RhfMuiSelectProps<TFieldValues extends FieldValues>
   extends Omit<TextFieldProps, "id" | "label" | "error" | "helperText"> {
   name: FieldPath<TFieldValues>;
   label: string;
-  control: Control<TFieldValues, FieldPath<TFieldValues>>;
+  control: Control<TFieldValues, unknown, TFieldValues>;
 }
 
 export function RhfMuiTextField<TFieldValues extends FieldValues>(props: RhfMuiSelectProps<TFieldValues>) {
