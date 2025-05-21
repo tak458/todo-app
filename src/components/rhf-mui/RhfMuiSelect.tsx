@@ -5,15 +5,22 @@ import Select, { SelectProps } from "@mui/material/Select";
 import type { ReactNode } from "react";
 import { Control, FieldPath, FieldValues, PathValue, useController } from "react-hook-form";
 
-export interface RhfMuiSelectProps<TFieldValues extends FieldValues>
-  extends Omit<SelectProps, "labelId" | "label" | "id"> {
-  name: FieldPath<TFieldValues>;
+export interface RhfMuiSelectProps<
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+  TTransformedValues = TFieldValues,
+> extends Omit<SelectProps, "labelId" | "label" | "id"> {
+  name: TName;
   label: string;
-  control: Control<TFieldValues, unknown, TFieldValues>;
+  control: Control<TFieldValues, TName, TTransformedValues>;
   children?: ReactNode;
 }
 
-export function RhfMuiSelect<TFieldValues extends FieldValues>(props: RhfMuiSelectProps<TFieldValues>) {
+export function RhfMuiSelect<
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+  TTransformedValues = TFieldValues,
+>(props: RhfMuiSelectProps<TFieldValues, TName, TTransformedValues>) {
   const { name, label, control, children, ...selectProps } = props;
   const id = name.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`);
 

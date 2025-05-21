@@ -14,6 +14,7 @@ import { useSnackbar } from "notistack";
 import { Dispatch, FC, SetStateAction, useCallback } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { z } from "zod";
 import { tasks } from "../store/modules/tasks";
 import { MarkdownEditor } from "./MarkdownEditor";
 import { ErrorFallback } from "./globals/ErrorFallback";
@@ -29,7 +30,11 @@ export interface TaskAddDialogProps {
 export const TaskAddDialog: FC<TaskAddDialogProps> = (props) => {
   const dispatch = useAppDispatch();
   const { enqueueSnackbar } = useSnackbar();
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit } = useForm<
+    z.input<typeof taskFormSchema>,
+    keyof z.infer<typeof taskFormSchema>,
+    z.output<typeof taskFormSchema>
+  >({
     resolver: zodResolver(taskFormSchema),
   });
 

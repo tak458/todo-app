@@ -1,14 +1,21 @@
 import TextField, { TextFieldProps } from "@mui/material/TextField";
 import { Control, Controller, FieldPath, FieldValues } from "react-hook-form";
 
-export interface RhfMuiSelectProps<TFieldValues extends FieldValues>
-  extends Omit<TextFieldProps, "id" | "label" | "error" | "helperText"> {
-  name: FieldPath<TFieldValues>;
+export interface RhfMuiSelectProps<
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+  TTransformedValues = TFieldValues,
+> extends Omit<TextFieldProps, "id" | "label" | "error" | "helperText"> {
+  name: TName;
   label: string;
-  control: Control<TFieldValues, unknown, TFieldValues>;
+  control: Control<TFieldValues, TName, TTransformedValues>;
 }
 
-export function RhfMuiTextField<TFieldValues extends FieldValues>(props: RhfMuiSelectProps<TFieldValues>) {
+export function RhfMuiTextField<
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+  TTransformedValues = TFieldValues,
+>(props: RhfMuiSelectProps<TFieldValues, TName, TTransformedValues>) {
   const { name, label, control, ...textFieldProps } = props;
   const id = name.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`);
   return (

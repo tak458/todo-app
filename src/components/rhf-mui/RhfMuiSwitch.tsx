@@ -2,13 +2,21 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch, { SwitchProps } from "@mui/material/Switch";
 import { Control, Controller, FieldPath, FieldValues } from "react-hook-form";
 
-export interface RhfMuiSwitchProps<TFieldValues extends FieldValues> extends Omit<SwitchProps, "id"> {
-  name: FieldPath<TFieldValues>;
+export interface RhfMuiSwitchProps<
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+  TTransformedValues = TFieldValues,
+> extends Omit<SwitchProps, "id"> {
+  name: TName;
   label: string;
-  control: Control<TFieldValues, unknown, TFieldValues>;
+  control: Control<TFieldValues, TName, TTransformedValues>;
 }
 
-export function RhfMuiSwitch<TFieldValues extends FieldValues>(props: RhfMuiSwitchProps<TFieldValues>) {
+export function RhfMuiSwitch<
+  TFieldValues extends FieldValues = FieldValues,
+  TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
+  TTransformedValues = TFieldValues,
+>(props: RhfMuiSwitchProps<TFieldValues, TName, TTransformedValues>) {
   const { name, label, control, ...switchProps } = props;
   const id = name.replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`);
   return (
