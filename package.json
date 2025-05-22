@@ -9,7 +9,7 @@
     "lint": "next lint -f stylish",
     "format": "prettier --write src/**/*",
     "type-check": "tsc --noEmit",
-    "test": "vitest --passWithNoTests",
+    "test": "vitest run --passWithNoTests",
     "test:ci": "vitest run --coverage --passWithNoTests",
     "build": "next build",
     "build-storybook": "storybook build",

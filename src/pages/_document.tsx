@@ -1,6 +1,6 @@
 import { GTM_ID } from "@/lib/gtm";
 import { roboto, theme } from "@/theme";
-import { DocumentHeadTags, DocumentHeadTagsProps, documentGetInitialProps } from "@mui/material-nextjs/v15-pagesRouter";
+import { documentGetInitialProps, DocumentHeadTags, DocumentHeadTagsProps } from "@mui/material-nextjs/v15-pagesRouter";
 import { DocumentContext, DocumentProps, Head, Html, Main, NextScript } from "next/document";
 
 export default function MyDocument(props: DocumentProps & DocumentHeadTagsProps) {

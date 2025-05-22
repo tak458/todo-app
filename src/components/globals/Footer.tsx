@@ -5,6 +5,7 @@ import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import NextLink from "next/link";
 import { SiStorybook } from "react-icons/si";
 
 // eslint-disable-next-line @typescript-eslint/no-empty-object-type
@@ -17,7 +18,7 @@ export const Footer = (props: FooterProps) => {
       <Toolbar variant="dense">
         <Typography variant="caption" sx={{ flexGrow: 1 }}>
           Copyright ©{" "}
-          <Link href="https://github.com/tak458" color="inherit">
+          <Link component={NextLink} href="https://github.com/tak458" color="inherit">
             tak458
           </Link>{" "}
           All Rights Reserved.
