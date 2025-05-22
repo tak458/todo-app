@@ -1,11 +1,11 @@
-import { useState, ReactNode } from "react";
-import Head from "next/head";
-import { Footer } from "./Footer";
-import { Header } from "./Header";
-import { SideBar } from "./SideBar";
+import { ErrorFallback } from "@/components/globals/ErrorFallback";
+import { Footer } from "@/components/globals/Footer";
+import { Header } from "@/components/globals/Header";
+import { SideBar } from "@/components/globals/SideBar";
 import { styled } from "@mui/material/styles";
+import Head from "next/head";
+import { ReactNode, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { ErrorFallback } from "./ErrorFallback";
 
 const StyledMain = styled("main")({
   flex: "1 0 auto",

@@ -1,8 +1,7 @@
+import { tasks } from "@/store/modules/tasks";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { FLUSH, PAUSE, PERSIST, PURGE, REGISTER, REHYDRATE, Storage, persistReducer } from "redux-persist";
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
-
-import { tasks } from "./modules/tasks";
 
 // HACK: `redux-persist failed to create sync storage. falling back to noop storage.`の対応
 // https://github.com/vercel/next.js/discussions/15687#discussioncomment-45319

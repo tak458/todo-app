@@ -1,7 +1,7 @@
+import { Task } from "@/models/Task";
+import { AppState } from "@/store";
 import { createEntityAdapter, createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { denormalize, normalize, schema } from "normalizr";
-import { AppState } from "..";
-import { Task } from "../../models/Task";
 
 type StoredTask = { children: StoredTask["id"][] } & Omit<Task, "children">;
 

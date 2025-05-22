@@ -1,7 +1,7 @@
+import { DateTimePattern } from "@/models/constants";
+import { fromDurationFormat, toDurationFormat } from "@/models/DurationFormat";
+import { Task } from "@/models/Task";
 import { format, parse } from "date-fns";
-import { DateTimePattern } from "./constants";
-import { fromDurationFormat, toDurationFormat } from "./DurationFormat";
-import { Task } from "./Task";
 import { z } from "zod";
 
 export const taskFormSchema = z.object({

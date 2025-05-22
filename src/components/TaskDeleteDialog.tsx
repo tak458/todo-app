@@ -1,3 +1,4 @@
+import { ErrorFallback } from "@/components/globals/ErrorFallback";
 import { useAppDispatch } from "@/hooks/toolkit";
 import { Task } from "@/models/Task";
 import { tasks } from "@/store/modules/tasks";
@@ -9,7 +10,6 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { useSnackbar } from "notistack";
 import { Dispatch, FC, SetStateAction, useCallback } from "react";
 import { ErrorBoundary } from "react-error-boundary";
-import { ErrorFallback } from "./globals/ErrorFallback";
 
 export interface TaskDeleteDialogProps {
   open: boolean;
