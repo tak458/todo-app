@@ -59,10 +59,10 @@ export const TaskAddDialog: FC<TaskAddDialogProps> = (props) => {
         <DialogContent>
           <ErrorBoundary FallbackComponent={ErrorFallback}>
             <Grid container spacing={2} marginTop={1}>
-              <Grid item xs={12}>
+              <Grid size={12}>
                 <RhfMuiTextField name="name" label="タスク名" control={control} fullWidth />
               </Grid>
-              <Grid item xs={12}>
+              <Grid size={12}>
                 <Controller
                   name="note"
                   control={control}
@@ -76,13 +76,13 @@ export const TaskAddDialog: FC<TaskAddDialogProps> = (props) => {
                   )}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <RhfMuiTextField name="estimatedTime" label="見積時間" control={control} fullWidth />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <RhfMuiTextField name="actualTime" label="実績時間" control={control} fullWidth />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <RhfMuiTextField
                   name="startedAt"
                   control={control}
@@ -92,7 +92,7 @@ export const TaskAddDialog: FC<TaskAddDialogProps> = (props) => {
                   InputLabelProps={{ shrink: true }}
                 />
               </Grid>
-              <Grid item xs={12} sm={6}>
+              <Grid size={{ xs: 12, sm: 6 }}>
                 <RhfMuiTextField
                   name="finishedAt"
                   control={control}
@@ -102,7 +102,7 @@ export const TaskAddDialog: FC<TaskAddDialogProps> = (props) => {
                   InputLabelProps={{ shrink: true }}
                 />
               </Grid>
-              <Grid item xs={12}>
+              <Grid size={12}>
                 <RhfMuiCheckbox name="completedAt" label="完了" control={control} />
               </Grid>
             </Grid>

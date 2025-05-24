@@ -75,10 +75,10 @@ export const DataImport = () => {
         <DialogTitle>インポート</DialogTitle>
         <DialogContent>
           <Grid container spacing={2}>
-            <Grid item>
+            <Grid>
               <Input type="file" onChange={onChange} onDrag={onDrop} />
             </Grid>
-            <Grid item>
+            <Grid>
               <FormControlLabel
                 control={
                   <Checkbox
