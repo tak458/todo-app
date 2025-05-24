@@ -1,5 +1,5 @@
 import { SimpleTreeView, SimpleTreeViewProps, TreeItem } from "@mui/x-tree-view";
-import type { ReactNode, SyntheticEvent } from "react";
+import type { ReactNode } from "react";
 
 type RenderTree<T> = {
   id: string;
@@ -18,7 +18,7 @@ function renderTree<T>(node: RenderTree<T>, renderLabel: (node: RenderTree<T>) =
 export interface TreeViewRecursiveProps<T> {
   treeNode: RenderTree<T> | RenderTree<T>[];
   selected?: string;
-  onSelected?: (event: SyntheticEvent, nodeId: string) => void;
+  onSelected?: SimpleTreeViewProps<false>["onItemSelectionToggle"];
   renderLabel?: (node: RenderTree<T>) => ReactNode;
   defaultExpanded?: SimpleTreeViewProps<false>["defaultExpandedItems"];
 }
