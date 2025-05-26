@@ -4,22 +4,69 @@ on:
   pull_request:
   # refs https://github.com/ArtiomTr/jest-coverage-report-action#forks-with-no-write-permission
   pull_request_target:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
 
 jobs:
-  linter:
+  code-check:
     runs-on: ubuntu-latest
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
+    name: Code check
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: "22.16.0"
+          node-version: 22
           cache: npm
-      - run: npm ci
-      - run: npm run lint -- -f stylish
-      - run: npm run test:ci
-      - run: npm run type-check
+      - run: npm install
+      - run: npm run build -- --log-prefix=none
+      - run: npm run lint -- --log-prefix=none
+      - name: Type Check
+        # eslint で tsc のチェック内容はチェックしないのでここで型チェックを行う
+        # next build だとエラーフォーマットが tsc と違い problemMatcher を書くのが面倒なので、
+        # 独自で tsc を実行するようにした
+        run: npm run type-check -- --log-prefix=none
+
+  # refs https://azukiazusa.dev/blog/monorepo-github-actions-jest-coverage-report-action/
+  get-changed-workspaces:
+    name: Get changed packages
+    runs-on: ubuntu-latest
+    outputs:
+      packages: ${{ steps.changed-packages.outputs.packages }}
+      empty: ${{ steps.changed-packages.outputs.empty }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Find changed packages
+        uses: alexshukel/get-changed-workspaces-action@v2.0.0
+        id: changed-packages
+        with:
+          workspaces: |
+            apps/*
+
+  coverage:
+    name: Coverage report
+    # このジョブを実行するためには get-changed-workspaces が正常に完了している必要がある
+    needs: [get-changed-workspaces]
+    if: ${{ !fromJson(needs.get-changed-workspaces.outputs.empty) }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # 変更された packages をマトリックス戦略に渡す
+        package: ${{ fromJson(needs.get-changed-workspaces.outputs.packages) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: 'Install'
+        run: npm install
+      - name: 'Test'
+        working-directory: apps/${{ matrix.package.name }}
+        run: npm run test:ci
       - uses: davelosert/vitest-coverage-report-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          # ワークフローを実行するディレクトリを指定する
+          working-directory: apps/${{ matrix.package.name }}

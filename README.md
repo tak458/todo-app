@@ -6,38 +6,24 @@ GitHub IO : https://tak458.github.io/todo-app/
 
 Storybook : https://tak458.github.io/todo-app/storybook/
 
-## Project setup
+## Require
 
-```shell
-npm ci
+- node.js 22
+
+## 開発
+
+gitignore しているファイルの削除
+
+```powershell
+Get-Process turbo | Stop-Process -Force
+dir -r -Filter ".next"|%{rm -r -Force $_}
+dir -r -Filter "node_modules"|%{rm -r -Force $_}
+dir -r -Filter ".turbo"|%{rm -r -Force $_}
+dir -r -Filter "coverage"|%{rm -r -Force $_}
+dir -r -Filter "*.tsbuildinfo"|%{rm -r -Force $_}
+dir -r -Filter "out"|%{rm -r -Force $_}
+dir -r -Filter "dist"|%{rm -r -Force $_}
+dir -r -Filter "reports"|%{rm -r -Force $_}
+rm -r -Force "package-lock.json"
 ```
 
-### Compiles and hot-reloads for development
-
-```shell
-npm run dev
-```
-
-### Compiles and minifies for production
-
-```shell
-npm run build
-```
-
-### Build Storybook
-
-```shell
-npm run build-storybook
-```
-
-### Run your tests
-
-```shell
-npm run test
-```
-
-### Lints and fixes files
-
-```shell
-npm run lint
-```

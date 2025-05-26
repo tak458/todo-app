@@ -1,0 +1,64 @@
+{
+  "$schema": "https://turborepo.org/schema.json",
+  "globalDependencies": [
+    "**/.env.*local"
+  ],
+  "globalEnv": [
+    "NODE_ENV"
+  ],
+  "tasks": {
+    "build": {
+      "dependsOn": [
+        "^build"
+      ],
+      "outputs": [
+        "dist/**",
+        ".next/**"
+      ],
+      "env": [
+        "DATABASE_URL",
+        "NEXT_PUBLIC_*",
+        "AUTH_URL",
+        "AUTH_KEYCLOAK_ISSUER",
+        "VERCEL_URL",
+        "PORT",
+        "LOG_PRETTY",
+        "LOG_LEVEL"
+      ]
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
+    "generate": {
+      "dependsOn": [
+        "^generate"
+      ],
+      "cache": false
+    },
+    "lint": {},
+    "clean": {
+      "cache": false
+    },
+    "test": {
+      "dependsOn": [
+        "^build"
+      ]
+    },
+    "test:ci": {
+      "dependsOn": [
+        "^test:ci"
+      ]
+    },
+    "type-check": {
+      "dependsOn": [
+        "^type-check"
+      ]
+    },
+    "format": {
+      "dependsOn": [
+        "^format"
+      ]
+    }
+  }
+}
