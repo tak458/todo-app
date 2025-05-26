@@ -1,19 +1,13 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "extends": ["@tsconfig/next/tsconfig.json"],
+  "extends": ["@repo/typescript-config/nextjs.json"],
   "compilerOptions": {
-    /* Base Options: */
-    "target": "ES2017",
-
-    "types": ["vitest/globals"],
-    "jsxImportSource": "@emotion/react",
-
     /* Path Aliases */
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "src", "test"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.cjs", "**/*.mjs", ".next/types/**/*.ts"],
   "exclude": ["node_modules", "next.config.js"]
 }
