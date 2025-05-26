@@ -2,7 +2,7 @@ import { SimpleTreeView, SimpleTreeViewProps, TreeItem } from "@mui/x-tree-view"
 import type { ReactNode } from "react";
 
 type RenderTree<T> = {
-  id: string;
+  id: string | number;
   name: ReactNode;
   children: RenderTree<T>[];
 } & T;
@@ -26,15 +26,15 @@ export interface TreeViewRecursiveProps<T> {
 export function TreeViewRecursive<T>(props: TreeViewRecursiveProps<T>) {
   return (
     <>
-      {(Array.isArray(props.treeNode) ? props.treeNode : [props.treeNode]).map((taskTree) => {
+      {(Array.isArray(props.treeNode) ? props.treeNode : [props.treeNode]).map((treeNode) => {
         return (
           <SimpleTreeView
-            key={taskTree.id}
+            key={treeNode.id}
             defaultExpandedItems={props.defaultExpanded}
             onItemSelectionToggle={props.onSelected}
             selectedItems={props.selected}
           >
-            {renderTree(taskTree, props.renderLabel)}
+            {renderTree(treeNode, props.renderLabel)}
           </SimpleTreeView>
         );
       })}
