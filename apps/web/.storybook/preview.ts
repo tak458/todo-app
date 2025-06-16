@@ -1,4 +1,4 @@
-import type { Preview } from "@storybook/react";
+import type { Preview } from "@storybook/nextjs";
 import { withMuiTheme } from "./with-mui-theme.decorator";
 
 const preview: Preview = {
