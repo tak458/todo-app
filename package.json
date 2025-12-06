@@ -15,8 +15,8 @@
     "test:ci": "turbo test:ci"
   },
   "devDependencies": {
-    "prettier": "3.7.3",
-    "tsx": "4.20.6",
+    "prettier": "3.7.4",
+    "tsx": "4.21.0",
     "turbo": "2.6.1"
   },
   "packageManager": "npm@11.6.4"
