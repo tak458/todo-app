@@ -76,7 +76,7 @@
     "identity-obj-proxy": "3.0.0",
     "jsdom": "27.3.0",
     "prettier": "3.7.4",
-    "storybook": "10.1.8",
+    "storybook": "10.1.10",
     "typescript": "5.9.3",
     "vitest": "4.0.15"
   },
