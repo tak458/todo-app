@@ -8,7 +8,7 @@ Storybook : https://tak458.github.io/todo-app/storybook/
 
 ## Require
 
-- node.js 22
+- node.js 24
 
 ## 開発
 
@@ -26,4 +26,3 @@ dir -r -Filter "dist"|%{rm -r -Force $_}
 dir -r -Filter "reports"|%{rm -r -Force $_}
 rm -r -Force "package-lock.json"
 ```
-
