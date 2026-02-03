@@ -144,14 +144,11 @@ export const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProp
     }
   }, [preRef, textareaRef]);
 
-  useEffect(() => {
-    // Handle final newlines
-    if (text[text.length - 1] === "\n") {
-      setText(text + " ");
-    }
+  const displayText = text.endsWith("\n") ? `${text} ` : text;
 
+  useEffect(() => {
     Prism.highlightAll();
-  }, [text]);
+  }, [displayText]);
 
   return (
     <Root className={classes.codeEditContainer}>
@@ -165,7 +162,7 @@ export const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProp
         ref={setRef}
       />
       <pre className={clsx(classes.codeInOutBase, classes.codeOutput)} aria-hidden="true" ref={preRef}>
-        <code className={clsx("language-markdown", classes.languageMarkdown)}>{text}</code>
+        <code className={clsx("language-markdown", classes.languageMarkdown)}>{displayText}</code>
       </pre>
     </Root>
   );
