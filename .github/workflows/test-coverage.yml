@@ -15,10 +15,10 @@ jobs:
       empty: ${{ steps.changed-packages.outputs.empty }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
 
       - name: Find changed packages
-        uses: alexshukel/get-changed-workspaces-action@v2.0.0
+        uses: alexshukel/get-changed-workspaces-action@e1b6faa54b788d9093c8bf234368859f1bcbb2b3 # v2.0.0
         id: changed-packages
         with:
           workspaces: |
@@ -35,8 +35,8 @@ jobs:
         # 変更された packages をマトリックス戦略に渡す
         package: ${{ fromJson(needs.get-changed-workspaces.outputs.packages) }}
     steps:
-      - uses: actions/checkout@v6
-      - uses: actions/setup-node@v6
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6
         with:
           node-version: 24.14.0
           cache: npm
@@ -45,7 +45,7 @@ jobs:
       - name: "Test"
         working-directory: apps/${{ matrix.package.name }}
         run: npm run test:ci
-      - uses: davelosert/vitest-coverage-report-action@v2
+      - uses: davelosert/vitest-coverage-report-action@2500dafcee7dd64f85ab689c0b83798a8359770e # v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           # ワークフローを実行するディレクトリを指定する
