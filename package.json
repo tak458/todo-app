@@ -17,7 +17,7 @@
   "devDependencies": {
     "prettier": "3.8.1",
     "tsx": "4.21.0",
-    "turbo": "2.8.21"
+    "turbo": "2.9.3"
   },
   "packageManager": "npm@11.12.1"
 }
