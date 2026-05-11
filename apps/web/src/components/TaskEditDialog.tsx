@@ -59,7 +59,7 @@ export const TaskEditDialog: FC<TaskEditDialogProps> = (props) => {
         <DialogTitle>タスクの編集</DialogTitle>
         <DialogContent>
           <ErrorBoundary FallbackComponent={ErrorFallback}>
-            <Grid container spacing={2} marginTop={1}>
+            <Grid container spacing={2} sx={{ marginTop: 1 }}>
               <Grid size={12}>
                 <RhfMuiTextField name="name" label="タスク名" control={control} fullWidth />
               </Grid>
@@ -90,7 +90,7 @@ export const TaskEditDialog: FC<TaskEditDialogProps> = (props) => {
                   type="datetime-local"
                   fullWidth
                   label="開始日時"
-                  InputLabelProps={{ shrink: true }}
+                  slotProps={{ inputLabel: { shrink: true } }}
                 />
               </Grid>
               <Grid size={{ xs: 12, sm: 6 }}>
@@ -100,7 +100,7 @@ export const TaskEditDialog: FC<TaskEditDialogProps> = (props) => {
                   type="datetime-local"
                   fullWidth
                   label="終了日時"
-                  InputLabelProps={{ shrink: true }}
+                  slotProps={{ inputLabel: { shrink: true } }}
                 />
               </Grid>
               <Grid size={12}>
