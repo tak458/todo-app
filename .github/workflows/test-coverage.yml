@@ -45,7 +45,7 @@ jobs:
       - name: "Test"
         working-directory: apps/${{ matrix.package.name }}
         run: npm run test:ci
-      - uses: davelosert/vitest-coverage-report-action@3c50566c523e04813df28de8f7c48dd97d663f1c # v2
+      - uses: davelosert/vitest-coverage-report-action@02f3c2e641286b7fa308cd3e430783103ce6103b # v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           # ワークフローを実行するディレクトリを指定する
