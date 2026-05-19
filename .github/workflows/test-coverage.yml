@@ -15,7 +15,7 @@ jobs:
       empty: ${{ steps.changed-packages.outputs.empty }}
     steps:
       - name: Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.0
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Find changed packages
         uses: alexshukel/get-changed-workspaces-action@e1b6faa54b788d9093c8bf234368859f1bcbb2b3 # v2.0.0
@@ -35,8 +35,8 @@ jobs:
         # 変更された packages をマトリックス戦略に渡す
         package: ${{ fromJson(needs.get-changed-workspaces.outputs.packages) }}
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.0
-      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.0.0
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
           node-version: 24.15.0
           cache: npm
