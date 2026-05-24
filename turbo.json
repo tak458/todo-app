@@ -25,7 +25,6 @@
       "dependsOn": ["^generate"],
       "cache": false
     },
-    "lint": {},
     "clean": {
       "cache": false
     },
@@ -37,9 +36,6 @@
     },
     "type-check": {
       "dependsOn": ["^type-check"]
-    },
-    "format": {
-      "dependsOn": ["^format"]
     }
   }
 }

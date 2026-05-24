@@ -1,0 +1,8 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": ["typescript", "react", "react-hooks", "react-perf", "nextjs", "unicorn", "import", "vitest"],
+  "rules": {
+    "react/react-in-jsx-scope": "off"
+  },
+  "ignorePatterns": ["node_modules", "dist", ".next", "out", "build", ".turbo", "storybook-static", "coverage"]
+}
