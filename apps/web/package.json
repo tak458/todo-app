@@ -6,26 +6,12 @@
   "scripts": {
     "dev": "cross-env NODE_OPTIONS='--inspect' next dev",
     "storybook": "storybook dev -p 6006",
-    "lint": "eslint -f stylish",
-    "format": "prettier --write src/**/*",
     "type-check": "tsc --noEmit",
     "test": "vitest run --passWithNoTests",
     "test:ci": "vitest run --coverage --passWithNoTests",
     "build": "next build",
     "build-storybook": "storybook build",
     "start": "next start"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
   },
   "dependencies": {
     "@emotion/cache": "11.14.0",
@@ -55,7 +41,6 @@
     "zod": "4.4.3"
   },
   "devDependencies": {
-    "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
     "@storybook/addon-docs": "10.4.0",
     "@storybook/addon-links": "10.4.0",
@@ -71,22 +56,31 @@
     "@vitejs/plugin-react": "6.0.2",
     "@vitest/coverage-v8": "4.1.6",
     "cross-env": "10.1.0",
-    "eslint": "9.39.4",
-    "eslint-plugin-storybook": "10.4.0",
     "identity-obj-proxy": "3.0.0",
     "jsdom": "29.1.1",
-    "prettier": "3.8.3",
     "storybook": "10.4.0",
     "typescript": "6.0.3",
     "vitest": "4.1.6"
+  },
+  "overrides": {
+    "storybook": "$storybook"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "engines": {
     "node": ">=24.0.0"
   },
   "ct3aMetadata": {
     "initVersion": "7.39.3"
-  },
-  "overrides": {
-    "storybook": "$storybook"
   }
 }

@@ -19,9 +19,6 @@ jobs:
           cache: npm
       - run: npm install
       - run: npm run build -- --log-prefix=none
-      - run: npm run lint -- --log-prefix=none
+      - run: npm run lint
       - name: Type Check
-        # eslint で tsc のチェック内容はチェックしないのでここで型チェックを行う
-        # next build だとエラーフォーマットが tsc と違い problemMatcher を書くのが面倒なので、
-        # 独自で tsc を実行するようにした
         run: npm run type-check -- --log-prefix=none

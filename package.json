@@ -8,14 +8,17 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
-    "lint": "turbo lint",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
     "type-check": "turbo type-check",
-    "format": "turbo format",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
     "generate": "turbo generate",
     "test:ci": "turbo test:ci"
   },
   "devDependencies": {
-    "prettier": "3.8.3",
+    "oxfmt": "0.51.0",
+    "oxlint": "1.66.0",
     "tsx": "4.22.1",
     "turbo": "2.9.14"
   },
