@@ -17,8 +17,8 @@
     "test:ci": "turbo test:ci"
   },
   "devDependencies": {
-    "oxfmt": "0.52.0",
-    "oxlint": "1.67.0",
+    "oxfmt": "0.53.0",
+    "oxlint": "1.68.0",
     "tsx": "4.22.4",
     "turbo": "2.9.16"
   },
