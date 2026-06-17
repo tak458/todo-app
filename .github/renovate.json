@@ -1,4 +1,11 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>tak458/renovate-config"]
+  "extends": ["github>tak458/renovate-config"],
+  "packageRules": [
+    {
+      "description": "Skip @mui 9.1.x due to ESM directory import regression (https://github.com/mui/material-ui/issues/48636)",
+      "matchPackageNames": ["@mui/**"],
+      "allowedVersions": "!/^9\\.1\\./"
+    }
+  ]
 }
