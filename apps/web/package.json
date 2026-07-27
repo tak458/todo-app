@@ -27,7 +27,7 @@
     "@t3-oss/env-nextjs": "0.13.11",
     "date-fns": "4.4.0",
     "markdown-to-jsx": "9.8.2",
-    "next": "16.2.10",
+    "next": "16.2.11",
     "normalizr": "3.6.2",
     "notistack": "3.0.2",
     "prismjs": "1.30.0",
