@@ -7,6 +7,6 @@
   },
   "devDependencies": {
     "@tsconfig/next": "2.0.6",
-    "@tsconfig/node24": "24.0.4"
+    "@tsconfig/node24": "24.0.5"
   }
 }
