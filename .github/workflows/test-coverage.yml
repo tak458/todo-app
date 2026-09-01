@@ -38,14 +38,14 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
-          node-version: 24.19.0
+          node-version: 24.20.0
           cache: npm
       - name: "Install"
         run: npm install
       - name: "Test"
         working-directory: apps/${{ matrix.package.name }}
         run: npm run test:ci
-      - uses: davelosert/vitest-coverage-report-action@8b157684c6a6b259b97d45e72b44242865c0f6a5 # v2.12.2
+      - uses: davelosert/vitest-coverage-report-action@c4bbc33a89b7ace0e63d35f1f7d4bcee31155a73 # v2.13.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           # ワークフローを実行するディレクトリを指定する
