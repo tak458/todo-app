@@ -1,6 +1,6 @@
 import { styled } from "@mui/material/styles";
 import clsx from "clsx";
-import { codeToHtml } from "shiki/bundle/web";
+import { highlightMarkdown } from "@/lib/shiki";
 import {
   ChangeEventHandler,
   createRef,
@@ -171,7 +171,7 @@ export const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProp
   useEffect(() => {
     let cancelled = false;
 
-    void codeToHtml(highlightedText, { lang: "markdown", theme: "github-light" })
+    void highlightMarkdown(highlightedText)
       .then((html) => {
         if (!cancelled) {
           setHighlightedResult({ text: highlightedText, html });
