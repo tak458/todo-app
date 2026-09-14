@@ -1,6 +1,6 @@
 import { styled } from "@mui/material/styles";
 import clsx from "clsx";
-import Prism from "prismjs";
+import { codeToHtml } from "shiki/bundle/web";
 import {
   ChangeEventHandler,
   createRef,
@@ -12,9 +12,6 @@ import {
   useRef,
   useState,
 } from "react";
-
-import "prismjs/components/prism-markdown";
-import "prismjs/themes/prism.css";
 
 const PREFIX = "MarkdownEditor";
 
@@ -47,6 +44,12 @@ const Root = styled("div")(({ theme }) => {
         margin: 0,
         padding: editorPadding,
         ...editorFont,
+      },
+      "& pre": {
+        margin: 0,
+        padding: editorPadding,
+        ...editorFont,
+        backgroundColor: "transparent !important",
       },
     },
     [`& .${classes.codeInOutBase}`]: {
@@ -81,6 +84,20 @@ const Root = styled("div")(({ theme }) => {
   };
 });
 
+const escapeHtml = (value: string) =>
+  value.replace(/[&<>"']/g, (character) => {
+    const entities: Record<string, string> = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;",
+    };
+    return entities[character];
+  });
+
+const createPlainHtml = (value: string) => `<pre><code>${escapeHtml(value)}</code></pre>`;
+
 export interface MarkdownEditorProps {
   id: string;
   value?: string;
@@ -92,6 +109,13 @@ export const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProp
   ref,
 ) {
   const [text, setText] = useState(props.value ?? "");
+  const highlightedText = text.endsWith("\n") ? `${text} ` : text;
+  const [highlightedResult, setHighlightedResult] = useState(() => ({
+    text: highlightedText,
+    html: createPlainHtml(highlightedText),
+  }));
+  const displayedHtml =
+    highlightedResult.text === highlightedText ? highlightedResult.html : createPlainHtml(highlightedText);
 
   const handleChange: ChangeEventHandler<HTMLTextAreaElement> = useCallback(
     (event) => {
@@ -107,7 +131,7 @@ export const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProp
       let value = props.value;
       const selStartPos = evt.currentTarget.selectionStart;
 
-      // handle 4-space indent on
+      // 4文字のインデントを処理する
       if (evt.key === "Tab") {
         value = (value?.substring(0, selStartPos) ?? "") + "    " + (value?.substring(selStartPos, value.length) ?? "");
         evt.currentTarget.selectionStart = selStartPos + 3;
@@ -120,7 +144,7 @@ export const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProp
     [props],
   );
 
-  const preRef = createRef<HTMLPreElement>();
+  const preRef = createRef<HTMLDivElement>();
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
 
   const setRef: LegacyRef<HTMLTextAreaElement> = useCallback(
@@ -145,13 +169,22 @@ export const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProp
   }, [preRef, textareaRef]);
 
   useEffect(() => {
-    // Handle final newlines
-    if (text[text.length - 1] === "\n") {
-      setText(text + " ");
-    }
+    let cancelled = false;
 
-    Prism.highlightAll();
-  }, [text]);
+    void codeToHtml(highlightedText, { lang: "markdown", theme: "github-light" })
+      .then((html) => {
+        if (!cancelled) {
+          setHighlightedResult({ text: highlightedText, html });
+        }
+      })
+      .catch(() => {
+        // Shiki が利用できない場合も入力内容は表示する
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [highlightedText]);
 
   return (
     <Root className={classes.codeEditContainer}>
@@ -164,9 +197,12 @@ export const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProp
         onScroll={handleScroll}
         ref={setRef}
       />
-      <pre className={clsx(classes.codeInOutBase, classes.codeOutput)} aria-hidden="true" ref={preRef}>
-        <code className={clsx("language-markdown", classes.languageMarkdown)}>{text}</code>
-      </pre>
+      <div
+        className={clsx(classes.codeInOutBase, classes.codeOutput)}
+        aria-hidden="true"
+        ref={preRef}
+        dangerouslySetInnerHTML={{ __html: displayedHtml }}
+      />
     </Root>
   );
 });
