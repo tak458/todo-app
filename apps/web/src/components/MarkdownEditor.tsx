@@ -1,6 +1,6 @@
-import { styled } from "@mui/material/styles";
+import { styled, useTheme } from "@mui/material/styles";
 import clsx from "clsx";
-import { highlightMarkdown } from "@/lib/shiki";
+import { highlightMarkdown, type MarkdownTheme } from "@/lib/shiki";
 import {
   ChangeEventHandler,
   createRef,
@@ -68,7 +68,7 @@ const Root = styled("div")(({ theme }) => {
       zIndex: 1,
       color: "transparent",
       background: "transparent",
-      caretColor: "black",
+      caretColor: theme.palette.text.primary,
       resize: "none",
       ...editorFont,
     },
@@ -108,14 +108,19 @@ export const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProp
   props: MarkdownEditorProps,
   ref,
 ) {
+  const theme = useTheme();
+  const shikiTheme: MarkdownTheme = theme.palette.mode === "dark" ? "github-dark" : "github-light";
   const [text, setText] = useState(props.value ?? "");
   const highlightedText = text.endsWith("\n") ? `${text} ` : text;
   const [highlightedResult, setHighlightedResult] = useState(() => ({
     text: highlightedText,
+    theme: shikiTheme,
     html: createPlainHtml(highlightedText),
   }));
   const displayedHtml =
-    highlightedResult.text === highlightedText ? highlightedResult.html : createPlainHtml(highlightedText);
+    highlightedResult.text === highlightedText && highlightedResult.theme === shikiTheme
+      ? highlightedResult.html
+      : createPlainHtml(highlightedText);
 
   const handleChange: ChangeEventHandler<HTMLTextAreaElement> = useCallback(
     (event) => {
@@ -171,10 +176,10 @@ export const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProp
   useEffect(() => {
     let cancelled = false;
 
-    void highlightMarkdown(highlightedText)
+    void highlightMarkdown(highlightedText, shikiTheme)
       .then((html) => {
         if (!cancelled) {
-          setHighlightedResult({ text: highlightedText, html });
+          setHighlightedResult({ text: highlightedText, theme: shikiTheme, html });
         }
       })
       .catch(() => {
@@ -184,7 +189,7 @@ export const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProp
     return () => {
       cancelled = true;
     };
-  }, [highlightedText]);
+  }, [highlightedText, shikiTheme]);
 
   return (
     <Root className={classes.codeEditContainer}>

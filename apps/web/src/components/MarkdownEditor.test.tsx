@@ -1,12 +1,14 @@
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 import { useState } from "react";
 import { vi } from "vitest";
 
 import { MarkdownEditor } from "@/components/MarkdownEditor";
+import { highlightMarkdown } from "@/lib/shiki";
 
 vi.mock("@/lib/shiki", () => ({
-  highlightMarkdown: vi.fn<(code: string) => Promise<string>>(
+  highlightMarkdown: vi.fn<(code: string, theme: "github-light" | "github-dark") => Promise<string>>(
     async (code) => `<pre class="shiki"><code>${code}</code></pre>`,
   ),
 }));
@@ -17,6 +19,10 @@ function ControlledMarkdownEditor({ initialValue = "" }: { initialValue?: string
 }
 
 describe("MarkdownEditor", () => {
+  beforeEach(() => {
+    vi.mocked(highlightMarkdown).mockClear();
+  });
+
   it("Shiki で Markdown をハイライトする", async () => {
     render(<MarkdownEditor id="memo" value="# 見出し" onChange={vi.fn<() => void>()} />);
 
@@ -25,6 +31,18 @@ describe("MarkdownEditor", () => {
     });
 
     expect(document.querySelector(".shiki")?.textContent).toContain("# 見出し");
+  });
+
+  it("ダークテーマではShikiのダークテーマを使う", async () => {
+    render(
+      <ThemeProvider theme={createTheme({ palette: { mode: "dark" } })}>
+        <MarkdownEditor id="memo" value="# 見出し" onChange={vi.fn<() => void>()} />
+      </ThemeProvider>,
+    );
+
+    await waitFor(() => {
+      expect(highlightMarkdown).toHaveBeenCalledWith("# 見出し", "github-dark");
+    });
   });
 
   it("入力内容の変更を通知する", async () => {
