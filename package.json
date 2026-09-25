@@ -17,10 +17,10 @@
     "test:ci": "turbo test:ci"
   },
   "devDependencies": {
-    "oxfmt": "0.68.0",
-    "oxlint": "1.83.0",
-    "tsx": "4.23.13",
-    "turbo": "2.11.2"
+    "oxfmt": "0.70.0",
+    "oxlint": "1.85.0",
+    "tsx": "4.23.15",
+    "turbo": "2.11.3"
   },
-  "packageManager": "npm@12.0.2"
+  "packageManager": "npm@12.1.0"
 }
