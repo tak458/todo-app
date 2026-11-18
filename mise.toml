@@ -1,4 +1,4 @@
 experimental_monorepo_root = true
 
 [tools]
-node = "26.13.0"
+node = "26.13.1"
